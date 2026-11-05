@@ -11,211 +11,283 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-:root{--blue:#263b82;--orange:#ff9a00;--ink:#172033;--muted:#64748b;--line:#dce3ef;--soft:#f4f7fc;--green:#13845b}
-*{box-sizing:border-box}body{margin:0;background:#f3f6fc;color:var(--ink);font-family:Inter,"Noto Sans Bengali",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.bn{font-family:"Noto Sans Bengali",sans-serif}.wrap{max-width:1080px;margin:auto;padding:18px}.top{background:linear-gradient(125deg,#1d2f70,#405bb4);color:white;padding:25px 0 30px}.brand{display:flex;align-items:center;gap:12px}.logo{width:58px;height:58px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 58px;padding:5px}.brand-logo{display:block;width:100%;height:100%;object-fit:contain}.logo-fallback{display:none;color:var(--blue);font-weight:900;font-size:17px;letter-spacing:-1px}.brandname{font-weight:900;letter-spacing:1px;font-size:22px}.brandname span{color:#ffb02e}.tag{font-size:11px;opacity:.86;margin-top:3px}.hero{padding:25px 0 5px}.hero h1{font-size:clamp(25px,4vw,38px);line-height:1.15;margin:0 0 10px}.hero p{margin:0;opacity:.9;max-width:650px;line-height:1.65}.pill{display:inline-flex;background:#ffffff20;border:1px solid #ffffff40;border-radius:30px;padding:7px 12px;font-size:11px;font-weight:800;margin-top:14px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;margin:18px 0;box-shadow:0 8px 25px #1e37600a}.section-title{font-size:18px;font-weight:900;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);line-height:1.6}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:17px 0}.tab{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 13px;font-size:12px;font-weight:800;color:#475569}.tab.active{background:var(--blue);color:white;border-color:var(--blue)}.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:13px}.plan{border:1.5px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:.18s;position:relative}.plan:hover{border-color:#8095db;transform:translateY(-2px)}.plan.selected{border:2px solid var(--blue);background:#f4f6ff;box-shadow:0 0 0 3px #263b8210}.plan h3{font-size:15px;margin:0 0 6px}.price{font-size:25px;font-weight:900;color:var(--blue);margin:8px 0}.muted{font-size:11px;color:var(--muted);line-height:1.6}.selecthint{font-size:11px;font-weight:800;color:var(--blue);margin-top:12px}.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:block;font-size:11px;font-weight:800;margin:0 0 6px;color:#34415b}.req{color:#d33}input,select,textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px;background:#fbfcff;outline:none;color:var(--ink);font-size:13px}input:focus,select:focus,textarea:focus{border-color:#7188d4;background:white}input[type=file]{padding:9px;background:#fff}input[type=checkbox]{width:auto;accent-color:var(--blue)}.checkline{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.6;margin:10px 0}.checkline input{margin-top:4px;flex-shrink:0}.btn{border:0;border-radius:12px;padding:13px 18px;background:var(--blue);color:white;font-weight:900;font-size:13px}.btn.orange{background:var(--orange);color:#1d2b4d}.btn.green{background:#16865e}.btn.light{background:#edf1fb;color:var(--blue)}.btn:disabled{opacity:.5;cursor:not-allowed}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.notice{border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.65;margin:12px 0}.info{background:#eef4ff;border:1px solid #d5e2ff;color:#29427e}.warn{background:#fff7e8;border:1px solid #ffe0a3;color:#81520b}.good{background:#eaf8f1;border:1px solid #c4ebd7;color:#126044}.bad{background:#fff0f0;border:1px solid #ffd1d1;color:#9c2424}.hidden{display:none!important}.couponrow{display:grid;grid-template-columns:1fr auto;gap:8px}.summary{background:#f6f8fd;border:1px solid var(--line);border-radius:13px;padding:14px}.sumrow{display:flex;justify-content:space-between;gap:12px;font-size:12px;padding:5px 0}.sumrow.total{border-top:1px solid var(--line);margin-top:5px;padding-top:10px;font-size:16px;font-weight:900;color:var(--blue)}.footer{text-align:center;color:#7a8599;font-size:11px;padding:25px 10px}.wizard-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}.wizard-item{padding:11px 8px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#73809a;text-align:center;font-size:11px;font-weight:800}.wizard-item.active{background:#eef2ff;border-color:var(--blue);color:var(--blue)}.wizard-item.done{background:#eaf8f1;border-color:#bce7d1;color:#126044}.wizard-item b{display:block;font-size:15px;margin-bottom:3px}.wizard-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.wizard-nav .btn{min-width:125px}.step{display:flex;gap:10px;align-items:center;margin:10px 0;font-size:12px;line-height:1.6}.num{width:25px;height:25px;border-radius:50%;background:var(--blue);color:white;display:grid;place-items:center;font-weight:900;flex-shrink:0}.successbox{text-align:center;padding:22px 12px}.successicon{font-size:44px}.successbox h2{margin:8px 0;font-size:23px}.language{display:grid;grid-template-columns:1fr 1fr;gap:12px}.language>div{background:#f8faff;border:1px solid var(--line);border-radius:13px;padding:13px;font-size:12px;line-height:1.75}.language h3{font-size:13px;margin:0 0 7px;color:var(--blue)}.tiny{font-size:10px;color:var(--muted)}@media(max-width:650px){.wrap{padding:13px}.card{padding:15px;margin:13px 0}.fieldgrid,.language{grid-template-columns:1fr}.hero{padding-top:20px}.btnrow .btn{flex:1}.brandname{font-size:19px}.logo{width:48px;height:48px;flex-basis:48px}} 
+:root{
+  --primary:#0a7b5c; --primary-dark:#065c44; --primary-light:#e8f7f1;
+  --accent:#e6a817; --accent-light:#fff8e6;
+  --ink:#162a24; --muted:#64776f; --line:#e2ece6; --soft:#f6faf8;
+  --success:#0a7b5c; --danger:#c0392b; --warn:#d68910;
+  --radius:14px; --radius-lg:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:#f4f9f6;color:var(--ink);font-family:Inter,"Noto Sans Bengali",sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:none}
+img{max-width:100%;height:auto;display:block}
+.bn{font-family:"Noto Sans Bengali",sans-serif}
+.hidden{display:none!important}
 
-.audience-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0 13px}
-.audience-tab{display:flex;align-items:center;gap:12px;text-align:left;padding:15px;border:1.5px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);transition:.18s}
-.audience-tab.active{border:2px solid var(--blue);background:linear-gradient(135deg,#f1f4ff,#fff);box-shadow:0 5px 18px #263b8210}
-.audience-icon{font-size:28px}.audience-tab strong{display:block;font-size:14px}.audience-tab small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
-.category-intro{background:#f5f7fd;border:1px solid var(--line);border-radius:13px;padding:12px 14px;margin:10px 0 14px;font-size:12px;line-height:1.7}
-.plan{padding:0;overflow:hidden}.plan-head{padding:16px 16px 12px;background:linear-gradient(135deg,#f5f7ff,#fff);border-bottom:1px solid var(--line)}
-.plan-kicker{font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#52669f;margin-bottom:7px}
-.plan h3{font-size:16px;line-height:1.4;margin:0 0 5px}.plan-body{padding:13px 16px 16px}
-.plan-price-row{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin:8px 0 12px}
-.plan-price{font-size:27px;font-weight:900;color:var(--blue);line-height:1}.old-price{font-size:11px;color:#8791a5;text-decoration:line-through;margin-left:5px}
-.plan-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.detail-chip{background:#f5f7fb;border-radius:10px;padding:9px;font-size:10px;color:#536078;line-height:1.5;min-width:0}
-.detail-chip b{display:block;color:#26344e;font-size:10px;margin-bottom:2px}.total-chip{background:#edf2ff;border:1px solid #d8e1ff;color:#263b82;font-weight:900}.total-chip b{color:#263b82}
-.plan-description{font-size:11px;color:#59667e;line-height:1.65;margin-top:9px}
-.plan-select{width:100%;border:0;border-radius:10px;padding:11px;background:#edf1ff;color:var(--blue);font-weight:900;font-size:11px;margin-top:13px}
-.plan.selected .plan-select{background:var(--blue);color:#fff}
-.batch-label{display:inline-block;padding:5px 8px;border-radius:7px;background:#e9f7f0;color:#16704d;font-size:10px;font-weight:800}
-.offer-tag{display:inline-block;background:#fff0d5;color:#945600;border-radius:7px;padding:4px 7px;font-size:9px;font-weight:900}
-@media(max-width:520px){.audience-tabs{gap:8px}.audience-tab{padding:11px 9px;gap:8px}.audience-icon{font-size:23px}.audience-tab strong{font-size:12px}}
+.wrap{max-width:1080px;margin:0 auto;padding:20px}
 
-.consent-card{background:#f8fafc;border:1px solid #dbe3ef;border-left:4px solid #525ea7;border-radius:12px;padding:13px 15px;margin:10px 0;color:#26334b}
-.consent-card strong{display:block;font-size:14px;margin-bottom:5px}
-.consent-card p{font-size:13px;line-height:1.55;margin:0}
-.consent-agree{background:#fff8e5;border:2px solid #f3c84b;border-radius:12px;padding:14px;margin:14px 0}
-#agreeConsentBtn:disabled{opacity:.45;cursor:not-allowed}
+/* HEADER */
+.top{background:linear-gradient(135deg,#064e3b 0%,#0a7b5c 55%,#0b8570 100%);color:#fff;padding:28px 0 36px;position:relative;overflow:hidden}
+.top::after{content:"";position:absolute;right:-80px;bottom:-160px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,#ffffff12 0%,transparent 70%);pointer-events:none}
+.top .wrap{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:56px;height:56px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 56px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.brand-logo{width:100%;height:100%;object-fit:contain}
+.logo-fallback{display:none;color:var(--primary);font-weight:900;font-size:18px;letter-spacing:-1px}
+.brandname{font-weight:900;letter-spacing:1.2px;font-size:22px}
+.brandname span{color:#d8f36a}
+.tag{font-size:10.5px;opacity:.85;margin-top:3px;letter-spacing:.3px}
+.hero{padding:24px 0 4px}
+.hero h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:0 0 12px;letter-spacing:-.5px}
+.hero p{margin:0;opacity:.9;max-width:620px;line-height:1.65;font-size:15px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(216,243,106,.15);border:1px solid rgba(216,243,106,.35);border-radius:30px;padding:7px 14px;font-size:11px;font-weight:800;margin-top:16px;letter-spacing:.5px;color:#f4ffdf}
 
-/* Mobile-first responsive refinements */
-html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{width:100%;min-width:0;overflow-x:hidden}
-img,canvas,svg,video{max-width:100%;height:auto}
-.wrap,main,header,.card,.wizard-panel{min-width:0;max-width:100%}
-button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-input,select,textarea{min-width:0;max-width:100%}
-.plan-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))}
-.plan,.plan-head,.plan-body,.detail-chip,.summary,.consent-card{min-width:0;overflow-wrap:anywhere}
-.plan-details{grid-template-columns:repeat(2,minmax(0,1fr))}
-.sumrow span,.sumrow strong{min-width:0;overflow-wrap:anywhere}
-.wizard-progress{grid-template-columns:repeat(4,minmax(0,1fr))}
-.wizard-item{min-width:0;overflow-wrap:anywhere}
-.wizard-nav>*{min-width:0}
-.fieldgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* WIZARD */
+.wizard-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0;background:#fff;padding:10px;border-radius:var(--radius-lg);border:1px solid var(--line);box-shadow:0 2px 8px rgba(10,123,92,.04)}
+.wizard-item{padding:12px 8px;border-radius:10px;background:transparent;color:var(--muted);text-align:center;font-size:11px;font-weight:700;transition:.2s;border:1.5px solid transparent;line-height:1.3}
+.wizard-item b{display:block;font-size:15px;margin-bottom:3px;color:inherit}
+.wizard-item.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark);font-weight:800}
+.wizard-item.done{background:#f0faf5;border-color:#b5e5ce;color:var(--primary-dark)}
+.wizard-item.done b::after{content:" ✓";font-size:12px}
+
+/* CARDS */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;margin:16px 0;box-shadow:0 4px 20px rgba(10,123,92,.05)}
+.section-title{font-size:19px;font-weight:800;margin:0 0 6px;color:var(--primary-dark);letter-spacing:-.3px}
+.sub{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 16px}
+
+/* AUDIENCE TABS */
+.audience-tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 16px}
+.audience-tab{display:flex;align-items:center;gap:14px;text-align:left;padding:16px 18px;border:1.5px solid var(--line);border-radius:var(--radius);background:#fff;color:var(--ink);transition:.2s}
+.audience-tab:hover{border-color:#b5d6c8;background:#fbfdfc}
+.audience-tab.active{border:2px solid var(--primary);background:linear-gradient(135deg,#f0faf5,#fff);box-shadow:0 4px 16px rgba(10,123,92,.1)}
+.audience-icon{font-size:28px;line-height:1}
+.audience-tab strong{display:block;font-size:15px;font-weight:800;margin-bottom:2px}
+.audience-tab small{display:block;color:var(--muted);font-size:11px;font-weight:500}
+
+/* CATEGORY TABS */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:4px;background:var(--soft);border-radius:12px;width:fit-content}
+.tab{border:none;background:transparent;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--muted);transition:.15s}
+.tab:hover{color:var(--primary-dark)}
+.tab.active{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(10,123,92,.25)}
+
+.category-intro{background:linear-gradient(120deg,#f0faf5,#fbfdfc);border:1px solid #d5e9de;border-radius:var(--radius);padding:14px 16px;margin:0 0 18px;font-size:13px;line-height:1.65;color:#315c4b}
+
+/* PLAN CATEGORY SECTIONS */
+.plan-section{margin-bottom:26px}
+.plan-section:last-child{margin-bottom:0}
+.plan-section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:13px 16px;background:linear-gradient(135deg,#f8fdfb,#f0faf5);border-radius:14px;border:1px solid #d5e9de}
+.plan-section-icon{font-size:22px;flex-shrink:0;line-height:1}
+.plan-section-title-block{flex:1;min-width:0}
+.plan-section-title{font-size:15px;font-weight:800;color:var(--primary-dark);margin:0;line-height:1.3}
+.plan-section-sub{font-size:11.5px;color:var(--muted);margin:2px 0 0;font-weight:500}
+.plan-section-count{font-size:11px;font-weight:800;color:var(--primary);background:#fff;border:1px solid #d5e9de;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.plan-section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+
+/* PLAN CARDS (Dynamic Colors via CSS Variables) */
+.plan{border:1.5px solid var(--t-border, var(--line));border-radius:var(--radius-lg);background:#fff;overflow:hidden;transition:.22s;position:relative;display:flex;flex-direction:column}
+.plan:hover{border-color:var(--t-accent, #8dcbb0);box-shadow:0 8px 28px var(--t-shadow, rgba(10,123,92,.1));transform:translateY(-2px)}
+.plan.selected{border:2px solid var(--t-accent, var(--primary));box-shadow:0 0 0 4px var(--t-shadow, rgba(10,123,92,.1)),0 8px 28px var(--t-shadow, rgba(10,123,92,.12))}
+.plan-badge{position:absolute;top:12px;right:12px;background:var(--t-accent, var(--accent));color:#fff;font-size:9px;font-weight:900;padding:4px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;z-index:2}
+.plan.selected .plan-badge{background:var(--t-accent, var(--primary))}
+
+.plan-head{padding:20px 20px 16px;background:var(--t-bg, linear-gradient(135deg,#f8fdfb,#fff));border-bottom:1px solid var(--t-border, var(--line))}
+.plan-kicker{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t-accent, var(--primary));margin-bottom:8px}
+.plan-head h3{font-size:17px;line-height:1.35;margin:0 0 6px;font-weight:800;color:var(--ink)}
+.plan-head .plan-sub{font-size:12px;color:var(--muted);font-weight:500}
+.batch-chip{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:8px;background:var(--t-light, var(--primary-light));color:var(--t-dark, var(--primary-dark));font-size:10.5px;font-weight:700}
+
+.plan-body{padding:16px 20px 20px;flex:1;display:flex;flex-direction:column}
+.plan-price-hero{margin-bottom:16px;padding-bottom:16px;border-bottom:1px dashed var(--t-border, var(--line))}
+.price-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.price-main{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.price-amount{font-size:28px;font-weight:900;color:var(--t-accent, var(--primary));letter-spacing:-1px;line-height:1}
+.price-old{font-size:13px;color:#a0aab3;text-decoration:line-through;font-weight:600}
+
+/* Plan stats dynamically adjust based on number of items */
+.plan-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:8px;margin-bottom:16px}
+.stat-pill{background:var(--t-soft, var(--soft));border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--t-border, #eef5f1)}
+.stat-pill .stat-num{font-size:15px;font-weight:900;color:var(--t-dark, var(--primary-dark));line-height:1.1}
+.stat-pill .stat-lbl{font-size:9.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:3px}
+
+.plan-details-toggle{background:none;border:none;width:100%;text-align:left;padding:10px 0;font-size:12px;font-weight:700;color:var(--t-accent, var(--primary));display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--t-border, var(--line));margin-top:auto}
+.plan-details-toggle:hover{color:var(--t-dark, var(--primary-dark))}
+.plan-details-toggle::after{content:"▾";font-size:14px;transition:.2s;margin-left:8px}
+.plan-details-toggle.open::after{transform:rotate(180deg)}
+.plan-details-list{display:none;padding-top:12px;font-size:12px;line-height:1.8;color:#4a5f55}
+.plan-details-list.open{display:block}
+.plan-details-list .row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dotted #eef5f1}
+.plan-details-list .row:last-child{border-bottom:none}
+.plan-details-list .row .lbl{color:var(--muted);font-weight:600}
+.plan-details-list .row .val{font-weight:700;color:var(--ink);text-align:right}
+
+/* Facilities */
+.facilities-block{margin-top:14px;padding-top:14px;border-top:1px dashed var(--t-border, var(--line))}
+.facilities-label{font-size:11px;font-weight:800;color:var(--t-dark, var(--primary-dark));text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.facilities-items{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.facilities-items li{font-size:12.5px;color:#2f5244;padding:8px 12px;background:var(--t-soft, #f0faf5);border-radius:8px;border-left:3px solid var(--t-accent, var(--primary));font-weight:600;line-height:1.4;display:flex;align-items:center;gap:8px}
+.facilities-items li::before{content:"✓";color:var(--t-accent, var(--primary));font-weight:900;flex-shrink:0}
+
+.plan-select{width:100%;border:none;border-radius:11px;padding:13px;background:var(--t-light, var(--primary-light));color:var(--t-dark, var(--primary-dark));font-weight:900;font-size:13px;margin-top:14px;transition:.15s;letter-spacing:.3px}
+.plan-select:hover{filter:brightness(0.95)}
+.plan.selected .plan-select{background:var(--t-accent, var(--primary));color:#fff}
+
+/* FORM */
+.fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label{display:block;font-size:11.5px;font-weight:700;margin:0 0 7px;color:#34415b;letter-spacing:.2px}
+.req{color:var(--danger)}
+input,select,textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;background:#fbfdfc;outline:none;color:var(--ink);font-size:14px;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(10,123,92,.1)}
+input[type=file]{padding:10px;background:#fff}
+input[type=checkbox]{width:auto;accent-color:var(--primary)}
+.checkline{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6;margin:12px 0}
+.checkline input{margin-top:3px;flex-shrink:0;width:18px;height:18px}
+
+/* BUTTONS */
+.btn{border:none;border-radius:11px;padding:13px 20px;background:var(--primary);color:#fff;font-weight:800;font-size:13.5px;transition:.15s;letter-spacing:.2px;box-shadow:0 2px 8px rgba(10,123,92,.2)}
+.btn:hover{background:var(--primary-dark)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.orange{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(230,168,23,.25)}
+.btn.orange:hover{background:#c99310}
+.btn.light{background:var(--primary-light);color:var(--primary-dark);box-shadow:none}
+.btn.light:hover{background:#d4ede1}
+.wizard-nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;align-items:stretch}
+.wizard-nav .btn{min-width:130px}
+
+/* NOTICES */
+.notice{border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6;margin:14px 0}
+.info{background:#eaf6f8;border:1px solid #cce8eb;color:#17616b}
+.warn{background:#fff6e4;border:1px solid #f4dfb1;color:#80560d}
+.good{background:#e4f7ed;border:1px solid #bfe8d0;color:#126044}
+.bad{background:#fff0f0;border:1px solid #ffd1d1;color:#9c2424}
+
+/* SUMMARY BANNER */
+.plan-summary-banner{background:linear-gradient(135deg,#f0faf5,#fbfdfc);border:1.5px solid #b5e5ce;border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 2px 10px rgba(10,123,92,.06)}
+.plan-summary-banner .plan-name{font-size:14.5px;font-weight:800;color:var(--primary-dark);margin:0;line-height:1.4}
+.plan-summary-banner .plan-meta{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
+.plan-summary-banner .plan-price-tag{font-size:19px;font-weight:900;color:var(--primary);white-space:nowrap}
+
+/* SUMMARY BOX */
+.summary{background:linear-gradient(135deg,#f6faf8,#fbfdfc);border:1px solid var(--line);border-radius:13px;padding:16px}
+.sumrow{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0;align-items:flex-start}
+.sumrow span{color:var(--muted);font-weight:600}
+.sumrow strong{color:var(--ink);font-weight:700}
+.sumrow.total{border-top:1.5px solid var(--line);margin-top:6px;padding-top:14px;font-size:17px;font-weight:900;color:var(--primary);align-items:center}
+.sumrow.total span,.sumrow.total strong{color:var(--primary);font-weight:900}
+
+/* COUPON */
+.coupon-row{display:flex;gap:10px}
+.coupon-row input{flex:1}
+#couponMessage{font-size:11.5px;margin-top:8px;font-weight:600}
+
+/* PAY BOX */
+.pay-box{border:1.5px dashed #b8d8cc;border-radius:16px;padding:20px;margin:16px 0;background:linear-gradient(145deg,#f9fdfb,#fff);text-align:center}
+.pay-box h3{margin:0 0 8px;color:var(--primary-dark);font-size:17px;font-weight:900}
+.pay-box .tiny{margin:0 0 14px}
+.qr-img{display:block;width:min(100%,280px);aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;margin:0 auto}
+.upi-box{margin-top:16px;text-align:left;background:var(--accent-light);border:1px solid #f4dfb1;border-radius:12px;padding:14px}
+.upi-label{font-size:11px;font-weight:900;color:#80560d;margin-bottom:8px;letter-spacing:.5px}
+.upi-row{display:flex;align-items:center;gap:10px}
+.upi-id{font-size:14px;color:#573b0b;font-weight:800;overflow-wrap:anywhere;flex:1;word-break:break-all}
+.payable-note{text-align:left;margin-top:14px;margin-bottom:0}
+.payable-note b{font-size:15px}
+
+/* CONSENT */
+.consent-card{background:#f8fbf9;border:1px solid #dfeae4;border-left:4px solid var(--primary);border-radius:12px;padding:14px 16px;margin:12px 0;color:#284d3d}
+.consent-card strong{display:block;font-size:14px;margin-bottom:6px;color:var(--primary-dark)}
+.consent-card p{font-size:13px;line-height:1.65;margin:0}
+.consent-card p+p{margin-top:8px}
+.consent-card .bn{background:rgba(10,123,92,.04);padding:8px 10px;border-radius:8px;font-size:12.5px;margin-top:8px;border-left:2px solid #b5e5ce}
+.consent-agree{background:var(--accent-light);border:2px solid #f0cd7a;border-radius:12px;padding:14px}
+
+/* SUCCESS */
+.successbox{text-align:center;padding:28px 16px}
+.successicon{font-size:52px;line-height:1}
+.successbox h2{margin:10px 0 8px;font-size:24px;color:var(--primary-dark)}
+.successbox .sub{margin-bottom:16px}
+#applicationId{font-family:'Courier New',monospace;background:var(--primary-light);color:var(--primary-dark);padding:8px 16px;border-radius:8px;display:inline-block;font-size:13px;font-weight:800;letter-spacing:1px}
+
+.language{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.language>div{background:linear-gradient(135deg,#f6faf8,#fbfdfc);border:1px solid var(--line);border-radius:13px;padding:16px;font-size:12.5px;line-height:1.85}
+.language h3{font-size:13px;margin:0 0 10px;color:var(--primary-dark);font-weight:800}
+.language b{color:var(--primary-dark)}
+
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.tiny{font-size:11px;color:var(--muted);line-height:1.6}
+.footer{text-align:center;color:var(--muted);font-size:11.5px;padding:32px 16px;line-height:1.7}
+
+/* MOBILE */
 @media(max-width:768px){
   .wrap{padding:14px}
-  .top{padding:20px 0 24px}
-  .hero{padding:20px 0 4px}
-  .hero h1{font-size:clamp(24px,6vw,34px);line-height:1.18}
+  .card{padding:18px;border-radius:16px}
+  .hero{padding:18px 0 0}
+  .hero h1{font-size:24px}
   .hero p{font-size:14px}
-  .card{border-radius:15px;padding:16px;margin:14px 0}
-  .plan-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:11px}
-  .plan-head{padding:14px 14px 11px}
-  .plan-body{padding:12px 14px 14px}
-  .plan-price{font-size:25px}
-  .wizard-progress{gap:6px;margin:14px 0}
-  .wizard-item{padding:9px 4px;font-size:10px;border-radius:10px}
-  .wizard-item b{font-size:14px}
-  .fieldgrid{gap:11px}
-}
-@media(max-width:600px){
-  .wrap{padding:11px}
-  .brand{gap:9px;align-items:center}
-  .logo{width:42px;height:42px;border-radius:12px;font-size:17px;flex:0 0 42px}
-  .brandname{font-size:18px;letter-spacing:.5px}
-  .tag{font-size:9px;line-height:1.4}
-  .hero h1{font-size:26px}
-  .hero p{font-size:13px;line-height:1.6}
-  .pill{font-size:10px;padding:7px 10px}
-  .section-title{font-size:17px;line-height:1.35}
-  .sub{font-size:12px}
-  .fieldgrid,.language{grid-template-columns:minmax(0,1fr)}
+  .fieldgrid{grid-template-columns:1fr}
   .field.full{grid-column:auto}
-  .audience-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  .audience-tab{min-width:0;padding:11px 8px;gap:7px;border-radius:12px}
-  .audience-icon{font-size:21px}
-  .audience-tab strong{font-size:11px;line-height:1.3}
-  .audience-tab small{font-size:9px;line-height:1.35}
-  .tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:13px 0}
-  .tab{min-width:0;padding:11px 7px;font-size:10px;line-height:1.35}
-  .plan-grid{grid-template-columns:minmax(0,1fr)}
-  .plan-details{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  .detail-chip{padding:8px;font-size:10px}
-  .detail-chip b{font-size:10px}
-  .wizard-progress{gap:4px}
-  .wizard-item{padding:8px 2px;font-size:9px;line-height:1.25}
-  .wizard-item b{font-size:13px;margin-bottom:2px}
-  .wizard-nav{gap:8px;align-items:stretch}
-  .wizard-nav .btn{min-width:0;flex:1;padding:13px 9px;font-size:11px;white-space:normal}
-  .btnrow{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .wizard-progress{padding:8px;gap:6px}
+  .wizard-item{padding:9px 4px;font-size:10px}
+  .wizard-item b{font-size:13px}
+  .language{grid-template-columns:1fr}
+  .wizard-nav{flex-direction:column}
+  .wizard-nav .btn{width:100%}
+  .btnrow{flex-direction:column}
   .btnrow .btn{width:100%}
-  .couponrow{grid-template-columns:minmax(0,1fr)}
-  .summary{padding:11px}
-  .sumrow{font-size:11px;gap:8px;align-items:flex-start}
-  .sumrow.total{font-size:15px}
-  .consent-card{padding:11px 12px}
-  .consent-card strong{font-size:13px}
-  .consent-card p{font-size:12px}
-  .consent-agree{padding:11px}
-  input,select,textarea{font-size:16px;padding:12px;border-radius:10px}
-  input[type=file]{font-size:13px;padding:9px}
-  .checkline{font-size:12px;gap:8px}
-  .checkline input{width:18px;height:18px;margin-top:2px}
-  .notice{font-size:11px;padding:11px 12px;overflow-wrap:anywhere}
-  .language>div{padding:11px;font-size:12px}
-  .successbox{padding:18px 8px}
-  .successbox h2{font-size:20px}
+  .plan-summary-banner{flex-direction:column;align-items:flex-start}
+  .plan-summary-banner > div:last-child{width:100%;justify-content:space-between;display:flex;align-items:center;gap:12px}
 }
-@media(max-width:360px){
-  .wrap{padding:9px}
-  .card{padding:12px}
-  .hero h1{font-size:23px}
-  .brandname{font-size:16px}
-  .tag{font-size:8px}
-  .audience-tab{padding:9px 6px}
-  .audience-icon{font-size:18px}
-  .tab{font-size:9px}
-  .wizard-item{font-size:8px}
-  .wizard-nav .btn{font-size:10px;padding:12px 6px}
-  .plan-price{font-size:23px}
+@media(max-width:640px){
+  .plan-section-header{padding:10px 12px;gap:10px}
+  .plan-section-title{font-size:14px}
+  .plan-section-sub{font-size:10.5px}
+  .plan-section-count{font-size:10px;padding:3px 8px}
+  .plan-section-grid{grid-template-columns:1fr}
 }
-@media(hover:none){.plan:hover{transform:none}}
-
-/* English Spur emerald-green visual refresh */
-:root{
- --blue:#087f5b;--green:#079669;--orange:#f5a623;--ink:#172b25;
- --muted:#657b72;--line:#d8e9e1;--soft:#f2faf6;
- --es-emerald:#087f5b;--es-mint:#dff6eb;--es-teal:#087e8b;
- --es-lime:#d8f36a;--es-gold:#f5a623;--es-purple:#7562b5;
+@media(max-width:520px){
+  .wrap{padding:11px}
+  .card{padding:16px}
+  .hero h1{font-size:22px}
+  .brandname{font-size:18px}
+  .audience-tab{padding:13px 12px;gap:10px}
+  .audience-icon{font-size:24px}
+  .audience-tab strong{font-size:13.5px}
+  .audience-tab small{font-size:10px}
+  .plan-stats{grid-template-columns:repeat(auto-fit,minmax(65px,1fr));gap:6px}
+  .stat-pill{padding:8px 4px}
+  .stat-pill .stat-num{font-size:13px}
+  .stat-pill .stat-lbl{font-size:8.5px}
+  .price-amount{font-size:25px}
+  input,select,textarea{font-size:16px}
+  .coupon-row{flex-direction:column}
 }
-body{background:linear-gradient(180deg,#effaf4 0,#f7fbf8 360px,#f5f9f7 100%);color:var(--ink)}
-.top{background:radial-gradient(circle at 85% 12%,#2aa77b55 0,transparent 34%),linear-gradient(125deg,#064e3b 0%,#087f5b 54%,#0b756f 100%);position:relative;overflow:hidden}
-.top:after{content:"";position:absolute;right:-95px;bottom:-165px;width:360px;height:360px;border:1px solid #ffffff22;border-radius:50%;box-shadow:0 0 0 28px #ffffff09,0 0 0 58px #ffffff08;pointer-events:none}
-.top>.wrap{position:relative;z-index:1}
-.logo{box-shadow:0 5px 18px #022c2250;border:1px solid #ffffff65}
-.brandname span{color:#d8f36a}
-.pill{background:#d8f36a20;border-color:#d8f36a65;color:#f4ffdf}
-.card{border-color:#dcebe3;box-shadow:0 10px 28px #0a54300b}
-.section-title{color:#075b43}
-.tab{border-color:#d6e8df;background:#fff;color:#426258}
-.tab.active{background:linear-gradient(135deg,#087f5b,#0b9b78);border-color:#087f5b;color:#fff;box-shadow:0 5px 14px #087f5b25}
-.audience-tab{border-color:#d7e9df;box-shadow:0 4px 14px #0b58300a}
-.audience-tab:first-child .audience-icon{color:#0b9b78}
-.audience-tab:nth-child(2) .audience-icon{color:#d28b16}
-.audience-tab:first-child.active{border-color:#0b9b78;background:linear-gradient(135deg,#e3f8ee,#fff)}
-.audience-tab:nth-child(2).active{border-color:#e0a12b;background:linear-gradient(135deg,#fff5df,#fff)}
-.category-intro{background:linear-gradient(115deg,#e9f8f0,#f5fbf7);border-color:#cfe8da;color:#315c4b}
-.plan{border-color:#d9e9e1;background:#fff;box-shadow:0 5px 16px #0b50300a}
-.plan:nth-child(4n+1) .plan-head{background:linear-gradient(120deg,#e2f7ed,#f8fffb)}
-.plan:nth-child(4n+2) .plan-head{background:linear-gradient(120deg,#fff3d9,#fffdf7)}
-.plan:nth-child(4n+3) .plan-head{background:linear-gradient(120deg,#e3f4f7,#f8feff)}
-.plan:nth-child(4n+4) .plan-head{background:linear-gradient(120deg,#f0eaff,#fcfaff)}
-.plan:nth-child(4n+1) .plan-kicker{color:#087f5b}
-.plan:nth-child(4n+2) .plan-kicker{color:#a66a08}
-.plan:nth-child(4n+3) .plan-kicker{color:#087e8b}
-.plan:nth-child(4n+4) .plan-kicker{color:#7562b5}
-.plan:hover{border-color:#75c6a1;box-shadow:0 10px 24px #087f5b14}
-.plan.selected{border:2px solid #079669;background:#f1fbf6;box-shadow:0 0 0 4px #07966918,0 10px 24px #087f5b12}
-.plan-price,.price{color:#087f5b}
-.detail-chip{background:#f1f8f4;border:1px solid #e3efe8;color:#536c60}
-.detail-chip b{color:#25483a}
-.total-chip{background:linear-gradient(135deg,#e1f7ec,#effcf5);border-color:#b9e5ce;color:#075b43}
-.total-chip b{color:#075b43}
-.batch-label{background:#dff6eb;color:#08704e}
-.offer-tag{background:#fff0cf;color:#8d5a00}
-.plan-select{background:#e2f5eb;color:#08704e}
-.plan.selected .plan-select{background:linear-gradient(100deg,#087f5b,#0b9b78);color:#fff}
-input,select,textarea{border-color:#d5e6dd;background:#fbfefc}
-input:focus,select:focus,textarea:focus{border-color:#23a477;box-shadow:0 0 0 3px #23a47718}
-input[type=checkbox]{accent-color:#087f5b}
-.btn{background:linear-gradient(110deg,#087f5b,#0b9b78);box-shadow:0 4px 12px #087f5b20}
-.btn.green{background:linear-gradient(110deg,#07845e,#12a477)}
-.btn.orange{background:linear-gradient(110deg,#f5a623,#ffd166);color:#49300a}
-.btn.light{background:#e4f4eb;color:#08704e;box-shadow:none}
-.info{background:#eaf6f8;border-color:#cce8eb;color:#17616b}
-.good{background:#e4f7ed;border-color:#bfe8d0;color:#126044}
-.warn{background:#fff6e4;border-color:#f4dfb1;color:#80560d}
-.summary{background:linear-gradient(135deg,#f0faf4,#f9fdfb);border-color:#d6e9df}
-.sumrow.total{color:#087f5b;border-color:#cfe5d8}
-.wizard-item{border-color:#d9e9e1;background:#fff;color:#70847a}
-.wizard-item.active{background:linear-gradient(135deg,#dff6eb,#f2fcf6);border-color:#079669;color:#08704e;box-shadow:0 4px 13px #087f5b12}
-.wizard-item.done{background:#e5f7ec;border-color:#a9dfc1;color:#08704e}
-.num{background:linear-gradient(135deg,#087f5b,#0b9b78)}
-.consent-card{background:#f4fbf7;border-color:#d5e9de;border-left-color:#0b9b78;color:#284d3d}
-.consent-agree{background:#fff8e8;border-color:#efc85b}
-.language>div{background:#f2faf6;border-color:#d8e9e1}
-.language h3{color:#08704e}
-.footer{color:#73887e}
-@media(max-width:600px){.top{padding:17px 0 21px}.wizard-item.active{box-shadow:none}}
-
-/* Student-entered text is displayed in CAPITAL LETTERS */
-#studentName,#mobile,#address,#school,#guardianName,#guardianMobile,#transactionId{text-transform:uppercase}
-
-/* NEW: Selected Plan Banner for Steps 2, 3, 4 */
-.plan-summary-banner { background: #f0faf4; border: 1.5px solid #b9e5ce; border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 12px #087f5b08; }
-.plan-summary-banner .plan-name { font-size: 14px; font-weight: 900; color: #087f5b; margin: 0; line-height: 1.4; }
-.plan-summary-banner .plan-meta { font-size: 11px; color: #64748b; margin-top: 4px; font-weight: 600; }
-.plan-summary-banner .plan-price-tag { font-size: 18px; font-weight: 900; color: #087f5b; white-space: nowrap; }
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <div class="brand"><div class="logo"><img class="brand-logo" src="logo.png" alt="English Spur Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">ES</span></div><div><div class="brandname">ENGLISH <span>SPUR</span></div><div class="tag">ONLINE ENGLISH TRAINING ACADEMY · ESTD. 2020</div></div></div>
-  <div class="hero"><h1>Start Your English Learning Journey</h1><p>Choose an available course or batch, complete your admission application and send your application PDF to English Spur on WhatsApp.</p><div class="pill">✦ ONLINE ADMISSION APPLICATION</div></div>
-</div></header>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">
+        <img class="brand-logo" src="logo.png" alt="English Spur" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-fallback">ES</span>
+      </div>
+      <div>
+        <div class="brandname">ENGLISH <span>SPUR</span></div>
+        <div class="tag">ONLINE ENGLISH TRAINING ACADEMY · ESTD. 2020</div>
+      </div>
+    </div>
+    <div class="hero">
+      <h1>Start Your English Learning Journey</h1>
+      <p>Choose an available course or batch, complete your admission application and send your application PDF to English Spur on WhatsApp.</p>
+      <div class="pill">✦ ONLINE ADMISSION APPLICATION</div>
+    </div>
+  </div>
+</header>
+
 <main class="wrap">
   <div class="wizard-progress" aria-label="Application steps">
     <div class="wizard-item active" data-progress="1"><b>01</b>Course</div>
@@ -223,38 +295,55 @@ input[type=checkbox]{accent-color:#087f5b}
     <div class="wizard-item" data-progress="3"><b>03</b>Payment</div>
     <div class="wizard-item" data-progress="4"><b>04</b>Consent</div>
   </div>
-  
+
   <!-- STEP 1 -->
   <section class="card wizard-panel" data-step="1">
-    <h2 class="section-title">Step 1 of 4 · Choose Your Course / Plan</h2><p class="sub bn">অ্যাডমিন কর্তৃক প্রকাশিত এবং সক্রিয় Course ও Batch-গুলিই এখানে দেখা যাবে।</p>
+    <h2 class="section-title">Step 1 of 4 · Choose Your Course</h2>
+    <p class="sub bn">অ্যাডমিন কর্তৃক প্রকাশিত এবং সক্রিয় Course ও Batch-গুলিই এখানে দেখা যাবে।</p>
+
     <div id="loadState" class="notice info">Loading current plans…</div>
+
     <div class="audience-tabs" id="audienceTabs">
-      <button class="audience-tab active" data-audience="adult"><span class="audience-icon">🧑</span><span><strong>Adult Courses</strong><small>18 years and above</small></span></button>
-      <button class="audience-tab" data-audience="kids"><span class="audience-icon">🧒</span><span><strong>Kids Courses</strong><small>Below 18 years</small></span></button>
+      <button type="button" class="audience-tab active" data-audience="adult">
+        <span class="audience-icon">🧑</span>
+        <span><strong>Adult Courses</strong><small>18 years and above</small></span>
+      </button>
+      <button type="button" class="audience-tab" data-audience="kids">
+        <span class="audience-icon">🧒</span>
+        <span><strong>Kids Courses</strong><small>Below 18 years</small></span>
+      </button>
     </div>
+
     <div class="tabs" id="planTabs">
-      <button class="tab active" data-tab="group">👥 Group Classes</button><button class="tab" data-tab="oneOnOne">👑 One-to-One Classes</button>
+      <button type="button" class="tab active" data-tab="group">👥 Group Classes</button>
+      <button type="button" class="tab" data-tab="oneOnOne">👑 One-to-One Classes</button>
     </div>
+
     <div id="categoryIntro" class="category-intro"></div>
-    <div id="plans" class="plan-grid"></div>
-    <div class="wizard-nav"><span></span><button type="button" class="btn" onclick="goStep(2)">Continue to Applicant Details →</button></div>
+    <div id="plans"></div>
+
+    <div class="wizard-nav">
+      <span></span>
+      <button type="button" class="btn" onclick="goStep(2)">Continue to Applicant Details →</button>
+    </div>
   </section>
 
   <!-- STEP 2 -->
   <section class="card wizard-panel hidden" data-step="2">
-    
     <div class="plan-summary-banner" id="summaryBannerStep2" style="display:none;">
       <div>
         <p class="plan-name"><span id="sumName2"></span></p>
         <p class="plan-meta"><span id="sumMeta2"></span></p>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div>
         <span class="plan-price-tag" id="sumPrice2"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
 
-    <h2 class="section-title">Step 2 of 4 · Applicant Details</h2><p class="sub bn">সঠিক তথ্য দিন। আবেদন Finalize করার পরে এই Portal থেকে তথ্য পরিবর্তন করা যাবে না।</p>
+    <h2 class="section-title">Step 2 of 4 · Applicant Details</h2>
+    <p class="sub bn">সঠিক তথ্য দিন। আবেদন Finalize করার পরে এই Portal থেকে তথ্য পরিবর্তন করা যাবে না।</p>
+
     <form id="applicationForm">
       <div class="fieldgrid">
         <div class="field"><label>Student's Full Name <span class="req">*</span></label><input id="studentName" required maxlength="100" placeholder="Full name"></div>
@@ -265,36 +354,45 @@ input[type=checkbox]{accent-color:#087f5b}
         <div class="field"><label>School / Institution (optional)</label><input id="school" placeholder="School / Institution"></div>
         <div class="field"><label>Student's Photo <span class="req">*</span></label><input id="studentPhoto" type="file" accept="image/*" required></div>
       </div>
+
       <div id="guardianArea" class="notice warn hidden">
         <strong>Guardian details required for applicants below 18.</strong>
-        <div class="fieldgrid" style="margin-top:12px">
+        <div class="fieldgrid" style="margin-top:14px">
           <div class="field"><label>Guardian's Full Name <span class="req">*</span></label><input id="guardianName" placeholder="Guardian name"></div>
           <div class="field"><label>Guardian's Mobile Number <span class="req">*</span></label><input id="guardianMobile" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"></div>
           <div class="field full"><label>Relationship with Student <span class="req">*</span></label><select id="guardianRelation"><option value="">Select relationship</option><option>Father</option><option>Mother</option><option>Legal Guardian</option><option>Other</option></select></div>
         </div>
       </div>
     </form>
-    <div class="wizard-nav"><button type="button" class="btn light" onclick="goStep(1)">← Back</button><button type="button" class="btn" onclick="goStep(3)">Continue to Payment →</button></div>
+
+    <div class="wizard-nav">
+      <button type="button" class="btn light" onclick="goStep(1)">← Back</button>
+      <button type="button" class="btn" onclick="goStep(3)">Continue to Payment →</button>
+    </div>
   </section>
 
   <!-- STEP 3 -->
   <section class="card wizard-panel hidden" data-step="3">
-    
     <div class="plan-summary-banner" id="summaryBannerStep3" style="display:none;">
       <div>
         <p class="plan-name"><span id="sumName3"></span></p>
         <p class="plan-meta"><span id="sumMeta3"></span></p>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div>
         <span class="plan-price-tag" id="sumPrice3"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
 
-    <h2 class="section-title">Step 3 of 4 · Coupon & Payment Details</h2><p class="sub">Enter your coupon code if you have one. Discount validation happens automatically. <strong>Each coupon can be used only once per student.</strong></p>
-    <div class="field"><label>Coupon Code (optional)</label><input id="couponCode" autocomplete="off" placeholder="ENTER COUPON CODE" style="text-transform:uppercase"></div>
-    <div id="couponMessage" class="tiny" style="margin-top:7px">No coupon applied.</div>
-    <div class="summary" style="margin-top:14px">
+    <h2 class="section-title">Step 3 of 4 · Coupon & Payment</h2>
+    <p class="sub">Enter your coupon code if you have one. <strong>Each coupon can be used only once per student.</strong></p>
+
+    <div class="coupon-row">
+      <input id="couponCode" autocomplete="off" placeholder="ENTER COUPON CODE" style="text-transform:uppercase">
+    </div>
+    <div id="couponMessage" class="tiny" style="margin-top:8px">No coupon applied.</div>
+
+    <div class="summary" style="margin-top:18px">
       <div class="sumrow"><span>Selected plan</span><strong id="sumPlan">Not selected</strong></div>
       <div class="sumrow"><span>Total Classes</span><strong id="sumClasses">—</strong></div>
       <div class="sumrow"><span>Course / Batch fee</span><strong id="sumBase">Rs.0.00</strong></div>
@@ -302,23 +400,26 @@ input[type=checkbox]{accent-color:#087f5b}
       <div class="sumrow"><span>Coupon discount</span><strong id="sumDiscount">−Rs.0.00</strong></div>
       <div class="sumrow total"><span>Payable amount</span><span id="sumTotal">Rs.0.00</span></div>
     </div>
+
     <div class="notice info bn">পেমেন্ট করার আগে নিচের QR Code স্ক্যান করুন অথবা UPI ID কপি করে পেমেন্ট করুন। Portal-এ পেমেন্টের তথ্য জমা দিলেই Admission Confirm হবে না। Bank/Payment verification-এর পরে Admin Admission Confirm করবেন।</div>
-    <div class="pay-box" style="border:1.5px dashed #b8c6e5;border-radius:16px;padding:16px;margin:14px 0;background:linear-gradient(145deg,#f8faff,#fff);text-align:center">
-      <h3 style="margin:0 0 8px;color:#263b82;font-size:16px;font-weight:900">📱 Scan QR Code to Pay</h3>
-      <p class="tiny" style="margin:0 0 12px">Open Google Pay / PhonePe / Paytm / any UPI app and scan this code.</p>
+
+    <div class="pay-box">
+      <h3>📱 Scan QR Code to Pay</h3>
+      <p class="tiny">Open Google Pay / PhonePe / Paytm / any UPI app and scan this code.</p>
       <a href="SOVAN%20KAPRI%20GOOGLE%20PAY.jpg" target="_blank" rel="noopener" style="display:inline-block;max-width:100%">
-        <img id="paymentQrImage" src="SOVAN%20KAPRI%20GOOGLE%20PAY.jpg" alt="English Spur UPI Payment QR Code" style="display:block;width:min(100%,300px);aspect-ratio:1/1;object-fit:contain;background:#fff;border:1px solid #e1e7f2;border-radius:13px;padding:8px;margin:auto" onerror="this.style.display='none';document.getElementById('qrMissingNote').classList.remove('hidden')">
+        <img id="paymentQrImage" src="SOVAN%20KAPRI%20GOOGLE%20PAY.jpg" alt="English Spur UPI QR" class="qr-img" onerror="this.style.display='none';document.getElementById('qrMissingNote').classList.remove('hidden')">
       </a>
-      <div id="qrMissingNote" class="notice warn hidden" style="text-align:left;margin:10px 0 0">QR image file not found. Please place the original <b>SOVAN KAPRI GOOGLE PAY.jpg</b> file in the same folder as index.html.</div>
-      <div style="margin-top:14px;text-align:left;background:#fff7e8;border:1px solid #ffe0a3;border-radius:12px;padding:12px">
-        <div style="font-size:11px;font-weight:900;color:#81520b;margin-bottom:7px">YOUR UPI ID</div>
-        <div style="display:flex;align-items:center;gap:8px;min-width:0">
-          <strong id="upiIdText" style="font-size:13px;color:#573b0b;overflow-wrap:anywhere;flex:1">sovankapri-1@okhdfcbank</strong>
-          <button type="button" class="btn orange" style="padding:9px 12px;flex:0 0 auto" onclick="copyPortalUpi()">Copy UPI</button>
+      <div id="qrMissingNote" class="notice warn hidden" style="text-align:left;margin:10px 0 0">QR image not found. Please place <b>SOVAN KAPRI GOOGLE PAY.jpg</b> next to index.html.</div>
+      <div class="upi-box">
+        <div class="upi-label">YOUR UPI ID</div>
+        <div class="upi-row">
+          <strong id="upiIdText" class="upi-id">sovankapri-1@okhdfcbank</strong>
+          <button type="button" class="btn orange" style="padding:9px 14px;flex-shrink:0;font-size:12px" onclick="copyPortalUpi()">Copy</button>
         </div>
       </div>
-      <div class="notice good" style="text-align:left;margin-bottom:0"><b>Payable Amount: <span id="paymentPayableAmount">Rs.0.00</span></b><br><span class="tiny">Please pay the exact payable amount shown here.</span></div>
+      <div class="notice good payable-note"><b>Payable Amount: <span id="paymentPayableAmount">Rs.0.00</span></b><br><span class="tiny">Please pay the exact payable amount shown here.</span></div>
     </div>
+
     <div class="fieldgrid">
       <div class="field"><label>Payment Method <span class="req">*</span></label><select id="paymentMethod" required><option value="">Select method</option><option>UPI</option><option>Google Pay</option><option>PhonePe</option><option>Paytm</option><option>Bank Transfer</option><option>Other</option></select></div>
       <div class="field"><label>Transaction / UTR ID (12 digits) <span class="req">*</span></label><input id="transactionId" required inputmode="numeric" maxlength="12" minlength="12" pattern="[0-9]{12}" placeholder="12-digit transaction / UTR ID"></div>
@@ -326,45 +427,64 @@ input[type=checkbox]{accent-color:#087f5b}
       <div class="field"><label>Amount Paid (₹) <span class="req">*</span></label><input id="amountPaid" type="number" min="1" step="0.01" required placeholder="Amount actually paid"></div>
       <div class="field full"><label>Payment Screenshot <span class="req">*</span></label><input id="paymentShot" type="file" accept="image/*" required><div class="tiny">Screenshot will be embedded in your Application PDF.</div></div>
     </div>
-    <div class="wizard-nav"><button type="button" class="btn light" onclick="goStep(2)">← Back</button><button type="button" class="btn" onclick="goStep(4)">Continue to Consent →</button></div>
+
+    <div class="wizard-nav">
+      <button type="button" class="btn light" onclick="goStep(2)">← Back</button>
+      <button type="button" class="btn" onclick="goStep(4)">Continue to Consent →</button>
+    </div>
   </section>
 
   <!-- STEP 4 -->
   <section class="card wizard-panel hidden" data-step="4">
-    
     <div class="plan-summary-banner" id="summaryBannerStep4" style="display:none;">
       <div>
         <p class="plan-name"><span id="sumName4"></span></p>
         <p class="plan-meta"><span id="sumMeta4"></span></p>
       </div>
-      <div style="display:flex;align-items:center;gap:12px;">
+      <div>
         <span class="plan-price-tag" id="sumPrice4"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
 
     <h2 class="section-title">Step 4 of 4 · Student Agreement & Consent</h2>
-    <p class="sub">Please read all five consent terms carefully. Tick the agreement box and press “I Agree & Continue” to finalize your application.</p>
+    <p class="sub">Please read all five consent terms carefully. Tick the agreement box and press "I Agree & Continue" to finalize.</p>
+
     <div class="consent-card"><strong>1. 📹 CLASS RECORDING CONSENT</strong><p>I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.</p><p class="bn" lang="bn"><b>১. ক্লাস রেকর্ডিংয়ের সম্মতি:</b> আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি। এই রেকর্ডিং শিক্ষা, প্রশিক্ষণ, নথিভুক্তকরণ, প্রচার এবং প্রতিষ্ঠানের প্রয়োজনীয় কাজে সংরক্ষণ ও ব্যবহার করা যেতে পারে।</p></div>
+
     <div class="consent-card"><strong>2. 📱 PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT</strong><p>I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities. This includes English Spur's website, Facebook, YouTube, Instagram, WhatsApp, digital advertisements and other communication or publicity channels.</p><p class="bn" lang="bn"><b>২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি:</b> আমি English Spur-কে আমার ছবি, ভিডিও, কণ্ঠস্বরের রেকর্ডিং, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন, বিজ্ঞাপন ও প্রচারমূলক কাজে ব্যবহার, সম্পাদনা, প্রকাশ, প্রদর্শন, বিতরণ এবং শেয়ার করার স্পষ্ট অনুমতি দিচ্ছি। এর মধ্যে English Spur-এর ওয়েবসাইট, Facebook, YouTube, Instagram, WhatsApp, ডিজিটাল বিজ্ঞাপন এবং অন্যান্য প্রচারমাধ্যম অন্তর্ভুক্ত।</p></div>
+
     <div class="consent-card"><strong>3. 🚫 ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT</strong><p>I confirm that I have read and understood Clauses 1 and 2 and have given my consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish the permitted content for the purposes stated above without obtaining separate approval for each individual photograph, video, recording, post or advertisement, provided the use remains within the scope of this consent. I will not object solely because English Spur has used the content in accordance with the permissions granted here.</p><p class="bn" lang="bn"><b>৩. সম্মতির স্বীকৃতি ও প্রতিবার আলাদা অনুমতির প্রয়োজন নেই:</b> আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি, বুঝেছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির নির্ধারিত উদ্দেশ্য ও সীমার মধ্যে English Spur প্রতিটি ছবি, ভিডিও, রেকর্ডিং, পোস্ট বা বিজ্ঞাপনের জন্য আলাদা অনুমতি না নিয়েই অনুমোদিত কনটেন্ট নির্বাচন, সম্পাদনা, সংকলন, পুনরুৎপাদন, প্রকাশ এবং পুনরায় প্রকাশ করতে পারবে। এখানে দেওয়া অনুমতির আওতায় কনটেন্ট ব্যবহার করা হয়েছে—শুধুমাত্র এই কারণে আমি আপত্তি করব না।</p></div>
+
     <div class="consent-card"><strong>4. 📜 RULES, RESPONSIBILITIES & CONTENT USE</strong><p>I agree to follow English Spur's academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not knowingly misuse, reproduce, distribute or commercially exploit English Spur's recordings, teaching materials, photographs, videos, logo or other institutional content without prior written permission.</p><p class="bn" lang="bn"><b>৪. নিয়মাবলি, দায়িত্ব ও কনটেন্ট ব্যবহার:</b> আমি English Spur-এর শিক্ষাগত নির্দেশিকা, ক্লাসের শৃঙ্খলা, উপস্থিতি, যোগাযোগনীতি এবং প্রতিষ্ঠানের নিয়ম মেনে চলতে সম্মত। English Spur-এর পূর্ব লিখিত অনুমতি ছাড়া প্রতিষ্ঠানের রেকর্ডিং, শিক্ষাসামগ্রী, ছবি, ভিডিও, লোগো বা অন্যান্য কনটেন্ট জেনে-শুনে অপব্যবহার, পুনরুৎপাদন, বিতরণ বা বাণিজ্যিক কাজে ব্যবহার করব না।</p></div>
+
     <div class="consent-card"><strong>5. 🔒 PRIVACY, ACKNOWLEDGEMENT & DECLARATION</strong><p>I confirm that the information and materials provided by me are accurate to the best of my knowledge. I understand that English Spur will handle personal information and content for the purposes explained in this consent and its applicable privacy practices. I understand that the application PDF is generated on my device and that I must send it with the payment screenshot to the official English Spur WhatsApp number for verification.</p><p class="bn" lang="bn"><b>৫. গোপনীয়তা, স্বীকৃতি ও ঘোষণা:</b> আমার দেওয়া তথ্য ও উপকরণ আমার জ্ঞান অনুযায়ী সঠিক বলে নিশ্চিত করছি। এই সম্মতিতে উল্লেখিত উদ্দেশ্য এবং প্রযোজ্য গোপনীয়তা নীতি অনুযায়ী English Spur আমার ব্যক্তিগত তথ্য ও কনটেন্ট ব্যবহার করবে—এটি আমি বুঝেছি। আবেদনপত্রের PDF আমার নিজের ডিভাইসে তৈরি হবে এবং যাচাইয়ের জন্য PDF ও পেমেন্টের স্ক্রিনশট English Spur-এর নির্ধারিত WhatsApp নম্বরে পাঠাতে হবে—এটিও আমি বুঝেছি।</p></div>
-    <label class="checkline consent-agree"><input type="checkbox" id="consentCheckbox" onchange="toggleConsentButton()"><span><strong>I have read and agree to all the five terms above. I give my full consent.</strong></span></label>
-    <label class="checkline"><input type="checkbox" id="consentAccuracy" required><span>I declare that the information and documents provided in this application are true and correct. I understand that incorrect information may lead to rejection of admission.</span></label>
+
+    <label class="checkline consent-agree"><input type="checkbox" id="consentCheckbox" onchange="toggleConsentButton()"><span><strong>I have read and agree to all five terms above. I give my full consent.</strong></span></label>
+    <label class="checkline"><input type="checkbox" id="consentAccuracy" required><span>I declare that the information and documents provided in this application are true and correct.</span></label>
     <label class="checkline"><input type="checkbox" id="consentPayment" required><span>I understand that submitting payment details does not guarantee admission. Admission is confirmed only after English Spur verifies the actual payment received.</span></label>
     <label class="checkline"><input type="checkbox" id="consentRules" required><span>I agree to follow the course schedule, learning guidelines, communication rules and other instructions issued by English Spur.</span></label>
     <div id="guardianConsentArea" class="hidden">
       <label class="checkline consent-agree"><input type="checkbox" id="guardianConsent" onchange="toggleConsentButton()"><span class="bn"><strong>অভিভাবকের বাধ্যতামূলক সম্মতি (শুধুমাত্র ১৮ বছরের কম বয়সীদের জন্য):</strong> আমি শিক্ষার্থীর পিতা/মাতা/আইনগত অভিভাবক হিসেবে এই আবেদন, নির্বাচিত কোর্স এবং English Spur-এর নিয়মাবলিতে সম্মতি প্রদান করছি।</span></label>
     </div>
     <label class="checkline"><input type="checkbox" id="consentData" required><span>I understand that I must send the downloaded Application PDF and payment screenshot to the official English Spur WhatsApp number for verification.</span></label>
+
     <div class="notice warn bn">গুরুত্বপূর্ণ: Guardian consent একটি ঘোষণামূলক সম্মতি। অনলাইনে checkbox tick করলেই অভিভাবকের পরিচয় স্বাধীনভাবে যাচাই হয় না।</div>
-    <div class="wizard-nav"><button type="button" class="btn light" onclick="goStep(3)">← Back</button><button type="button" id="agreeConsentBtn" class="btn orange" onclick="finalizeApplication()" disabled>✅ I Agree & Continue</button></div>
+
+    <div class="wizard-nav">
+      <button type="button" class="btn light" onclick="goStep(3)">← Back</button>
+      <button type="button" id="agreeConsentBtn" class="btn orange" onclick="finalizeApplication()" disabled>✅ I Agree & Continue</button>
+    </div>
     <div id="formError" class="notice bad hidden"></div>
   </section>
 
   <section id="afterDownload" class="card hidden">
-    <div class="successbox"><div class="successicon">✅</div><h2>Application PDF Ready!</h2><p class="sub">Your application has been finalized on this device. Now send the PDF directly to English Spur Admin on WhatsApp for verification.</p><p><strong id="applicationId"></strong></p></div>
+    <div class="successbox">
+      <div class="successicon">✅</div>
+      <h2>Application PDF Ready!</h2>
+      <p class="sub">Your application has been finalized on this device. Now send the PDF directly to English Spur Admin on WhatsApp for verification.</p>
+      <p><strong id="applicationId"></strong></p>
+    </div>
     <div class="notice good bn">আপনার Application PDF তৈরি হয়েছে। এখন নিচের সবুজ বাটনে ক্লিক করে সরাসরি English Spur Admin (9875340842)-এর WhatsApp-এ PDF-টি পাঠান।</div>
     <div class="language">
       <div class="bn"><h3>বাংলায় করণীয়</h3>
@@ -382,9 +502,13 @@ input[type=checkbox]{accent-color:#087f5b}
         5. Admission remains pending until payment verification.
       </div>
     </div>
-    <div class="btnrow"><button class="btn green" onclick="sendPdfToAdmin()">📤 Send PDF to Admin on WhatsApp (9875340842)</button><button class="btn light" onclick="downloadAgain()">Download PDF</button></div>
-    <p class="tiny" style="margin-top:12px">If your device does not support direct file sharing, the PDF will be downloaded and the WhatsApp chat with English Spur (9875340842) will open automatically — please attach the downloaded PDF there.</p>
+    <div class="btnrow">
+      <button class="btn green" style="background:var(--success)" onclick="sendPdfToAdmin()">📤 Send PDF to Admin on WhatsApp (9875340842)</button>
+      <button class="btn light" onclick="downloadAgain()">Download PDF</button>
+    </div>
+    <p class="tiny" style="margin-top:14px">If your device does not support direct file sharing, the PDF will be downloaded and the WhatsApp chat will open — please attach the downloaded PDF there.</p>
   </section>
+
   <footer class="footer">© 2026 English Spur Online English Training Academy · Kanaipur, Bagnan, Howrah<br>WhatsApp / Call: 9875340842 · Only Call: 8158874131</footer>
 </main>
 
@@ -398,13 +522,16 @@ const firebaseConfig = {
   appId: "1:113483091618:web:1bb7cfb608ba85382011fb"
 };
 let db=null, offer={}, categories={oneOnOne:{},group:{}}, coupons=[];
-let activeTab='group', activeAudience='adult', selected=null, couponState={valid:false,discount:0,record:null,message:''};
+let activeTab='group', activeAudience='adult', selected=null;
+let couponState={valid:false,discount:0,record:null,message:''};
 let finalPdfBlob=null, finalPdfName='', finalAppId='', finalPdfFile=null;
-let usageCheckTimer=null;
 const COUPON_USAGE_COLLECTION='couponUsage';
 const $=id=>document.getElementById(id);
 const money=n=>'Rs.'+Number(n||0).toFixed(2);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const ENGLISH_KEYWORDS = ['english','speak','grammar','ielts','toefl','vocabulary','pronunciation','fluency'];
+
 function offerActive(){if(offer.active===false)return false;if(!offer.endDateTime)return false;const d=new Date(offer.endDateTime);return !isNaN(d)&&d.getTime()>Date.now();}
 function ageOf(v){if(!v)return null;const b=new Date(v+'T00:00:00');if(isNaN(b))return null;const n=new Date();let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a;}
 function formatPlanDuration(plan){
@@ -416,6 +543,31 @@ function formatPlanDuration(plan){
   if(months) return months+' month'+(months===1?'':'s');
  }
  return days?days+' days':'—';
+}
+
+/* ============================================================
+   DYNAMIC COURSE CARD COLOURS
+   ============================================================ */
+function getThemeStyle(courseName) {
+ const str = courseName || 'default';
+ let hash = 0;
+ for (let i = 0; i < str.length; i++) {
+  hash = str.charCodeAt(i) + ((hash << 5) - hash);
+ }
+ const hue = Math.abs(hash) % 360;
+ return `--t-accent: hsl(${hue}, 65%, 35%); --t-dark: hsl(${hue}, 65%, 20%); --t-light: hsl(${hue}, 65%, 92%); --t-soft: hsl(${hue}, 65%, 97%); --t-border: hsl(${hue}, 40%, 88%); --t-shadow: hsla(${hue}, 65%, 35%, 0.15); --t-bg: linear-gradient(135deg, hsl(${hue}, 65%, 96%), #fff);`;
+}
+
+function categorizePlan(plan){
+ const sub = plan.sub || {};
+ const planObj = plan.plan || {};
+ if (sub.isNew === true || planObj.isNew === true) return 'new';
+ if (sub.courseGroup === 'english') return 'english';
+ if (sub.courseGroup === 'other') return 'other';
+ if (sub.courseGroup === 'new') return 'new';
+ const nameLower = (plan.name || '').toLowerCase();
+ if (ENGLISH_KEYWORDS.some(k => nameLower.includes(k))) return 'english';
+ return 'other';
 }
 
 /* ============================================================
@@ -462,18 +614,14 @@ async function recordCouponUsage({studentName,couponRecord,plan,appId}){
    ============================================================ */
 function planData(){
  const list=[], cats=categories[activeTab]||{};
- 
  Object.keys(cats).forEach(key=>{
   const sub=cats[key]||{};
-  
   const isKidsCourse = String(key || '').toLowerCase().indexOf('kid') !== -1;
   if(activeAudience==='kids' && !isKidsCourse) return;
   if(activeAudience==='adult' && isKidsCourse) return;
-
   const batches=Array.isArray(sub.batches)?sub.batches:[];
-  
   if(activeTab==='group'){
-   batches.forEach((b,bi)=>{
+   batches.forEach((b)=>{
     if(b.active===false||b.published===false||b.isActive===false)return;
     (b.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,b,pi)));
    });
@@ -489,7 +637,6 @@ function makePlan(cat,key,sub,p,batch,idx){
  const months=cat==='oneOnOne'?(Number(p.months)||({90:3,180:6,270:9,360:12})[days]||0):0;
  let base=0,admission=0,regular=0,classes=Number(p.classes)||0;
  let duration=p.perClassDuration||p.duration||'', mode=p.mode||p.platform||'Online Classes', facilities=[];
- 
  if(cat==='oneOnOne'){
   regular=Number(p.regularTotal)||0;
   const discounted=Number(p.discountedTotal)||regular;
@@ -509,74 +656,208 @@ function makePlan(cat,key,sub,p,batch,idx){
   duration=p.perClassDuration||'60 mins/class';
   mode=p.mode||'Online via Google Meet or Zoom';
  }
- 
  return {
   id:[cat,sub.subCategoryId||key,batch?.batchId||'no-batch',idx].join('|'),
-  cat, key, sub, name:sub.displayName||key, label:cat==='oneOnOne'?'One-to-One':'Group Class',
+  cat, key, sub, name:sub.displayName||key,
+  label:cat==='oneOnOne'?'One-to-One':'Group Class',
   days, base, admission, regular, classes, duration, mode, facilities, batch, kid:activeAudience==='kids', plan:p, months
  };
 }
 
+/* ============================================================
+   RENDER A SINGLE PLAN CARD
+   ============================================================ */
+function renderPlanCard(p, selectedNow){
+ const total=p.base+p.admission, old=p.regular+p.admission;
+ const savings=old>total?old-total:0;
+ const ratio=p.cat==='oneOnOne'?'1:1':(p.batch?.maxStudents?`1:${p.batch.maxStudents}`:'Group');
+ const ratioLabel=p.cat==='oneOnOne'?'1-on-1':'Up to '+(p.batch?.maxStudents||'4');
+ const adult = activeAudience === 'adult';
+ const themeStyle = getThemeStyle(p.name);
+
+ return `<article class="plan ${selectedNow?'selected':''}" style="${themeStyle}">
+  ${savings>0?`<div class="plan-badge">Save ${money(savings)}</div>`:''}
+  <div class="plan-head">
+   <div class="plan-kicker">${adult?'ADULT':'KIDS'} · ${p.label.toUpperCase()}</div>
+   <h3>${esc(p.name)}</h3>
+   <div class="plan-sub">${p.cat==='group'?'Group Course':'Personal One-to-One'}</div>
+   ${p.batch?`<div class="batch-chip">📅 ${esc(p.batch.batchName||'Available Batch')}</div>`:''}
+  </div>
+  <div class="plan-body">
+   <div class="plan-price-hero">
+    <div class="price-label">Total Programme Fee</div>
+    <div class="price-main">
+     <span class="price-amount">${money(total)}</span>
+     ${old>total?`<span class="price-old">${money(old)}</span>`:''}
+    </div>
+   </div>
+
+   <div class="plan-stats">
+    <div class="stat-pill">
+     <div class="stat-num">${p.classes||p.days||'—'}</div>
+     <div class="stat-lbl">Classes</div>
+    </div>
+    ${p.cat === 'oneOnOne' ? `
+    <div class="stat-pill">
+     <div class="stat-num">${formatPlanDuration(p)}</div>
+     <div class="stat-lbl">Duration</div>
+    </div>` : ''}
+    <div class="stat-pill">
+     <div class="stat-num">${ratioLabel}</div>
+     <div class="stat-lbl">Batch Size</div>
+    </div>
+   </div>
+
+   <button type="button" class="plan-details-toggle" onclick="togglePlanDetails(this)">
+    <span class="toggle-label">View full details${p.facilities?.length ? ' · ' + p.facilities.length + ' facilities' : ''}</span>
+   </button>
+   <div class="plan-details-list">
+    <div class="row"><span class="lbl">Class Type</span><span class="val">${p.label}</span></div>
+    ${p.batch?`<div class="row"><span class="lbl">Batch</span><span class="val">${esc(p.batch.batchName||'—')}</span></div>`:''}
+    <div class="row"><span class="lbl">Student Ratio</span><span class="val">${ratio}</span></div>
+    <div class="row"><span class="lbl">Class Duration</span><span class="val">${esc(p.duration||'—')}</span></div>
+    <div class="row"><span class="lbl">Learning Mode</span><span class="val">${esc(p.mode||'Online')}</span></div>
+    <div class="row"><span class="lbl">Course Fee</span><span class="val">${money(p.base)}</span></div>
+    <div class="row"><span class="lbl">Admission Fee</span><span class="val">${money(p.admission)}</span></div>
+    ${p.facilities?.length ? `
+     <div class="facilities-block">
+      <div class="facilities-label">✨ What's Included</div>
+      <ul class="facilities-items">
+       ${p.facilities.map(f => `<li>${esc(f)}</li>`).join('')}
+      </ul>
+     </div>
+    ` : ''}
+   </div>
+
+   <button class="plan-select" onclick="choosePlan('${encodeURIComponent(p.id)}')">
+    ${selectedNow?'✓ Selected':'Select this plan'}
+   </button>
+  </div>
+ </article>`;
+}
+
+/* ============================================================
+   RENDER PLANS
+   ============================================================ */
 function renderPlans(){
- const all=planData(), adult=activeAudience==='adult';
- $('categoryIntro').innerHTML=adult
- ? '<strong>Adult Courses</strong><br>For learners aged 18 and above. Choose a Group or One-to-One programme to compare every fee and class detail.'
- : '<strong>Kids Courses</strong><br>For learners below 18 years. A guided English learning programme designed for children. A parent or legal guardian must complete the application and provide consent.';
- 
- $('plans').innerHTML=all.length?all.map(p=>{
-  const total=p.base+p.admission,old=p.regular+p.admission,selectedNow=selected?.id===p.id;
-  const features=p.facilities?.length?p.facilities.map(x=>`<div>✓ ${esc(x)}</div>`).join(''):'';
-  const ratio=p.cat==='oneOnOne'?'1 Student : 1 Teacher':(p.batch?.maxStudents?`Group batch · Up to ${Number(p.batch.maxStudents)} students`:'Group batch');
-  const batchDetails=p.cat==='group' ? `
-      <div class="detail-chip"><b>👥 Student Ratio / Batch Size</b>${ratio}</div>
-      ${p.batch?.maxStudents?`<div class="detail-chip"><b>🎓 Maximum Students</b>${Number(p.batch.maxStudents)} students per batch</div>`:''}` : `<div class="detail-chip"><b>👤 Student Ratio</b>${ratio}</div>`;
-  return `<article class="plan ${selectedNow?'selected':''}" onclick="choosePlan('${encodeURIComponent(p.id)}')">
-   <div class="plan-head"><div class="plan-kicker">${adult?'ADULT PROGRAMME':'KIDS PROGRAMME'} · ${p.label.toUpperCase()}</div>
-    <h3>${esc(p.name)}</h3><div class="muted">${p.cat==='group'?'Group Course':'Personal One-to-One Course'}</div>
-    ${p.batch?`<div style="margin-top:9px"><span class="batch-label">Batch: ${esc(p.batch.batchName||'Available Batch')}</span></div>`:''}
-   </div><div class="plan-body">
-    <div class="plan-price-row"><div><div class="muted">TOTAL PROGRAMME FEE</div><div class="plan-price">${money(total)}</div>${old>total?`<span class="old-price">${money(old)}</span> <span class="offer-tag">OFFER</span>`:''}</div><div class="muted" style="text-align:right">${p.classes||p.days||'—'}<br>total classes</div></div>
-    <div class="plan-details">
-     <div class="detail-chip"><b>📘 Course Name</b>${esc(p.name)}</div>
-     <div class="detail-chip"><b>📅 Plan Duration</b>${formatPlanDuration(p.cat==='oneOnOne'?{...p,cat:'oneOnOne',months:p.months}:{...p,cat:'group'})}</div>
-     <div class="detail-chip"><b>🏷️ Class Type</b>${p.label}</div>
-     ${p.batch?`<div class="detail-chip"><b>🗂️ Batch Details</b>${esc(p.batch.batchName||'Available Batch')}</div>`:''}
-     ${batchDetails}
-     <div class="detail-chip"><b>🎯 Total Classes</b>${p.classes||p.days||'As scheduled'} sessions</div>
-     <div class="detail-chip"><b>⏱️ Per Class Duration</b>${esc(p.duration||'To be confirmed')}</div>
-     <div class="detail-chip"><b>💻 Learning Mode</b>${esc(p.mode||'Online Classes')}</div>
-     <div class="detail-chip"><b>📚 Tuition / Course Fee</b>${money(p.base)}</div>
-     <div class="detail-chip"><b>🧾 Admission Fee</b>${money(p.admission)}</div>
-     <div class="detail-chip total-chip"><b>💰 Total Payable (before coupon)</b>${money(total)}</div>
-    </div>${features?`<div class="plan-description"><b>Included facilities</b>${features}</div>`:''}
-    <button class="plan-select">${selectedNow?'✓ SELECTED':'SELECT THIS PLAN'}</button>
-   </div></article>`;
- }).join(''):`<div class="notice warn" style="grid-column:1/-1">No ${adult?'Adult':'Kids'} plan is currently available in this class type. Please contact English Spur.</div>`;
+ const all = planData();
+ const adult = activeAudience === 'adult';
+
+ $('categoryIntro').innerHTML = adult
+  ? '<strong>Adult Courses</strong><br>For learners aged 18 and above. Choose a Group or One-to-One programme.'
+  : '<strong>Kids Courses</strong><br>For learners below 18. A parent or legal guardian must complete the application and provide consent.';
+
+ if (!all.length) {
+  $('plans').innerHTML = `<div class="notice warn">No ${adult?'Adult':'Kids'} plan is currently available in this class type. Please contact English Spur.</div>`;
+  updateSummary();
+  return;
+ }
+
+ const groups = { english: [], other: [], new: [] };
+ all.forEach(p => groups[categorizePlan(p)].push(p));
+
+ const sortFn = (a, b) => {
+  const nameCmp = (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase());
+  if (nameCmp !== 0) return nameCmp;
+  return (a.batch?.batchName || '').toLowerCase().localeCompare((b.batch?.batchName || '').toLowerCase());
+ };
+ Object.keys(groups).forEach(k => groups[k].sort(sortFn));
+
+ const meta = {
+  english: { icon: '📘', title: 'English Courses', sub: 'Master English with expert-led programmes' },
+  other:   { icon: '🎯', title: 'Other Skill Trainings', sub: 'Broaden your skills with specialised courses' },
+  new:     { icon: '✨', title: 'New Courses', sub: 'Freshly launched programmes just for you' }
+ };
+
+ let html = '';
+ ['english', 'other', 'new'].forEach(key => {
+  const plans = groups[key];
+  if (!plans.length) return;
+  const m = meta[key];
+  html += `<section class="plan-section" data-group="${key}">
+   <div class="plan-section-header">
+    <span class="plan-section-icon">${m.icon}</span>
+    <div class="plan-section-title-block">
+     <h3 class="plan-section-title">${m.title}</h3>
+     <p class="plan-section-sub">${m.sub}</p>
+    </div>
+    <span class="plan-section-count">${plans.length} ${plans.length===1?'course':'courses'}</span>
+   </div>
+   <div class="plan-section-grid">
+    ${plans.map(p => renderPlanCard(p, selected?.id === p.id)).join('')}
+   </div>
+  </section>`;
+ });
+
+ $('plans').innerHTML = html;
  updateSummary();
 }
 
-function choosePlan(encoded){const id=decodeURIComponent(encoded);selected=planData().find(p=>p.id===id)||null;couponState={valid:false,discount:0,record:null,message:''};$('couponCode').value='';$('couponMessage').textContent='No coupon applied.';renderPlans();}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));activeTab=b.dataset.tab;selected=null;renderPlans();}));
-document.querySelectorAll('.audience-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.audience-tab').forEach(x=>x.classList.toggle('active',x===b));activeAudience=b.dataset.audience;selected=null;couponState={valid:false,discount:0,record:null,message:''};$('couponCode').value='';$('couponMessage').textContent='No coupon applied.';renderPlans();}));
-$('dob').addEventListener('change',()=>{const a=ageOf($('dob').value);$('guardianArea').classList.toggle('hidden',a===null||a>=18);$('guardianConsentArea').classList.toggle('hidden',a===null||a>=18);$('guardianName').required=a!==null&&a<18;$('guardianMobile').required=a!==null&&a<18;$('guardianRelation').required=a!==null&&a<18;$('guardianConsent').required=a!==null&&a<18;if(a===null||a>=18){$('guardianConsent').checked=false;}toggleConsentButton();renderPlans();});
+/* ============================================================
+   TOGGLE DETAILS
+   ============================================================ */
+function togglePlanDetails(btn){
+ btn.classList.toggle('open');
+ const list = btn.nextElementSibling;
+ list.classList.toggle('open');
+ const label = btn.querySelector('.toggle-label');
+ if (!label) return;
+ if (!btn.dataset.baseLabel) btn.dataset.baseLabel = label.textContent;
+ label.textContent = btn.classList.contains('open') ? 'Hide details' : btn.dataset.baseLabel;
+}
+
+/* ============================================================
+   INTERACTIONS
+   ============================================================ */
+function choosePlan(encoded){
+ const id=decodeURIComponent(encoded);
+ selected=planData().find(p=>p.id===id)||null;
+ couponState={valid:false,discount:0,record:null,message:''};
+ $('couponCode').value='';
+ $('couponMessage').textContent='No coupon applied.';
+ renderPlans();
+}
+
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+ activeTab=b.dataset.tab;selected=null;renderPlans();
+}));
+document.querySelectorAll('.audience-tab').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.audience-tab').forEach(x=>x.classList.toggle('active',x===b));
+ activeAudience=b.dataset.audience;selected=null;
+ couponState={valid:false,discount:0,record:null,message:''};
+ $('couponCode').value='';
+ $('couponMessage').textContent='No coupon applied.';
+ renderPlans();
+}));
+
+$('dob').addEventListener('change',()=>{
+ const a=ageOf($('dob').value);
+ $('guardianArea').classList.toggle('hidden',a===null||a>=18);
+ $('guardianConsentArea').classList.toggle('hidden',a===null||a>=18);
+ $('guardianName').required=a!==null&&a<18;
+ $('guardianMobile').required=a!==null&&a<18;
+ $('guardianRelation').required=a!==null&&a<18;
+ $('guardianConsent').required=a!==null&&a<18;
+ if(a===null||a>=18){$('guardianConsent').checked=false;}
+ toggleConsentButton();
+});
 
 function updatePlanSummaryBanners(activeStep) {
-    ['2','3','4'].forEach(num => {
-        const banner = document.getElementById('summaryBannerStep' + num);
-        if (!banner) return;
-        if (selected && String(activeStep) === num) {
-            banner.style.display = 'flex';
-            document.getElementById('sumName' + num).textContent = selected.name;
-            
-            let metaText = selected.label + ' · ' + (selected.classes || selected.days) + ' classes';
-            if (selected.batch) metaText += ' · ' + (selected.batch.batchName || 'Default Batch');
-            document.getElementById('sumMeta' + num).textContent = metaText;
-            
-            document.getElementById('sumPrice' + num).textContent = money(selected.base + selected.admission);
-        } else {
-            banner.style.display = 'none';
-        }
-    });
+ ['2','3','4'].forEach(num => {
+  const banner = document.getElementById('summaryBannerStep' + num);
+  if (!banner) return;
+  if (selected && String(activeStep) === num) {
+   banner.style.display = 'flex';
+   document.getElementById('sumName' + num).textContent = selected.name;
+   let metaText = selected.label + ' · ' + (selected.classes || selected.days) + ' classes';
+   if (selected.batch) metaText += ' · ' + (selected.batch.batchName || 'Default Batch');
+   document.getElementById('sumMeta' + num).textContent = metaText;
+   document.getElementById('sumPrice' + num).textContent = money(selected.base + selected.admission);
+  } else {
+   banner.style.display = 'none';
+  }
+ });
 }
 
 function goStep(next){
@@ -591,21 +872,22 @@ function goStep(next){
   if(age<18&&(!$('guardianName').value.trim()||!/^([6-9][0-9]{9})$/.test($('guardianMobile').value.trim())||!$('guardianRelation').value)){$('guardianArea').classList.remove('hidden');alert('Please complete the required guardian details.');return;}
  }
  if(next===4){
-  for(const id of ['paymentMethod','transactionId','paymentDate','amountPaid','paymentShot']){const el=$(id);if(!el.checkValidity()){el.reportValidity();return;}}
+  for(const id of ['paymentMethod','transactionId','paymentDate','amountPaid','paymentShot']){
+   const el=$(id);if(!el.checkValidity()){el.reportValidity();return;}
+  }
   if(!selected){alert('Please select a course / plan first.');goStep(1);return;}
  }
  document.querySelectorAll('.wizard-panel').forEach(el=>el.classList.toggle('hidden',Number(el.dataset.step)!==next));
  document.querySelectorAll('.wizard-item').forEach(el=>{const n=Number(el.dataset.progress);el.classList.toggle('active',n===next);el.classList.toggle('done',n<next);});
- 
- // Update the top summary banner
  updatePlanSummaryBanners(next);
- 
- window.scrollTo({top:document.querySelector('.wizard-progress').getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
+ window.scrollTo({top:document.querySelector('.wizard-progress').getBoundingClientRect().top+window.scrollY-16,behavior:'smooth'});
 }
+
 function getPayableBeforeCoupon(){return selected?selected.base+selected.admission:0;}
 
 async function validateCoupon(){
- const code=$('couponCode').value.trim().toUpperCase();$('couponCode').value=$('couponCode').value.toUpperCase();
+ const code=$('couponCode').value.trim().toUpperCase();
+ $('couponCode').value=$('couponCode').value.toUpperCase();
  couponState={valid:false,discount:0,record:null,message:''};
  if(!code){$('couponMessage').textContent='No coupon applied.';$('couponMessage').style.color='';updateSummary();return;}
  if(!selected){$('couponMessage').textContent='Please select a plan first.';updateSummary();return;}
@@ -618,24 +900,25 @@ async function validateCoupon(){
  else if(c.subCategory&&c.subCategory!==selected.sub.subCategoryId&&c.subCategory!==selected.key){couponState.message='This coupon is not valid for this course.';}
  else if(Array.isArray(c.allowedPlans)&&c.allowedPlans.length&&!c.allowedPlans.some(x=>String(x)===String(selected.plan.days)||String(x)===String(selected.id)||String(x)===String(selected.plan.planId))){couponState.message='This coupon is not valid for the selected plan.';}
  else{
-  /* Check 1-use-per-student rule */
   const studentName=($('studentName')?.value||'').trim().toUpperCase();
   let dupRecord=null;
   if(studentName){
    $('couponMessage').textContent='Checking coupon eligibility…';
-   $('couponMessage').style.color='#64748b';
+   $('couponMessage').style.color='#64776f';
    dupRecord=await checkCouponUsedByStudent(studentName,c.code);
   }
   if(dupRecord){
    const dupDate=dupRecord.usedAt?new Date(dupRecord.usedAt).toLocaleString('en-IN'):'—';
    couponState.message='❌ You have already used this coupon on '+dupDate+' for "'+(dupRecord.courseName||'—')+'". A coupon can be used only ONCE per student.';
   }else{
-   const base=getPayableBeforeCoupon();let d=c.type==='percent'?base*Number(c.value||0)/100:Number(c.value||0);d=Math.min(base,Math.max(0,d));
-   couponState={valid:true,discount:d,record:c,message:'Coupon applied successfully.'};
+   const base=getPayableBeforeCoupon();
+   let d=c.type==='percent'?base*Number(c.value||0)/100:Number(c.value||0);
+   d=Math.min(base,Math.max(0,d));
+   couponState={valid:true,discount:d,record:c,message:'✓ Coupon applied successfully.'};
   }
  }
  $('couponMessage').textContent=couponState.message;
- $('couponMessage').style.color=couponState.valid?'#13845b':'#b42318';
+ $('couponMessage').style.color=couponState.valid?'#0a7b5c':'#c0392b';
  updateSummary();
 }
 $('couponCode').addEventListener('input',()=>{clearTimeout(window.couponTimer);window.couponTimer=setTimeout(()=>{validateCoupon().catch(e=>console.warn(e));},400);});
@@ -647,40 +930,65 @@ function copyPortalUpi(){
  else fallbackCopyPortalUpi(upi);
 }
 function fallbackCopyPortalUpi(upi){
- const t=document.createElement('textarea');t.value=upi;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();
- try{document.execCommand('copy');alert('UPI ID copied: '+upi);}catch(e){alert('Please copy this UPI ID manually: '+upi);}t.remove();
+ const t=document.createElement('textarea');t.value=upi;t.style.position='fixed';t.style.opacity='0';
+ document.body.appendChild(t);t.select();
+ try{document.execCommand('copy');alert('UPI ID copied: '+upi);}catch(e){alert('Please copy manually: '+upi);}
+ t.remove();
 }
+
 function updateSummary(){
  const base=selected?.base||0,adm=selected?.admission||0,disc=couponState.valid?couponState.discount:0;
  $('sumPlan').textContent=selected?selected.name:'Not selected';
  $('sumClasses').textContent=selected?(Number(selected.classes)||'—')+' classes':'—';
- $('sumBase').textContent=money(base);$('sumAdmission').textContent=money(adm);$('sumDiscount').textContent='−'+money(disc);$('sumTotal').textContent=money(Math.max(0,base+adm-disc));
- const payAmount=$('paymentPayableAmount');if(payAmount)payAmount.textContent=money(Math.max(0,base+adm-disc));
+ $('sumBase').textContent=money(base);
+ $('sumAdmission').textContent=money(adm);
+ $('sumDiscount').textContent='−'+money(disc);
+ $('sumTotal').textContent=money(Math.max(0,base+adm-disc));
+ const payAmount=$('paymentPayableAmount');
+ if(payAmount)payAmount.textContent=money(Math.max(0,base+adm-disc));
 }
+
 function loadFirebase(){
- try{firebase.initializeApp(firebaseConfig);db=firebase.firestore();
+ try{
+  firebase.initializeApp(firebaseConfig);
+  db=firebase.firestore();
   db.collection('config').doc('offer').onSnapshot(doc=>{
-      offer=doc.exists?doc.data():{};
-      categories=offer.categories||{oneOnOne:{},group:{}};
-      if(!categories.oneOnOne)categories.oneOnOne={};
-      if(!categories.group)categories.group={};
-      $('loadState').className='notice good';
-      $('loadState').textContent='Plans loaded. Select an available plan to continue.';
-      renderPlans();
-  },err=>{$('loadState').className='notice bad';$('loadState').textContent='Unable to load plans. Please contact English Spur. '+err.message;});
-  
+   offer=doc.exists?doc.data():{};
+   categories=offer.categories||{oneOnOne:{},group:{}};
+   if(!categories.oneOnOne)categories.oneOnOne={};
+   if(!categories.group)categories.group={};
+   $('loadState').className='notice good';
+   $('loadState').textContent='Plans loaded. Select an available plan to continue.';
+   renderPlans();
+  },err=>{
+   $('loadState').className='notice bad';
+   $('loadState').textContent='Unable to load plans. Please contact English Spur. '+err.message;
+  });
   db.collection('coupons').onSnapshot(s=>{
-      coupons=[];
-      s.forEach(d=>coupons.push({...d.data(),_id:d.id}));
-      if($('couponCode').value.trim())validateCoupon().catch(e=>console.warn(e));
+   coupons=[];
+   s.forEach(d=>coupons.push({...d.data(),_id:d.id}));
+   if($('couponCode').value.trim())validateCoupon().catch(e=>console.warn(e));
   },err=>console.warn('Coupon read unavailable',err));
- }catch(e){$('loadState').className='notice bad';$('loadState').textContent='Portal setup error: '+e.message;}
+ }catch(e){
+  $('loadState').className='notice bad';
+  $('loadState').textContent='Portal setup error: '+e.message;
+ }
 }
+
 function readFile(file){return new Promise((resolve,reject)=>{if(!file)return reject(new Error('A required image is missing.'));const r=new FileReader();r.onload=()=>resolve({data:r.result,type:file.type,name:file.name});r.onerror=()=>reject(new Error('Could not read '+file.name));r.readAsDataURL(file);});}
+
 function addImagePage(doc,img,label){
- if(!img)return;doc.addPage();doc.setFontSize(15);doc.text(label,14,18);
- const props=doc.getImageProperties(img.data);const maxW=180,maxH=255;const scale=Math.min(maxW/props.width,maxH/props.height);const w=props.width*scale,h=props.height*scale;doc.addImage(img.data,props.fileType||'JPEG',14,27,w,h,undefined,'FAST');
+ if(!img)return;
+ doc.addPage();
+ doc.setFontSize(15);
+ doc.text(label,14,18);
+ const props=doc.getImageProperties(img.data);
+ const maxW=180,maxH=255;
+ const scale=Math.min(maxW/props.width,maxH/props.height);
+ const w=props.width*scale,h=props.height*scale;
+ doc.addImage(img.data,props.fileType||'JPEG',14,27,w,h,undefined,'FAST');
 }
+
 async function makePdf(data){
  if(document.fonts?.ready) await document.fonts.ready;
  if(!window.jspdf?.jsPDF)throw new Error('PDF library did not load. Check your internet connection and try again.');
@@ -688,8 +996,9 @@ async function makePdf(data){
  const doc=new jsPDF({unit:'mm',format:'a4',compress:true});
  const PAGE_W=210,PAGE_H=297,LEFT=16,RIGHT=16,CONTENT_W=PAGE_W-LEFT-RIGHT,BOTTOM=278;
  let y=18;
+
  const addPageIfNeeded=(needed=8)=>{if(y+needed>BOTTOM){doc.addPage();y=18;return true;}return false;};
- const heading=(title)=>{addPageIfNeeded(16);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(38,59,130);doc.text(title,LEFT,y);y+=8;};
+ const heading=(title)=>{addPageIfNeeded(16);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(10,123,92);doc.text(title,LEFT,y);y+=8;};
  const paragraph=(text,{fontSize=9,lineGap=4.8,indent=0,bold=false,bullet=''}={})=>{
   doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fontSize);doc.setTextColor(35,43,58);
   const prefix=bullet?bullet+' ':'';
@@ -703,113 +1012,134 @@ async function makePdf(data){
  const field=(label,value)=>{
   doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(35,43,58);
   const labelLines=doc.splitTextToSize(label,43);
-  
-  // If we are in the top section, restrict the value text width to avoid the passport photo
   let maxW = CONTENT_W - 48;
-  if (y < 100 && y > 50) {
-      maxW = 155 - LEFT - 48; // 155 - 16 - 48 = 91
-  }
-  
-  doc.setFont('helvetica','normal');const valueLines=doc.splitTextToSize(String(value||'—'),maxW);
+  if (y < 100 && y > 50) maxW = 155 - LEFT - 48;
+  doc.setFont('helvetica','normal');
+  const valueLines=doc.splitTextToSize(String(value||'—'),maxW);
   const count=Math.max(labelLines.length,valueLines.length);
   if(y+count*4.7+2>BOTTOM){doc.addPage();y=18;}
   doc.setFont('helvetica','bold');doc.text(labelLines,LEFT,y);
   doc.setFont('helvetica','normal');doc.text(valueLines,LEFT+48,y);
   y+=count*4.7+2;
  };
- // Application details page(s)
- doc.setFillColor(38,59,130);doc.rect(0,0,PAGE_W,34,'F');
+
+ doc.setFillColor(10,123,92);doc.rect(0,0,PAGE_W,34,'F');
  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text('ENGLISH SPUR',LEFT,15);
  doc.setFontSize(9);doc.text('ONLINE ENGLISH TRAINING ACADEMY',LEFT,23);doc.text('ADMISSION APPLICATION',LEFT,29);
  doc.setTextColor(30,40,60);doc.setFontSize(9);doc.text('Application ID: '+data.id,LEFT,43);doc.text('Generated: '+data.generated,LEFT,49);y=61;
- 
- // Draw Student Photo with Red Box
+
  if(data.photo) {
-   const photoX = 160;
-   const photoY = 56;
-   const targetW = 32;
-   const targetH = 42;
-   
-   // Draw Red Border
-   doc.setDrawColor(255, 0, 0); 
-   doc.setLineWidth(0.6);
-   doc.rect(photoX, photoY, targetW, targetH);
-   
-   try {
-       const imgProps = doc.getImageProperties(data.photo.data);
-       const imgW = imgProps.width;
-       const imgH = imgProps.height;
-       const scale = Math.min(targetW / imgW, targetH / imgH);
-       const drawW = imgW * scale;
-       const drawH = imgH * scale;
-       const drawX = photoX + (targetW - drawW) / 2;
-       const drawY = photoY + (targetH - drawH) / 2;
-       doc.addImage(data.photo.data, imgProps.fileType || 'JPEG', drawX, drawY, drawW, drawH, undefined, 'FAST');
-   } catch(e) {
-       console.warn("Could not add student photo to PDF", e);
-   }
+  const photoX = 160,photoY = 56,targetW = 32,targetH = 42;
+  doc.setDrawColor(200, 30, 30);
+  doc.setLineWidth(0.6);
+  doc.rect(photoX, photoY, targetW, targetH);
+  try {
+   const imgProps = doc.getImageProperties(data.photo.data);
+   const scale = Math.min(targetW / imgProps.width, targetH / imgProps.height);
+   const drawW = imgProps.width * scale;
+   const drawH = imgProps.height * scale;
+   const drawX = photoX + (targetW - drawW) / 2;
+   const drawY = photoY + (targetH - drawH) / 2;
+   doc.addImage(data.photo.data, imgProps.fileType || 'JPEG', drawX, drawY, drawW, drawH, undefined, 'FAST');
+  } catch(e) { console.warn("Could not add photo", e); }
  }
 
  heading('APPLICANT & COURSE DETAILS');
  const rows=[
- ['Student Name',data.name],['Mobile Number',data.mobile],['Date of Birth',data.dob],['Age',data.age+' years'],['Gender',data.gender||'Not provided'],['Address',data.address],['School / Institution',data.school||'Not provided'],
- ['Programme Category',data.plan.kid?'Kids':'Adult'],['Course',data.plan.name],['Class Type',data.plan.label],['Batch',data.plan.batch?.batchName||'Not applicable'],['Class Duration',data.plan.duration||'—'],['Learning Mode',data.plan.mode||'—'],['Total Classes',data.plan.classes||'—'],
- ['Course Fee',money(data.plan.base)],['Admission Fee',money(data.plan.admission)],['Coupon Code',data.coupon||'Not used'],['Coupon Discount',money(data.discount)],['Payable Amount',money(data.total)],
- ['Payment Method',data.method],['Transaction / UTR ID',data.utr],['Payment Date',data.payDate],['Amount Paid',money(data.paid)]
+  ['Student Name',data.name],['Mobile Number',data.mobile],['Date of Birth',data.dob],['Age',data.age+' years'],['Gender',data.gender||'Not provided'],['Address',data.address],['School / Institution',data.school||'Not provided'],
+  ['Programme Category',data.plan.kid?'Kids':'Adult'],['Course',data.plan.name],['Class Type',data.plan.label],['Batch',data.plan.batch?.batchName||'Not applicable'],['Class Duration',data.plan.duration||'—'],['Learning Mode',data.plan.mode||'—'],['Total Classes',data.plan.classes||'—'],
+  ['Course Fee',money(data.plan.base)],['Admission Fee',money(data.plan.admission)],['Coupon Code',data.coupon||'Not used'],['Coupon Discount',money(data.discount)],['Payable Amount',money(data.total)],
+  ['Payment Method',data.method],['Transaction / UTR ID',data.utr],['Payment Date',data.payDate],['Amount Paid',money(data.paid)]
  ];
  rows.forEach(([k,v])=>field(k,v));
- if(data.guardianName){heading('PARENT / LEGAL GUARDIAN DETAILS');field('Guardian Name',data.guardianName);field('Guardian Mobile',data.guardianMobile);field('Relationship',data.guardianRelation);}
- 
+
+ if(data.guardianName){
+  heading('PARENT / LEGAL GUARDIAN DETAILS');
+  field('Guardian Name',data.guardianName);
+  field('Guardian Mobile',data.guardianMobile);
+  field('Relationship',data.guardianRelation);
+ }
+
  doc.addPage();y=20;
- doc.setFillColor(38,59,130);doc.rect(0,0,PAGE_W,27,'F');
+ doc.setFillColor(10,123,92);doc.rect(0,0,PAGE_W,27,'F');
  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text('DECLARATIONS & CONSENT',LEFT,17);
  y=39;
  paragraph('Application ID: '+data.id+'    |    Applicant: '+data.name,{fontSize:9,bold:true,lineGap:5});
- paragraph('The applicant (and, where the applicant is under 18, the parent or legal guardian) confirms that the following terms were read and accepted electronically before this application was finalized.',{fontSize:9,lineGap:4.8});
+ paragraph('The applicant (and, where under 18, the parent or legal guardian) confirms the following terms were read and accepted electronically before finalizing.',{fontSize:9,lineGap:4.8});
+
  const clauses=[
-  ['1. CLASS RECORDING CONSENT','I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.','১. ক্লাস রেকর্ডিংয়ের সম্মতি: আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি। এই রেকর্ডিং শিক্ষা, প্রশিক্ষণ, নথিভুক্তকরণ, প্রচার এবং প্রতিষ্ঠানের প্রয়োজনে সংরক্ষণ ও ব্যবহার করা যেতে পারে।'],
-  ['2. PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT','I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities. This includes English Spur website, Facebook, YouTube, Instagram, WhatsApp, digital advertisements and other communication or publicity channels.','২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি: আমি English Spur-কে আমার ছবি, ভিডিও, কণ্ঠস্বরের রেকর্ডিং, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন, বিজ্ঞাপন ও প্রচারমূলক কাজে ব্যবহার, সম্পাদনা, প্রকাশ, প্রদর্শন, বিতরণ এবং শেয়ার করার স্পষ্ট অনুমতি দিচ্ছি। এর মধ্যে English Spur-এর ওয়েবসাইট, Facebook, YouTube, Instagram, WhatsApp, ডিজিটাল বিজ্ঞাপন এবং অন্যান্য প্রচারমাধ্যম অন্তর্ভুক্ত।'],
-  ['3. ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT','I confirm that I have read and understood Clauses 1 and 2 and have given my consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish the permitted content for the purposes stated above without obtaining separate approval for each individual photograph, video, recording, post or advertisement, provided the use remains within the scope of this consent. I will not object solely because English Spur has used the content in accordance with the permissions granted here.','৩. সম্মতির স্বীকৃতি ও প্রতিবার আলাদা অনুমতির প্রয়োজন নেই: আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি, বুঝেছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির নির্ধারিত উদ্দেশ্য ও সীমার মধ্যে English Spur প্রতিটি ছবি, ভিডিও, রেকর্ডিং, পোস্ট বা বিজ্ঞাপনের জন্য আলাদা অনুমতি না নিয়েই অনুমোদিত কনটেন্ট নির্বাচন, সম্পাদনা, সংকলন, পুনরুৎপাদন, প্রকাশ এবং পুনরায় প্রকাশ করতে পারবে। এখানে দেওয়া অনুমতির আওতায় কনটেন্ট ব্যবহার করা হয়েছে—শুধুমাত্র এই কারণে আমি আপত্তি করব না।'],
-  ['4. RULES, RESPONSIBILITIES & CONTENT USE','I agree to follow English Spur academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not knowingly misuse, reproduce, distribute or commercially exploit English Spur recordings, teaching materials, photographs, videos, logo or other institutional content without prior written permission.','৪. নিয়মাবলি, দায়িত্ব ও কনটেন্ট ব্যবহার: আমি English Spur-এর শিক্ষাগত নির্দেশিকা, ক্লাসের শৃঙ্খলা, উপস্থিতি, যোগাযোগনীতি এবং প্রতিষ্ঠানের নিয়ম মেনে চলতে সম্মত। English Spur-এর পূর্ব লিখিত অনুমতি ছাড়া প্রতিষ্ঠানের রেকর্ডিং, শিক্ষাসামগ্রী, ছবি, ভিডিও, লোগো বা অন্যান্য কনটেন্ট জেনে-শুনে অপব্যবহার, পুনরুৎপাদন, বিতরণ বা বাণিজ্যিক কাজে ব্যবহার করব না।'],
-  ['5. PRIVACY, ACKNOWLEDGEMENT & DECLARATION','I confirm that the information and materials provided by me are accurate to the best of my knowledge. I understand that English Spur will handle personal information and content for the purposes explained in this consent and its applicable privacy practices. I understand that the application PDF is generated on my device and that I must send it with the payment screenshot to the official English Spur WhatsApp number for verification.','৫. গোপনীয়তা, স্বীকৃতি ও ঘোষণা: আমার দেওয়া তথ্য ও উপকরণ আমার জ্ঞান অনুযায়ী সঠিক বলে নিশ্চিত করছি। এই সম্মতিতে উল্লেখিত উদ্দেশ্য এবং প্রযোজ্য গোপনীয়তা নীতি অনুযায়ী English Spur আমার ব্যক্তিগত তথ্য ও কনটেন্ট ব্যবহার করবে—এটি আমি বুঝেছি। আবেদনপত্রের PDF আমার নিজের ডিভাইসে তৈরি হবে এবং যাচাইয়ের জন্য PDF ও পেমেন্টের স্ক্রিনশট English Spur-এর নির্ধারিত WhatsApp নম্বরে পাঠাতে হবে—এটিও আমি বুঝেছি।'],
+  ['1. CLASS RECORDING CONSENT','I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.','১. ক্লাস রেকর্ডিংয়ের সম্মতি: আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি।'],
+  ['2. PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT','I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities.','২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি: আমি English Spur-কে আমার ছবি, ভিডিও, কণ্ঠস্বরের রেকর্ডিং, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন, বিজ্ঞাপন ও প্রচারমূলক কাজে ব্যবহার করার স্পষ্ট অনুমতি দিচ্ছি।'],
+  ['3. ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT','I confirm that I have read Clauses 1 and 2 and have given consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish permitted content without separate approval for each individual item, provided use remains within this consent.','৩. সম্মতির স্বীকৃতি ও প্রতিবার আলাদা অনুমতির প্রয়োজন নেই: আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি, বুঝেছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির সীমার মধ্যে English Spur প্রতিটি কনটেন্টের জন্য আলাদা অনুমতি না নিয়েই প্রকাশ করতে পারবে।'],
+  ['4. RULES, RESPONSIBILITIES & CONTENT USE','I agree to follow English Spur academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not knowingly misuse, reproduce, distribute or commercially exploit English Spur recordings, teaching materials, photographs, videos, logo or other institutional content without prior written permission.','৪. নিয়মাবলি, দায়িত্ব ও কনটেন্ট ব্যবহার: আমি English Spur-এর শিক্ষাগত নির্দেশিকা, ক্লাসের শৃঙ্খলা, উপস্থিতি, যোগাযোগনীতি এবং প্রতিষ্ঠানের নিয়ম মেনে চলতে সম্মত।'],
+  ['5. PRIVACY, ACKNOWLEDGEMENT & DECLARATION','I confirm the information provided is accurate. I understand English Spur will handle personal information and content as explained in this consent. I understand the PDF is generated on my device and must be sent with payment screenshot to the official WhatsApp number.','৫. গোপনীয়তা, স্বীকৃতি ও ঘোষণা: আমার দেওয়া তথ্য সঠিক বলে নিশ্চিত করছি। এই সম্মতিতে উল্লেখিত উদ্দেশ্য অনুযায়ী English Spur আমার তথ্য ব্যবহার করবে—এটি আমি বুঝেছি।']
  ];
+
  clauses.forEach(([title,body,bn])=>{
-  addPageIfNeeded(18);doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(38,59,130);doc.text(title,LEFT,y);y+=6;
+  addPageIfNeeded(18);
+  doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(10,123,92);doc.text(title,LEFT,y);y+=6;
   paragraph(body,{fontSize:9,lineGap:4.8,indent:1});
   const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
   const pxPerMm=11.2,canvasW=Math.round(CONTENT_W*pxPerMm),pad=18,linePx=23;
-  canvas.width=canvasW;ctx.font='16px "Noto Sans Bengali", sans-serif';
+  canvas.width=canvasW;
+  ctx.font='16px "Noto Sans Bengali", sans-serif';
   const words=String(bn).split(/\s+/),lines=[];let line='';
-  for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>canvasW-pad*2&&line){lines.push(line);line=word;}else line=test;}if(line)lines.push(line);
-  const canvasH=pad*2+lines.length*linePx;canvas.height=canvasH;ctx.fillStyle='#f0f8f4';ctx.fillRect(0,0,canvasW,canvasH);ctx.fillStyle='#174b3a';ctx.font='16px "Noto Sans Bengali", sans-serif';ctx.textBaseline='top';lines.forEach((ln,i)=>ctx.fillText(ln,pad,pad+i*linePx));
-  const imgH=canvasH/pxPerMm;addPageIfNeeded(imgH+5);doc.addImage(canvas.toDataURL('image/png'),'PNG',LEFT,y,CONTENT_W,imgH);y+=imgH+5;
-  addPageIfNeeded(4);doc.setDrawColor(215,221,232);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=5;
+  for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>canvasW-pad*2&&line){lines.push(line);line=word;}else line=test;}
+  if(line)lines.push(line);
+  const canvasH=pad*2+lines.length*linePx;
+  canvas.height=canvasH;
+  ctx.fillStyle='#f0faf5';ctx.fillRect(0,0,canvasW,canvasH);
+  ctx.fillStyle='#174b3a';ctx.font='16px "Noto Sans Bengali", sans-serif';ctx.textBaseline='top';
+  lines.forEach((ln,i)=>ctx.fillText(ln,pad,pad+i*linePx));
+  const imgH=canvasH/pxPerMm;
+  addPageIfNeeded(imgH+5);
+  doc.addImage(canvas.toDataURL('image/png'),'PNG',LEFT,y,CONTENT_W,imgH);
+  y+=imgH+5;
+  addPageIfNeeded(4);
+  doc.setDrawColor(215,221,232);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=5;
  });
+
  heading('ADDITIONAL APPLICATION DECLARATIONS');
- paragraph('I declare that the information and documents provided in this application are true and correct. I understand that incorrect information may lead to rejection of the application.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
+ paragraph('I declare that the information and documents provided in this application are true and correct.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
  paragraph('I understand that submitting payment details does not guarantee admission. Admission is confirmed only after English Spur verifies the actual payment received.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
  paragraph('I understand that I must send the downloaded Application PDF and payment screenshot to English Spur by WhatsApp for verification.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
+
  if(data.guardianName){
   heading('PARENT / LEGAL GUARDIAN CONSENT - MINOR APPLICANT');
-  paragraph('I, '+data.guardianName+', as the parent / legal guardian of '+data.name+', confirm that I have read and agree to the five consent clauses and the application declarations above. I consent to the minor applicant joining the selected course and to the recording and sharing uses specifically described in this document.',{fontSize:9,lineGap:4.8,bullet:'[GUARDIAN CONSENT RECORDED]'});
-  field('Guardian Name',data.guardianName);field('Guardian Mobile',data.guardianMobile);field('Relationship',data.guardianRelation);
+  paragraph('I, '+data.guardianName+', as the parent / legal guardian of '+data.name+', confirm that I have read and agree to the five consent clauses and the application declarations above.',{fontSize:9,lineGap:4.8,bullet:'[GUARDIAN CONSENT RECORDED]'});
+  field('Guardian Name',data.guardianName);
+  field('Guardian Mobile',data.guardianMobile);
+  field('Relationship',data.guardianRelation);
  }else{
   heading('APPLICANT CONSENT RECORD');
-  paragraph('The applicant confirmed agreement to all five consent clauses and the required application declarations by selecting the consent checkboxes and pressing “I Agree & Continue”.',{fontSize:9,lineGap:4.8,bullet:'[APPLICANT CONSENT RECORDED]'});
+  paragraph('The applicant confirmed agreement to all five consent clauses and the required application declarations by selecting the consent checkboxes and pressing "I Agree & Continue".',{fontSize:9,lineGap:4.8,bullet:'[APPLICANT CONSENT RECORDED]'});
  }
- addPageIfNeeded(25);y+=2;doc.setDrawColor(130,140,160);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=7;
+
+ addPageIfNeeded(25);y+=2;
+ doc.setDrawColor(130,140,160);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=7;
  paragraph('Consent recorded electronically on: '+data.generated,{fontSize:9,bold:true,lineGap:5});
  paragraph('Applicant: '+data.name+'    |    Application ID: '+data.id,{fontSize:9,bold:true,lineGap:5});
  paragraph('Payment status: PENDING VERIFICATION - NOT AN ADMISSION CONFIRMATION',{fontSize:8.5,bold:true,lineGap:5});
+
  const pageCount=doc.getNumberOfPages();
- for(let i=1;i<=pageCount;i++){doc.setPage(i);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(110,118,132);doc.text('English Spur | Application '+data.id,LEFT,289);doc.text('Page '+i+' of '+pageCount,PAGE_W-RIGHT,289,{align:'right'});}
+ for(let i=1;i<=pageCount;i++){
+  doc.setPage(i);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(110,118,132);
+  doc.text('English Spur | Application '+data.id,LEFT,289);
+  doc.text('Page '+i+' of '+pageCount,PAGE_W-RIGHT,289,{align:'right'});
+ }
+
  addImagePage(doc,data.paymentImage,'PAYMENT SCREENSHOT');
  doc.setProperties({title:'English Spur Admission '+data.id,subject:'Admission Application and Consent Record'});
  return doc.output('blob');
 }
+
 function downloadBlob(blob,name){
- const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
+
 function toggleConsentButton(){
  const accepted=$('consentCheckbox')?.checked===true;
  const age=ageOf($('dob')?.value);
@@ -818,59 +1148,100 @@ function toggleConsentButton(){
  const btn=$('agreeConsentBtn');
  if(btn)btn.disabled=!(accepted&&guardianAccepted);
 }
+
 async function finalizeApplication(){
- const err=$('formError');err.classList.add('hidden');
- const form=$('applicationForm');if(!form.reportValidity())return;
+ const err=$('formError');
+ err.classList.add('hidden');
+ const form=$('applicationForm');
+ if(!form.reportValidity())return;
  if(!selected){err.textContent='Please select a course / plan first.';err.classList.remove('hidden');return;}
- const age=ageOf($('dob').value);if(age===null||age<0){err.textContent='Please enter a valid date of birth.';err.classList.remove('hidden');return;}
- if(age<18){$('guardianConsent').required=true;if(!$('guardianName').value.trim()||!$('guardianMobile').value.match(/^[6-9][0-9]{9}$/)||!$('guardianRelation').value){err.textContent='For applicants below 18, guardian name, mobile number and relationship are mandatory.';err.classList.remove('hidden');$('guardianArea').classList.remove('hidden');return;}if(!$('guardianConsent').checked){err.textContent='Guardian consent is mandatory for every applicant below 18. Please obtain the parent or legal guardian agreement and tick the guardian consent box.';err.classList.remove('hidden');$('guardianConsentArea').classList.remove('hidden');$('guardianConsent').focus();return;}}
+ const age=ageOf($('dob').value);
+ if(age===null||age<0){err.textContent='Please enter a valid date of birth.';err.classList.remove('hidden');return;}
+ if(age<18){
+  $('guardianConsent').required=true;
+  if(!$('guardianName').value.trim()||!$('guardianMobile').value.match(/^[6-9][0-9]{9}$/)||!$('guardianRelation').value){
+   err.textContent='For applicants below 18, guardian name, mobile number and relationship are mandatory.';
+   err.classList.remove('hidden');
+   $('guardianArea').classList.remove('hidden');
+   return;
+  }
+  if(!$('guardianConsent').checked){
+   err.textContent='Guardian consent is mandatory for every applicant below 18.';
+   err.classList.remove('hidden');
+   $('guardianConsentArea').classList.remove('hidden');
+   $('guardianConsent').focus();
+   return;
+  }
+ }
  if(!$('consentCheckbox').checked){err.textContent='Please read and agree to all five consent terms.';err.classList.remove('hidden');return;}
  if(!$('consentAccuracy').checked||!$('consentPayment').checked||!$('consentRules').checked||!$('consentData').checked){err.textContent='Please accept all required application declarations.';err.classList.remove('hidden');return;}
  if(!/^[6-9][0-9]{9}$/.test($('mobile').value.trim())){err.textContent='Enter a valid 10-digit mobile number.';err.classList.remove('hidden');return;}
  const total=Math.max(0,getPayableBeforeCoupon()-(couponState.valid?couponState.discount:0));
- const paid=Number($('amountPaid').value);if(!paid||paid<=0){err.textContent='Enter the amount actually paid.';err.classList.remove('hidden');return;}
- if(paid+0.01<total){err.textContent='The amount paid is less than the payable amount. Please verify the payment details.';err.classList.remove('hidden');return;}
+ const paid=Number($('amountPaid').value);
+ if(!paid||paid<=0){err.textContent='Enter the amount actually paid.';err.classList.remove('hidden');return;}
+ if(paid+0.01<total){err.textContent='The amount paid is less than the payable amount.';err.classList.remove('hidden');return;}
  if(!/^[0-9]{12}$/.test($('transactionId').value.trim())){err.textContent='Enter a valid 12-digit transaction / UTR ID.';err.classList.remove('hidden');return;}
 
  const studentNameUpper=$('studentName').value.trim().toUpperCase();
 
- /* Final safety check: 1-use-per-student coupon rule */
  if(couponState.valid&&couponState.record){
   const existing=await checkCouponUsedByStudent(studentNameUpper,couponState.record.code);
   if(existing){
    const dupDate=existing.usedAt?new Date(existing.usedAt).toLocaleString('en-IN'):'—';
-   err.textContent='❌ This coupon ('+couponState.record.code+') has already been used by "'+studentNameUpper+'" on '+dupDate+' for "'+(existing.courseName||'—')+'". A coupon can be used only ONCE per student. Please remove the coupon or use a different one.';
+   err.textContent='❌ This coupon ('+couponState.record.code+') has already been used by "'+studentNameUpper+'" on '+dupDate+'. A coupon can be used only ONCE per student.';
    err.classList.remove('hidden');
    err.scrollIntoView({behavior:'smooth',block:'center'});
    return;
   }
  }
 
- const btn=$('agreeConsentBtn') || $('generateBtn');
+ const btn=$('agreeConsentBtn');
  if(btn){btn.disabled=true;btn.textContent='Preparing your PDF…';}
+
  try{
   const [photo,paymentImage]=await Promise.all([readFile($('studentPhoto').files[0]),readFile($('paymentShot').files[0])]);
   const id='ES-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
-  const data={id,generated:new Date().toLocaleString('en-IN'),name:studentNameUpper,mobile:$('mobile').value.trim(),dob:$('dob').value,age,gender:$('gender').value,address:$('address').value.trim().toUpperCase(),school:$('school').value.trim().toUpperCase(),photo,paymentImage,plan:selected,coupon:couponState.valid?couponState.record.code:'',discount:couponState.valid?couponState.discount:0,total,method:$('paymentMethod').value,utr:$('transactionId').value.trim(),payDate:$('paymentDate').value,paid:Number($('amountPaid').value),guardianName:$('guardianName').value.trim().toUpperCase(),guardianMobile:$('guardianMobile').value.trim(),guardianRelation:$('guardianRelation').value};
-  const blob=await makePdf(data);finalPdfBlob=blob;finalPdfName='EnglishSpur_Application_'+id+'.pdf';finalAppId=id;
+  const data={
+   id,generated:new Date().toLocaleString('en-IN'),
+   name:studentNameUpper,mobile:$('mobile').value.trim(),dob:$('dob').value,age,
+   gender:$('gender').value,address:$('address').value.trim().toUpperCase(),
+   school:$('school').value.trim().toUpperCase(),
+   photo,paymentImage,plan:selected,
+   coupon:couponState.valid?couponState.record.code:'',
+   discount:couponState.valid?couponState.discount:0,
+   total,method:$('paymentMethod').value,utr:$('transactionId').value.trim(),
+   payDate:$('paymentDate').value,paid:Number($('amountPaid').value),
+   guardianName:$('guardianName').value.trim().toUpperCase(),
+   guardianMobile:$('guardianMobile').value.trim(),
+   guardianRelation:$('guardianRelation').value
+  };
+  const blob=await makePdf(data);
+  finalPdfBlob=blob;
+  finalPdfName='EnglishSpur_Application_'+id+'.pdf';
+  finalAppId=id;
   try{finalPdfFile=new File([blob],finalPdfName,{type:'application/pdf'});}catch(e){finalPdfFile=null;}
 
-  /* ✅ Record coupon usage in Firestore so admin portal's "Coupon Usage" tab can see it */
   if(couponState.valid&&couponState.record){
-   await recordCouponUsage({
-    studentName:studentNameUpper,
-    couponRecord:couponState.record,
-    plan:selected,
-    appId:id
-   });
+   await recordCouponUsage({studentName:studentNameUpper,couponRecord:couponState.record,plan:selected,appId:id});
   }
 
-  $('applicationId').textContent='Application ID: '+id;$('afterDownload').classList.remove('hidden');document.querySelectorAll('.wizard-panel').forEach(x=>x.classList.add('hidden'));document.querySelector('.wizard-progress')?.classList.add('hidden');$('afterDownload').scrollIntoView({behavior:'smooth'});if(btn){btn.textContent='PDF Ready';btn.disabled=true;}
-  form.querySelectorAll('input,textarea,select').forEach(x=>x.disabled=true);document.querySelectorAll('#couponCode,#paymentMethod,#transactionId,#paymentDate,#amountPaid,#paymentShot,#consentAccuracy,#consentPayment,#consentRules,#consentData,#consentCheckbox,#guardianConsent').forEach(x=>x.disabled=true);
- }catch(e){err.textContent='Could not generate/download PDF: '+e.message+'. Please try again.';err.classList.remove('hidden');if(btn){btn.disabled=false;btn.textContent='✅ I Agree & Continue';}}
+  $('applicationId').textContent='Application ID: '+id;
+  $('afterDownload').classList.remove('hidden');
+  document.querySelectorAll('.wizard-panel').forEach(x=>x.classList.add('hidden'));
+  document.querySelector('.wizard-progress')?.classList.add('hidden');
+  $('afterDownload').scrollIntoView({behavior:'smooth'});
+  if(btn){btn.textContent='PDF Ready';btn.disabled=true;}
+  form.querySelectorAll('input,textarea,select').forEach(x=>x.disabled=true);
+  document.querySelectorAll('#couponCode,#paymentMethod,#transactionId,#paymentDate,#amountPaid,#paymentShot,#consentAccuracy,#consentPayment,#consentRules,#consentData,#consentCheckbox,#guardianConsent').forEach(x=>x.disabled=true);
+ }catch(e){
+  err.textContent='Could not generate/download PDF: '+e.message+'. Please try again.';
+  err.classList.remove('hidden');
+  if(btn){btn.disabled=false;btn.textContent='✅ I Agree & Continue';}
+ }
 }
+
 async function sendPdfToAdmin(){
- if(!finalPdfBlob){alert('Your application PDF is not ready yet. Please complete the application first.');return;}
+ if(!finalPdfBlob){alert('Your application PDF is not ready yet.');return;}
  if(!finalPdfFile){try{finalPdfFile=new File([finalPdfBlob],finalPdfName,{type:'application/pdf'});}catch(e){finalPdfFile=null;}}
  const msg='Hello English Spur, I have completed my admission application. Application ID: '+finalAppId+'. I am sending my Application PDF and Payment Screenshot for verification.';
  if(finalPdfFile&&navigator.canShare&&navigator.canShare({files:[finalPdfFile]})){
@@ -881,9 +1252,13 @@ async function sendPdfToAdmin(){
  window.open('https://wa.me/9875340842?text='+encodeURIComponent(msg),'_blank','noopener');
  alert('Your Application PDF has been downloaded.\n\nWhatsApp chat with English Spur (9875340842) is opening. Please attach the downloaded PDF in that chat and send it, then send your payment screenshot separately.');
 }
+
 function downloadAgain(){if(finalPdfBlob)downloadBlob(finalPdfBlob,finalPdfName);}
+
 $('paymentDate').value=new Date().toISOString().slice(0,10);
 $('transactionId').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(0,12);});
+
 loadFirebase();
 </script>
-</body></html>
+</body>
+</html>
