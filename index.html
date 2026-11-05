@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087f5b">
-<title>English Spur | Admission Application</title>
+<title>English Spur | Admission Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -134,8 +134,6 @@ input,select,textarea{min-width:0;max-width:100%}
 }
 @media(hover:none){.plan:hover{transform:none}}
 
-
-
 /* English Spur emerald-green visual refresh */
 :root{
  --blue:#087f5b;--green:#079669;--orange:#f5a623;--ink:#172b25;
@@ -205,7 +203,6 @@ input[type=checkbox]{accent-color:#087f5b}
 
 /* Student-entered text is displayed in CAPITAL LETTERS */
 #studentName,#mobile,#address,#school,#guardianName,#guardianMobile,#transactionId{text-transform:uppercase}
-
 </style>
 </head>
 <body>
@@ -413,50 +410,74 @@ async function recordCouponUsage({studentName,couponRecord,plan,appId}){
  }catch(e){console.warn('Could not record coupon usage:',e);return null;}
 }
 
+/* ============================================================
+   DYNAMIC PLAN DATA
+   ============================================================ */
 function planData(){
  const list=[], cats=categories[activeTab]||{};
- const wantedKey=activeAudience==='kids'?'Fearless English for Kids':'Power Speak for Adults';
+ 
+ // Iterate dynamically over all categories added by Admin
  Object.keys(cats).forEach(key=>{
-  if(key!==wantedKey)return;
-  const sub=cats[key]||{}, batches=Array.isArray(sub.batches)?sub.batches:[];
+  const sub=cats[key]||{};
+  
+  // Auto-detect Kids vs Adult based on course name
+  const isKidsCourse = String(key || '').toLowerCase().indexOf('kid') !== -1;
+  if(activeAudience==='kids' && !isKidsCourse) return;
+  if(activeAudience==='adult' && isKidsCourse) return;
+
+  const batches=Array.isArray(sub.batches)?sub.batches:[];
+  
   if(activeTab==='group'){
    batches.forEach((b,bi)=>{
     if(b.active===false||b.published===false||b.isActive===false)return;
     (b.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,b,pi)));
    });
-  }else (sub.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,null,pi)));
+  }else{
+   (sub.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,null,pi)));
+  }
  });
  return list;
 }
+
 function makePlan(cat,key,sub,p,batch,idx){
  const days=Number(p.days ?? p.planDays ?? p.durationDays ?? 0)||0;
  const months=cat==='oneOnOne'?(Number(p.months)||({90:3,180:6,270:9,360:12})[days]||0):0;
  let base=0,admission=0,regular=0,classes=Number(p.classes)||0;
  let duration=p.perClassDuration||p.duration||'', mode=p.mode||p.platform||'Online Classes', facilities=[];
+ 
  if(cat==='oneOnOne'){
-  const metaKey=months>0?months+'m':'';
-  const meta=metaKey?(offer.oneOnOnePricing?.courses||{})[metaKey]||{}:{};
-  regular=Number(meta.regular)||Number(p.regularTotal)||0;
-  const discounted=Number(meta.discounted)||Number(p.discountedTotal)||regular;
-  base=offerActive()?(Number(meta.special)||discounted):discounted;
+  regular=Number(p.regularTotal)||0;
+  const discounted=Number(p.discountedTotal)||regular;
+  base=offerActive()?(Number(p.specialTotal)||discounted):discounted;
   admission=offerActive()?(Number(offer.oneOnOnePricing?.admissionSpecial)||0):(Number(offer.oneOnOnePricing?.admissionDiscounted)||Number(offer.oneOnOnePricing?.admissionRegular)||0);
-  classes=Number(meta.classes)||classes;duration=p.perClassDuration||p.classDuration||duration||'60 mins/class';mode=meta.platform||mode;
-  facilities=Array.isArray(meta.facilities)?meta.facilities:(Array.isArray(p.facilities)?p.facilities:String(meta.facilities||'').split('\\n').filter(Boolean));
+  classes=Number(p.classes)||classes;
+  duration=p.duration||duration||'60 mins/class';
+  mode=p.platform||mode;
+  facilities=Array.isArray(p.facilities)?p.facilities:[];
  }else{
   regular=Number(p.regularTotal??p.regularRate)||0;
   const discounted=Number(p.discountedTotal??p.discountedRate)||regular;
   base=offerActive()?(Number(p.specialTotal??p.specialRate)||discounted):discounted;
   const af=batch?.admissionFee||{};
   admission=offerActive()?(Number(af.special)||0):(Number(af.discounted)||Number(af.regular)||0);
-  classes=Number(p.classes)||days;duration=p.perClassDuration||'60 mins/class';mode=p.mode||'Online via Google Meet or Zoom';
+  classes=Number(p.classes)||days;
+  duration=p.perClassDuration||'60 mins/class';
+  mode=p.mode||'Online via Google Meet or Zoom';
  }
- return {id:[cat,sub.subCategoryId||key,batch?.batchId||'no-batch',idx].join('|'),cat,key,sub,name:sub.displayName||key,label:cat==='oneOnOne'?'One-to-One':'Group Class',days,base,admission,regular,classes,duration,mode,facilities,batch,kid:activeAudience==='kids',plan:p,months};
+ 
+ return {
+  id:[cat,sub.subCategoryId||key,batch?.batchId||'no-batch',idx].join('|'),
+  cat, key, sub, name:sub.displayName||key, label:cat==='oneOnOne'?'One-to-One':'Group Class',
+  days, base, admission, regular, classes, duration, mode, facilities, batch, kid:activeAudience==='kids', plan:p, months
+ };
 }
+
 function renderPlans(){
  const all=planData(), adult=activeAudience==='adult';
  $('categoryIntro').innerHTML=adult
- ? '<strong>Power Speak for Adults</strong><br>For learners aged 18 and above. Build confident spoken English, communication skills and practical language fluency through structured online learning. Choose a Group or One-to-One programme to compare every fee and class detail.'
- : '<strong>Fearless English for Kids</strong><br>For learners below 18 years. A guided English learning programme designed for children, with age-appropriate learning support. A parent or legal guardian must complete the application and provide consent.';
+ ? '<strong>Adult Courses</strong><br>For learners aged 18 and above. Choose a Group or One-to-One programme to compare every fee and class detail.'
+ : '<strong>Kids Courses</strong><br>For learners below 18 years. A guided English learning programme designed for children. A parent or legal guardian must complete the application and provide consent.';
+ 
  $('plans').innerHTML=all.length?all.map(p=>{
   const total=p.base+p.admission,old=p.regular+p.admission,selectedNow=selected?.id===p.id;
   const features=p.facilities?.length?p.facilities.map(x=>`<div>✓ ${esc(x)}</div>`).join(''):'';
@@ -472,7 +493,7 @@ function renderPlans(){
     <div class="plan-price-row"><div><div class="muted">TOTAL PROGRAMME FEE</div><div class="plan-price">${money(total)}</div>${old>total?`<span class="old-price">${money(old)}</span> <span class="offer-tag">OFFER</span>`:''}</div><div class="muted" style="text-align:right">${p.classes||p.days||'—'}<br>total classes</div></div>
     <div class="plan-details">
      <div class="detail-chip"><b>📘 Course Name</b>${esc(p.name)}</div>
-     <div class="detail-chip"><b>📅 Plan Duration</b>${formatPlanDuration(p.cat==='oneOnOne'?{...p,cat:'oneOnOne',months:p.months||({90:3,180:6,270:9,360:12})[Number(p.days)]}:{...p,cat:'group'})}</div>
+     <div class="detail-chip"><b>📅 Plan Duration</b>${formatPlanDuration(p.cat==='oneOnOne'?{...p,cat:'oneOnOne',months:p.months}:{...p,cat:'group'})}</div>
      <div class="detail-chip"><b>🏷️ Class Type</b>${p.label}</div>
      ${p.batch?`<div class="detail-chip"><b>🗂️ Batch Details</b>${esc(p.batch.batchName||'Available Batch')}</div>`:''}
      ${batchDetails}
@@ -488,6 +509,7 @@ function renderPlans(){
  }).join(''):`<div class="notice warn" style="grid-column:1/-1">No ${adult?'Adult':'Kids'} plan is currently available in this class type. Please contact English Spur.</div>`;
  updateSummary();
 }
+
 function choosePlan(encoded){const id=decodeURIComponent(encoded);selected=planData().find(p=>p.id===id)||null;couponState={valid:false,discount:0,record:null,message:''};$('couponCode').value='';$('couponMessage').textContent='No coupon applied.';renderPlans();}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));activeTab=b.dataset.tab;selected=null;renderPlans();}));
 document.querySelectorAll('.audience-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.audience-tab').forEach(x=>x.classList.toggle('active',x===b));activeAudience=b.dataset.audience;selected=null;couponState={valid:false,discount:0,record:null,message:''};$('couponCode').value='';$('couponMessage').textContent='No coupon applied.';renderPlans();}));
@@ -568,8 +590,21 @@ function updateSummary(){
 }
 function loadFirebase(){
  try{firebase.initializeApp(firebaseConfig);db=firebase.firestore();
-  db.collection('config').doc('offer').onSnapshot(doc=>{offer=doc.exists?doc.data():{};categories=offer.categories||{oneOnOne:{},group:{}};if(!categories.oneOnOne)categories.oneOnOne={};if(!categories.group)categories.group={};$('loadState').className='notice good';$('loadState').textContent='Plans loaded. Select an available plan to continue.';renderPlans();},err=>{$('loadState').className='notice bad';$('loadState').textContent='Unable to load plans. Please contact English Spur. '+err.message;});
-  db.collection('coupons').onSnapshot(s=>{coupons=[];s.forEach(d=>coupons.push({...d.data(),_id:d.id}));if($('couponCode').value.trim())validateCoupon().catch(e=>console.warn(e));},err=>console.warn('Coupon read unavailable',err));
+  db.collection('config').doc('offer').onSnapshot(doc=>{
+      offer=doc.exists?doc.data():{};
+      categories=offer.categories||{oneOnOne:{},group:{}};
+      if(!categories.oneOnOne)categories.oneOnOne={};
+      if(!categories.group)categories.group={};
+      $('loadState').className='notice good';
+      $('loadState').textContent='Plans loaded. Select an available plan to continue.';
+      renderPlans();
+  },err=>{$('loadState').className='notice bad';$('loadState').textContent='Unable to load plans. Please contact English Spur. '+err.message;});
+  
+  db.collection('coupons').onSnapshot(s=>{
+      coupons=[];
+      s.forEach(d=>coupons.push({...d.data(),_id:d.id}));
+      if($('couponCode').value.trim())validateCoupon().catch(e=>console.warn(e));
+  },err=>console.warn('Coupon read unavailable',err));
  }catch(e){$('loadState').className='notice bad';$('loadState').textContent='Portal setup error: '+e.message;}
 }
 function readFile(file){return new Promise((resolve,reject)=>{if(!file)return reject(new Error('A required image is missing.'));const r=new FileReader();r.onload=()=>resolve({data:r.result,type:file.type,name:file.name});r.onerror=()=>reject(new Error('Could not read '+file.name));r.readAsDataURL(file);});}

@@ -201,18 +201,21 @@
             </div>
 
             <div class="section-hero section-hero-1on1">
-                <div class="flex items-center gap-3">
-                    <span class="section-hero-icon">👑</span>
-                    <div>
-                        <p class="section-hero-title">One on One Section</p>
-                        <p class="section-hero-subtitle">Admission Fee + Complete Course Packages (3 / 6 / 9 / 12 Months)</p>
+                <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="section-hero-icon">👑</span>
+                        <div>
+                            <p class="section-hero-title">One on One Section</p>
+                            <p class="section-hero-subtitle">Admission Fee + Complete Course Packages</p>
+                        </div>
                     </div>
+                    <button type="button" onclick="addCourse('oneOnOne')" class="bg-white text-blue-800 font-black text-xs px-3 py-1.5 rounded-lg shadow hover:bg-blue-50">➕ Add Custom 1-on-1 Course</button>
                 </div>
             </div>
 
             <div class="section-container-1on1 mb-8">
                 <div class="sub-block-1on1">
-                    <p class="sub-block-title sub-block-title-1on1">🎓 Admission Fee (One Time) — 1-on-1 Only</p>
+                    <p class="sub-block-title sub-block-title-1on1">🎓 Admission Fee (Default Fallback) — 1-on-1 Only</p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="text-[10px] font-bold text-slate-600 uppercase">Regular ₹</label>
@@ -229,115 +232,11 @@
                     </div>
                 </div>
 
-                <div class="sub-block-1on1">
-                    <p class="sub-block-title sub-block-title-1on1">📅 Complete Course Packages — 1-on-1 Only</p>
-
-                    <div class="course-block">
-                        <div class="course-block-title">🔵 3 Months Course <span class="month-highlight month-basic">Basic</span></div>
-                        <div class="grid grid-cols-3 gap-2 mb-3">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" id="cfg1on1_3m_regular" value="15000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" id="cfg1on1_3m_disc" value="13500" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" id="cfg1on1_3m_special" value="12000" class="w-full border-2 border-amber-400 rounded-lg p-2 bg-amber-50 font-bold text-xs"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Total Classes</label><input type="number" id="cfg1on1_3m_classes" value="30" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Class Duration</label><input type="text" id="cfg1on1_3m_duration" value="60 mins" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="text-[9px] font-bold text-slate-600 uppercase">Platform / App</label>
-                            <input type="text" id="cfg1on1_3m_platform" value="Google Meet" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs">
-                        </div>
-                        <div>
-                            <label class="text-[9px] font-bold text-slate-600 uppercase mb-1 block">Facilities (one per line)</label>
-                            <textarea id="cfg1on1_3m_facilities" rows="4" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-semibold text-xs">Live 1-on-1 class with expert teacher
-Class recording provided
-PDF notes & materials
-WhatsApp support</textarea>
-                        </div>
+                <div class="sub-block-1on1 bg-blue-50/50">
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="sub-block-title sub-block-title-1on1 border-b-0 m-0 pb-0">👑 1-on-1 Courses & Plans</p>
                     </div>
-
-                    <div class="course-block">
-                        <div class="course-block-title">🟣 6 Months Course <span class="month-highlight month-intermediate">Intermediate</span></div>
-                        <div class="grid grid-cols-3 gap-2 mb-3">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" id="cfg1on1_6m_regular" value="28000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" id="cfg1on1_6m_disc" value="25000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" id="cfg1on1_6m_special" value="22000" class="w-full border-2 border-amber-400 rounded-lg p-2 bg-amber-50 font-bold text-xs"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Total Classes</label><input type="number" id="cfg1on1_6m_classes" value="60" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Class Duration</label><input type="text" id="cfg1on1_6m_duration" value="60 mins" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="text-[9px] font-bold text-slate-600 uppercase">Platform / App</label>
-                            <input type="text" id="cfg1on1_6m_platform" value="Google Meet" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs">
-                        </div>
-                        <div>
-                            <label class="text-[9px] font-bold text-slate-600 uppercase mb-1 block">Facilities (one per line)</label>
-                            <textarea id="cfg1on1_6m_facilities" rows="4" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-semibold text-xs">Live 1-on-1 class with expert teacher
-Class recording provided
-PDF notes & materials
-WhatsApp support
-Monthly progress report</textarea>
-                        </div>
-                    </div>
-
-                    <div class="course-block">
-                        <div class="course-block-title">🟠 9 Months Course <span class="month-highlight month-advanced">Advanced</span></div>
-                        <div class="grid grid-cols-3 gap-2 mb-3">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" id="cfg1on1_9m_regular" value="40000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" id="cfg1on1_9m_disc" value="36000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" id="cfg1on1_9m_special" value="32000" class="w-full border-2 border-amber-400 rounded-lg p-2 bg-amber-50 font-bold text-xs"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Total Classes</label><input type="number" id="cfg1on1_9m_classes" value="90" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Class Duration</label><input type="text" id="cfg1on1_9m_duration" value="60 mins" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="text-[9px] font-bold text-slate-600 uppercase">Platform / App</label>
-                            <input type="text" id="cfg1on1_9m_platform" value="Google Meet" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs">
-                        </div>
-                        <div>
-                            <label class="text-[9px] font-bold text-slate-600 uppercase mb-1 block">Facilities (one per line)</label>
-                            <textarea id="cfg1on1_9m_facilities" rows="4" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-semibold text-xs">Live 1-on-1 class with expert teacher
-Class recording provided
-PDF notes & materials
-WhatsApp support
-Monthly progress report
-Mock tests & feedback</textarea>
-                        </div>
-                    </div>
-
-                    <div class="course-block">
-                        <div class="course-block-title">🟢 12 Months Course <span class="month-highlight month-master">Master</span></div>
-                        <div class="grid grid-cols-3 gap-2 mb-3">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" id="cfg1on1_12m_regular" value="52000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" id="cfg1on1_12m_disc" value="46000" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" id="cfg1on1_12m_special" value="40000" class="w-full border-2 border-amber-400 rounded-lg p-2 bg-amber-50 font-bold text-xs"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Total Classes</label><input type="number" id="cfg1on1_12m_classes" value="120" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                            <div><label class="text-[9px] font-bold text-slate-600 uppercase">Class Duration</label><input type="text" id="cfg1on1_12m_duration" value="60 mins" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs"></div>
-                        </div>
-                        <div class="mb-2">
-                            <label class="text-[9px] font-bold text-slate-600 uppercase">Platform / App</label>
-                            <input type="text" id="cfg1on1_12m_platform" value="Google Meet" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-bold text-xs">
-                        </div>
-                        <div>
-                            <label class="text-[9px] font-bold text-slate-600 uppercase mb-1 block">Facilities (one per line)</label>
-                            <textarea id="cfg1on1_12m_facilities" rows="4" class="w-full border-2 border-slate-200 rounded-lg p-2 bg-white font-semibold text-xs">Live 1-on-1 class with expert teacher
-Class recording provided
-PDF notes & materials
-WhatsApp support
-Monthly progress report
-Mock tests & feedback
-Certificate on completion</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sub-block-1on1">
-                    <p class="sub-block-title sub-block-title-1on1">👑 1-on-1 Courses (Adults & Kids)</p>
-                    <div id="oneOnOneCategories" class="space-y-3"></div>
+                    <div id="oneOnOneCategories" class="space-y-4"></div>
                 </div>
             </div>
 
@@ -346,18 +245,21 @@ Certificate on completion</textarea>
             </div>
 
             <div class="section-hero section-hero-group">
-                <div class="flex items-center gap-3">
-                    <span class="section-hero-icon">👥</span>
-                    <div>
-                        <p class="section-hero-title">Group Class Section</p>
-                        <p class="section-hero-subtitle">Student-wise Batches (1 Teacher : Max N Students) & Learning Plans</p>
+                <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="section-hero-icon">👥</span>
+                        <div>
+                            <p class="section-hero-title">Group Class Section</p>
+                            <p class="section-hero-subtitle">Student-wise Batches & Learning Plans</p>
+                        </div>
                     </div>
+                    <button type="button" onclick="addCourse('group')" class="bg-white text-emerald-800 font-black text-xs px-3 py-1.5 rounded-lg shadow hover:bg-emerald-50">➕ Add Custom Group Course</button>
                 </div>
             </div>
 
             <div class="section-container-group mb-6">
                 <div class="sub-block-group">
-                    <p class="sub-block-title sub-block-title-group">🎓 Admission Fee (New Students) — Group Default</p>
+                    <p class="sub-block-title sub-block-title-group">🎓 Admission Fee (Default Fallback) — Group</p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="text-[10px] font-bold text-slate-600 uppercase">Regular ₹</label>
@@ -372,14 +274,12 @@ Certificate on completion</textarea>
                             <input type="number" id="cfgGroupAdmissionSpecial" value="1500" class="w-full border-2 border-amber-400 rounded-lg p-2.5 bg-amber-50 font-bold text-sm">
                         </div>
                     </div>
-                    <div class="bg-white border-2 border-dashed border-emerald-400 rounded-lg p-3 mt-3">
-                        <p class="text-[11px] font-bold text-emerald-900">ℹ️ Batch-wise Multi-Plan Architecture</p>
-                        <p class="text-[10px] text-slate-600 mt-1">Each Group Sub-Category can have multiple batch sets (e.g., 1 Teacher : Max 4 Students, 1:10 Students). Each batch contains its specific admission fee, schedule timing, days, and nested plan rows.</p>
-                    </div>
                 </div>
 
-                <div class="sub-block-group">
-                    <p class="sub-block-title sub-block-title-group">📚 Group Class Batches & Plans</p>
+                <div class="sub-block-group bg-emerald-50/50">
+                    <div class="flex justify-between items-center mb-4">
+                        <p class="sub-block-title sub-block-title-group border-b-0 m-0 pb-0">📚 Group Class Courses & Batches</p>
+                    </div>
                     <div id="groupCategories" class="space-y-4"></div>
                 </div>
             </div>
@@ -719,17 +619,26 @@ function DEFAULT_GROUP_BATCH(subKey, index) {
     };
 }
 
-var FIXED_SUBCATEGORIES = {
-    oneOnOne: [
-        { key: "Power Speak for Adults", id: "power_speak_adults_1on1", displayName: "Power Speak for Adults — One on One",
-          fixedPlans: [{ days: 90, label: "3 Months", months: 3, value: "3m" },{ days: 180, label: "6 Months", months: 6, value: "6m" },{ days: 270, label: "9 Months", months: 9, value: "9m" },{ days: 360, label: "12 Months", months: 12, value: "12m" }] },
-        { key: "Fearless English for Kids", id: "fearless_kids_1on1", displayName: "Fearless English for Kids — One on One",
-          fixedPlans: [{ days: 90, label: "3 Months", months: 3, value: "3m" },{ days: 180, label: "6 Months", months: 6, value: "6m" },{ days: 270, label: "9 Months", months: 9, value: "9m" },{ days: 360, label: "12 Months", months: 12, value: "12m" }] }
-    ],
-    group: [
-        { key: "Power Speak for Adults", id: "power_speak_adults_group", displayName: "Power Speak for Adults — Group Class" },
-        { key: "Fearless English for Kids", id: "fearless_english_kids_group", displayName: "Fearless English for Kids — Group Class" }
-    ]
+// Default structure to seed if Firebase is completely empty
+var DEFAULT_CATEGORIES = {
+    oneOnOne: {
+        "Power Speak for Adults": { subCategoryId: "power_speak_adults_1on1", displayName: "Power Speak for Adults — One on One", plans: [
+            { days: 90, label: "3 Months", months: 3, classes: 30, regularTotal: 15000, discountedTotal: 13500, specialTotal: 12000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording'] },
+            { days: 180, label: "6 Months", months: 6, classes: 60, regularTotal: 28000, discountedTotal: 25000, specialTotal: 22000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report'] },
+            { days: 270, label: "9 Months", months: 9, classes: 90, regularTotal: 40000, discountedTotal: 36000, specialTotal: 32000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report', 'Mock tests'] },
+            { days: 360, label: "12 Months", months: 12, classes: 120, regularTotal: 52000, discountedTotal: 46000, specialTotal: 40000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report', 'Mock tests', 'Certificate'] }
+        ]},
+        "Fearless English for Kids": { subCategoryId: "fearless_kids_1on1", displayName: "Fearless English for Kids — One on One", plans: [
+            { days: 90, label: "3 Months", months: 3, classes: 30, regularTotal: 15000, discountedTotal: 13500, specialTotal: 12000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording'] },
+            { days: 180, label: "6 Months", months: 6, classes: 60, regularTotal: 28000, discountedTotal: 25000, specialTotal: 22000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report'] },
+            { days: 270, label: "9 Months", months: 9, classes: 90, regularTotal: 40000, discountedTotal: 36000, specialTotal: 32000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report', 'Mock tests'] },
+            { days: 360, label: "12 Months", months: 12, classes: 120, regularTotal: 52000, discountedTotal: 46000, specialTotal: 40000, duration: '60 mins', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording', 'Monthly report', 'Mock tests', 'Certificate'] }
+        ]}
+    },
+    group: {
+        "Power Speak for Adults": { subCategoryId: "power_speak_adults_group", displayName: "Power Speak for Adults — Group Class", batches: [DEFAULT_GROUP_BATCH("Power Speak for Adults", 0)] },
+        "Fearless English for Kids": { subCategoryId: "fearless_english_kids_group", displayName: "Fearless English for Kids — Group Class", batches: [DEFAULT_GROUP_BATCH("Fearless English for Kids", 0)] }
+    }
 };
 
 /* ============ AUTH ============ */
@@ -805,144 +714,208 @@ function loadAll() {
     }
 }
 
-/* ============ OFFER (unchanged) ============ */
+/* ============ OFFER ============ */
 var currentOffer = null;
-var DEFAULT_COURSE_META = {
-    '3m':  { classes: 30,  duration: '60 mins', platform: 'Google Meet', facilities: 'Live 1-on-1 class with expert teacher\nClass recording provided\nPDF notes & materials\nWhatsApp support' },
-    '6m':  { classes: 60,  duration: '60 mins', platform: 'Google Meet', facilities: 'Live 1-on-1 class with expert teacher\nClass recording provided\nPDF notes & materials\nWhatsApp support\nMonthly progress report' },
-    '9m':  { classes: 90,  duration: '60 mins', platform: 'Google Meet', facilities: 'Live 1-on-1 class with expert teacher\nClass recording provided\nPDF notes & materials\nWhatsApp support\nMonthly progress report\nMock tests & feedback' },
-    '12m': { classes: 120, duration: '60 mins', platform: 'Google Meet', facilities: 'Live 1-on-1 class with expert teacher\nClass recording provided\nPDF notes & materials\nWhatsApp support\nMonthly progress report\nMock tests & feedback\nCertificate on completion' }
-};
 
 function loadOffer() {
     db.collection('config').doc('offer').onSnapshot(function(doc) {
         var d = doc.exists ? doc.data() : {};
-        if (!d.oneOnOnePricing) { d.oneOnOnePricing = { admissionRegular: 2500, admissionDiscounted: 2000, admissionSpecial: 1500, courses: { '3m': { regular: 15000, discounted: 13500, special: 12000, classes: 30, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['3m'].facilities }, '6m': { regular: 28000, discounted: 25000, special: 22000, classes: 60, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['6m'].facilities }, '9m': { regular: 40000, discounted: 36000, special: 32000, classes: 90, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['9m'].facilities }, '12m': { regular: 52000, discounted: 46000, special: 40000, classes: 120, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['12m'].facilities } } }; }
-        if (d.oneOnOnePricing && !d.oneOnOnePricing.courses) { d.oneOnOnePricing.courses = { '3m': { regular: 15000, discounted: 13500, special: 12000, classes: 30, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['3m'].facilities }, '6m': { regular: 28000, discounted: 25000, special: 22000, classes: 60, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['6m'].facilities }, '9m': { regular: 40000, discounted: 36000, special: 32000, classes: 90, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['9m'].facilities }, '12m': { regular: 52000, discounted: 46000, special: 40000, classes: 120, duration: '60 mins', platform: 'Google Meet', facilities: DEFAULT_COURSE_META['12m'].facilities } }; }
+        
+        // Fallback initializations
+        if (!d.oneOnOnePricing) { d.oneOnOnePricing = { admissionRegular: 2500, admissionDiscounted: 2000, admissionSpecial: 1500 }; }
         if (!d.groupPricing) { d.groupPricing = { regularAdmission: 2500, discountedAdmission: 2000, specialAdmission: 1500 }; }
-        if (!d.categories) d.categories = { oneOnOne: {}, group: {} };
-        if (!d.categories.oneOnOne) d.categories.oneOnOne = {};
-        if (!d.categories.group) d.categories.group = {};
+        
+        // Seed categories if completely missing
+        if (!d.categories || !d.categories.oneOnOne || !d.categories.group || Object.keys(d.categories.oneOnOne).length === 0) {
+            d.categories = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+        }
 
+        // Normalize group batches if missing
         if (d.categories && d.categories.group) {
             Object.keys(d.categories.group).forEach(function(subKey) {
                 var sub = d.categories.group[subKey];
-                if (sub) {
-                    if (!sub.batches || !Array.isArray(sub.batches) || sub.batches.length === 0) {
-                        var legacyPlans = (sub.plans && sub.plans.length > 0) ? sub.plans : [
-                            { days: 8,  perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 1600, discountedTotal: 1440, specialTotal: 1360 },
-                            { days: 16, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 3200, discountedTotal: 2720, specialTotal: 2560 },
-                            { days: 24, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 4800, discountedTotal: 3840, specialTotal: 3600 }
-                        ];
-                        legacyPlans.forEach(function(p) {
-                            if (!p.regularTotal && p.regularRate && p.days) p.regularTotal = p.days * (Number(p.regularRate) || 0);
-                            if (!p.discountedTotal && p.discountedRate && p.days) p.discountedTotal = p.days * (Number(p.discountedRate) || 0);
-                            if (!p.specialTotal && p.specialRate && p.days) p.specialTotal = p.days * (Number(p.specialRate) || 0);
-                            if (!p.perClassDuration) p.perClassDuration = "60 mins/class";
-                            if (!p.mode) p.mode = "Online via Google Meet or Zoom";
-                        });
-                        sub.batches = [{ batchId: 'batch_default_' + Date.now(), batchName: (sub.displayName || subKey) + ' (1:4 set)', maxStudents: 4, batchTiming: "7:00-8:00 AM", batchDays: "Mon/Wed/Fri", admissionFee: { regular: d.groupPricing.regularAdmission || 2500, discounted: d.groupPricing.discountedAdmission || 2000, special: d.groupPricing.specialAdmission || 1500 }, plans: legacyPlans }];
-                    } else {
-                        sub.batches.forEach(function(b) {
-                            if (!b.admissionFee) { b.admissionFee = { regular: d.groupPricing.regularAdmission || 2500, discounted: d.groupPricing.discountedAdmission || 2000, special: d.groupPricing.specialAdmission || 1500 }; }
-                            if (b.plans) {
-                                b.plans.forEach(function(p) {
-                                    if (!p.regularTotal && p.regularRate && p.days) p.regularTotal = p.days * (Number(p.regularRate) || 0);
-                                    if (!p.discountedTotal && p.discountedRate && p.days) p.discountedTotal = p.days * (Number(p.discountedRate) || 0);
-                                    if (!p.specialTotal && p.specialRate && p.days) p.specialTotal = p.days * (Number(p.specialRate) || 0);
-                                    if (!p.perClassDuration) p.perClassDuration = "60 mins/class";
-                                    if (!p.mode) p.mode = "Online via Google Meet or Zoom";
-                                });
-                            }
-                        });
-                    }
+                if (sub && (!sub.batches || sub.batches.length === 0)) {
+                    sub.batches = [DEFAULT_GROUP_BATCH(subKey, 0)];
                 }
             });
         }
 
         currentOffer = d; window.currentOffer = d;
+        
         document.getElementById('offerActive').checked = d.active !== false;
         document.getElementById('offerTitle').value = d.title || '';
         document.getElementById('offerDescription').value = d.description || '';
         document.getElementById('cfg1on1AdmissionRegular').value = d.oneOnOnePricing.admissionRegular || 2500;
         document.getElementById('cfg1on1AdmissionDiscounted').value = d.oneOnOnePricing.admissionDiscounted || 2000;
         document.getElementById('cfg1on1AdmissionSpecial').value = d.oneOnOnePricing.admissionSpecial || 1500;
-        var courses = d.oneOnOnePricing.courses || {};
-        [3, 6, 9, 12].forEach(function(m) {
-            var key = m + 'm', c = courses[key] || {};
-            document.getElementById('cfg1on1_' + m + 'm_regular').value = c.regular || 0;
-            document.getElementById('cfg1on1_' + m + 'm_disc').value = c.discounted || 0;
-            document.getElementById('cfg1on1_' + m + 'm_special').value = c.special || 0;
-            document.getElementById('cfg1on1_' + m + 'm_classes').value = c.classes || DEFAULT_COURSE_META[key].classes;
-            document.getElementById('cfg1on1_' + m + 'm_duration').value = c.duration || DEFAULT_COURSE_META[key].duration;
-            document.getElementById('cfg1on1_' + m + 'm_platform').value = c.platform || DEFAULT_COURSE_META[key].platform;
-            document.getElementById('cfg1on1_' + m + 'm_facilities').value = c.facilities || DEFAULT_COURSE_META[key].facilities;
-        });
         document.getElementById('cfgGroupAdmissionRegular').value = d.groupPricing.regularAdmission || 2500;
         document.getElementById('cfgGroupAdmissionDiscounted').value = d.groupPricing.discountedAdmission || 2000;
         document.getElementById('cfgGroupAdmissionSpecial').value = d.groupPricing.specialAdmission || 1500;
+        
         if (d.endDateTime) document.getElementById('offerEndDateTime').value = d.endDateTime;
         else document.getElementById('offerEndDateTime').value = formatDateTimeLocal(new Date(Date.now() + 30 * 60 * 1000));
+        
         updateStatusBadge(d);
         renderCategories(d.categories);
     });
 }
 
+function addCourse(cat) {
+    var name = prompt("Enter New Course Name (e.g., IELTS Preparation, Spoken Hindi):");
+    if (!name) return;
+    var key = name.trim();
+    if (currentOffer.categories[cat][key]) {
+        alert("❌ This course name already exists!");
+        return;
+    }
+    
+    currentOffer.categories[cat][key] = {
+        subCategoryId: cat + '_' + Date.now(),
+        displayName: key,
+        plans: cat === 'oneOnOne' ? [{ days: 90, label: '3 Months', months: 3, classes: 24, regularTotal: 15000, discountedTotal: 12000, specialTotal: 10000, duration: '60 mins/class', platform: 'Google Meet', facilities: ['Live 1-on-1 class', 'Recording'] }] : [],
+        batches: cat === 'group' ? [DEFAULT_GROUP_BATCH(key, 0)] : []
+    };
+    
+    renderCategories(currentOffer.categories);
+    toast('✅ Course Added: ' + key);
+}
+
+function removeCategory(cat, key) {
+    if (!confirm("⚠️ Are you sure you want to delete the ENTIRE course: " + key + "?\nAll its plans and batches will be removed.")) return;
+    delete currentOffer.categories[cat][key];
+    renderCategories(currentOffer.categories);
+    toast('🗑️ Course Deleted');
+}
+
 function renderCategories(categories) {
     var oneContainer = document.getElementById('oneOnOneCategories');
     oneContainer.innerHTML = '';
-    FIXED_SUBCATEGORIES.oneOnOne.forEach(function(sub) {
-        var subData = (categories.oneOnOne && categories.oneOnOne[sub.key]) || { subCategoryId: sub.id, displayName: sub.displayName, plans: [] };
-        oneContainer.appendChild(buildSubCategoryBlock('oneOnOne', sub.key, subData));
-    });
+    if (categories.oneOnOne) {
+        Object.keys(categories.oneOnOne).forEach(function(key) {
+            oneContainer.appendChild(buildSubCategoryBlock('oneOnOne', key, categories.oneOnOne[key]));
+        });
+    }
+    
     var groupContainer = document.getElementById('groupCategories');
     groupContainer.innerHTML = '';
-    FIXED_SUBCATEGORIES.group.forEach(function(sub) {
-        var subData = (categories.group && categories.group[sub.key]) || { subCategoryId: sub.id, displayName: sub.displayName, batches: [] };
-        groupContainer.appendChild(buildSubCategoryBlock('group', sub.key, subData));
-    });
+    if (categories.group) {
+        Object.keys(categories.group).forEach(function(key) {
+            groupContainer.appendChild(buildSubCategoryBlock('group', key, categories.group[key]));
+        });
+    }
 }
 
 function buildSubCategoryBlock(cat, key, subData) {
     var block = document.createElement('div');
     block.className = (cat === 'oneOnOne') ? 'bg-white border-2 border-blue-200 rounded-lg p-3' : 'bg-white border-2 border-emerald-200 rounded-lg p-3';
+    block.dataset.courseKey = key;
+    block.dataset.displayName = subData.displayName || key;
+    block.dataset.subcategoryId = subData.subCategoryId || (cat + '_' + Date.now());
+    
     var safeKey = key.replace(/[^a-zA-Z0-9]/g, '_');
     var isOneOnOne = (cat === 'oneOnOne');
     var isKids = String(key || '').toLowerCase().indexOf('kid') !== -1;
     var ageBadge = isKids ? '<span class="bg-pink-100 text-pink-800 text-[9px] font-black px-2 py-1 rounded-full border border-pink-300">👶 KIDS ONLY · &lt;18</span>' : '<span class="bg-blue-100 text-blue-800 text-[9px] font-black px-2 py-1 rounded-full border border-blue-300">🔞 ADULT ONLY · 18+</span>';
+    
+    var header = 
+        '<div class="flex justify-between items-center mb-3 flex-wrap gap-2 pb-2 border-b-2 ' + (isOneOnOne ? 'border-blue-100' : 'border-emerald-100') + '">' +
+            '<div class="flex items-center gap-2 flex-wrap">' +
+                '<span class="text-lg">' + (isOneOnOne ? '👑' : '👥') + '</span>' +
+                '<p class="font-black text-slate-800 text-sm">' + (subData.displayName || key) + '</p>' +
+                ageBadge +
+            '</div>' +
+            '<div class="flex items-center gap-2">' +
+                (isOneOnOne ? '<button type="button" onclick="addOneOnOnePlan(\'' + safeKey + '\')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm">➕ Add Plan Row</button>' : '') +
+                '<button type="button" onclick="removeCategory(\'' + cat + '\', \'' + key.replace(/'/g, "\\'") + '\')" class="bg-red-100 text-red-700 hover:bg-red-200 font-bold text-xs px-2.5 py-1.5 rounded-lg border border-red-300">🗑️ Remove Course</button>' +
+            '</div>' +
+        '</div>';
+
     if (isOneOnOne) {
-        block.innerHTML = '<div class="flex justify-between items-center mb-2 flex-wrap gap-2"><div class="flex items-center gap-2 flex-wrap"><span class="text-lg">👑</span><p class="font-black text-slate-800 text-xs">' + (subData.displayName || key) + '</p>' + ageBadge + '</div><span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded-lg">📅 3 / 6 / 9 / 12 Months (Fixed)</span></div><div class="plans-list space-y-2" id="plans_' + cat + '_' + safeKey + '"></div>';
+        block.innerHTML = header + '<div class="plans-list space-y-2" id="plans_' + safeKey + '"></div>';
         setTimeout(function() {
-            var list = document.getElementById('plans_' + cat + '_' + safeKey);
+            var list = document.getElementById('plans_' + safeKey);
             if (!list) return;
             list.innerHTML = '';
-            var fp = FIXED_SUBCATEGORIES.oneOnOne.filter(function(x){return x.key === key;})[0];
-            if (fp && fp.fixedPlans) {
-                list.innerHTML = fp.fixedPlans.map(function(p) {
-                    var m = p.months;
-                    var reg = document.getElementById('cfg1on1_' + m + 'm_regular');
-                    var spec = document.getElementById('cfg1on1_' + m + 'm_special');
-                    var cls = document.getElementById('cfg1on1_' + m + 'm_classes');
-                    var dur = document.getElementById('cfg1on1_' + m + 'm_duration');
-                    var plat = document.getElementById('cfg1on1_' + m + 'm_platform');
-                    return '<div class="bg-blue-50 border border-blue-200 rounded-lg p-2 text-[10px]"><strong class="text-blue-800">' + p.label + '</strong> · R: ₹' + (reg ? reg.value : '—') + ' · S: ₹' + (spec ? spec.value : '—') + '<br><span class="text-slate-500">📚 ' + (cls ? cls.value : '—') + ' classes · ⏱️ ' + (dur ? dur.value : '—') + ' · 💻 ' + (plat ? plat.value : '—') + '</span></div>';
-                }).join('');
-            }
+            var plans = subData.plans || [];
+            plans.forEach(function(p, pIdx) {
+                list.appendChild(buildOneOnOnePlanRow(safeKey, p, pIdx));
+            });
         }, 0);
         return block;
     }
-    block.innerHTML = '<div class="flex justify-between items-center mb-3 flex-wrap gap-2 pb-2 border-b-2 border-emerald-100"><div class="flex items-center gap-2 flex-wrap"><span class="text-lg">👥</span><p class="font-black text-slate-800 text-sm">' + (subData.displayName || key) + '</p>' + ageBadge + '</div><button type="button" onclick="addGroupBatch(\'' + key.replace(/'/g, "\\'") + '\')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-sm">➕ Add Batch</button></div><div class="batches-list space-y-4" id="batches_group_' + safeKey + '"></div>';
+
+    // GROUP
+    block.innerHTML = header + '<div class="flex justify-end mb-2"><button type="button" onclick="addGroupBatch(\'' + safeKey + '\')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm">➕ Add Batch</button></div><div class="batches-list space-y-4" id="batches_group_' + safeKey + '"></div>';
     setTimeout(function() {
         var list = document.getElementById('batches_group_' + safeKey);
         if (!list) return;
         list.innerHTML = '';
         var batches = subData.batches || [];
-        if (batches.length === 0) batches.push(DEFAULT_GROUP_BATCH(key, 0));
-        batches.forEach(function(b, bIdx) { list.appendChild(buildGroupBatchBlock(key, b, bIdx)); });
+        batches.forEach(function(b, bIdx) {
+            list.appendChild(buildGroupBatchBlock(key, b, bIdx));
+        });
     }, 0);
+    
     return block;
 }
 
+/* ============ 1-ON-1 PLAN ROW ============ */
+function buildOneOnOnePlanRow(safeKey, plan, pIdx) {
+    var div = document.createElement('div');
+    div.className = 'plan-row border border-blue-200 bg-blue-50/30 p-2.5 rounded-xl one-on-one-plan-row';
+    div.innerHTML = 
+        '<div class="grid grid-cols-12 gap-2 items-end">' +
+            '<div class="col-span-6 sm:col-span-2">' +
+                '<label class="plan-row-label">Plan Label</label>' +
+                '<input type="text" class="plan-row-input plan-label" value="' + (plan.label || '') + '" placeholder="e.g. 3 Months">' +
+            '</div>' +
+            '<div class="col-span-6 sm:col-span-1">' +
+                '<label class="plan-row-label">Months</label>' +
+                '<input type="number" class="plan-row-input plan-months" value="' + (plan.months || 0) + '" min="0" oninput="this.closest(\'.plan-row\').querySelector(\'.plan-days\').value = this.value * 30">' +
+            '</div>' +
+            '<div class="col-span-6 sm:col-span-1">' +
+                '<label class="plan-row-label">Days</label>' +
+                '<input type="number" class="plan-row-input plan-days" value="' + (plan.days || 0) + '" min="1">' +
+            '</div>' +
+            '<div class="col-span-6 sm:col-span-1">' +
+                '<label class="plan-row-label">Classes</label>' +
+                '<input type="number" class="plan-row-input plan-classes" value="' + (plan.classes || 0) + '" min="1">' +
+            '</div>' +
+            '<div class="col-span-4 sm:col-span-1">' +
+                '<label class="plan-row-label">Reg ₹</label>' +
+                '<input type="number" class="plan-row-input plan-reg" value="' + (plan.regularTotal || plan.regularRate || 0) + '" min="0">' +
+            '</div>' +
+            '<div class="col-span-4 sm:col-span-1">' +
+                '<label class="plan-row-label">Disc ₹</label>' +
+                '<input type="number" class="plan-row-input plan-disc" value="' + (plan.discountedTotal || plan.discountedRate || 0) + '" min="0">' +
+            '</div>' +
+            '<div class="col-span-4 sm:col-span-1">' +
+                '<label class="plan-row-label">Spec ₹</label>' +
+                '<input type="number" class="plan-row-input plan-spec" value="' + (plan.specialTotal || plan.specialRate || 0) + '" min="0">' +
+            '</div>' +
+            '<div class="col-span-6 sm:col-span-2">' +
+                '<label class="plan-row-label">Duration / Mode</label>' +
+                '<input type="text" class="plan-row-input plan-duration" value="' + (plan.duration || '60 mins/class') + '">' +
+                '<input type="text" class="plan-row-input plan-mode mt-1" value="' + (plan.platform || 'Google Meet') + '">' +
+            '</div>' +
+            '<div class="col-span-12 sm:col-span-2">' +
+                '<label class="plan-row-label">Features (1 per line)</label>' +
+                '<textarea class="plan-row-input plan-facilities" rows="2">' + (Array.isArray(plan.facilities) ? plan.facilities.join('\n') : '') + '</textarea>' +
+            '</div>' +
+            '<div class="col-span-12 sm:col-span-1">' +
+                '<button type="button" onclick="this.closest(\'.plan-row\').remove()" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-lg text-xs">🗑️</button>' +
+            '</div>' +
+        '</div>';
+    return div;
+}
+
+function addOneOnOnePlan(safeKey) {
+    var list = document.getElementById('plans_' + safeKey);
+    if (!list) return;
+    list.appendChild(buildOneOnOnePlanRow(safeKey, { days: 90, label: '3 Months', months: 3, classes: 30, regularTotal: 15000, discountedTotal: 12000, specialTotal: 10000, duration: '60 mins/class', platform: 'Google Meet', facilities: ['Live class'] }, list.children.length));
+}
+
+/* ============ GROUP BATCH ROW ============ */
 function buildGroupBatchBlock(subKey, batch, bIdx) {
     var safeKey = subKey.replace(/[^a-zA-Z0-9]/g, '_');
     var batchCard = document.createElement('div');
@@ -952,8 +925,31 @@ function buildGroupBatchBlock(subKey, batch, bIdx) {
     batchCard.dataset.batchId = batch.batchId || ('batch_' + Date.now() + '_' + Math.floor(Math.random() * 1000));
     var adm = batch.admissionFee || { regular: 2500, discounted: 2000, special: 1500 };
     var plans = batch.plans || [];
-    if (plans.length === 0) plans = [{ days: 8, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 1600, discountedTotal: 1440, specialTotal: 1360 },{ days: 16, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 3200, discountedTotal: 2720, specialTotal: 2560 },{ days: 24, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 4800, discountedTotal: 3840, specialTotal: 3600 }];
-    batchCard.innerHTML = '<div class="batch-header-strip"><div class="flex items-center gap-2"><span class="text-xl">🎓</span><span class="font-black text-sm uppercase tracking-wide">Batch Set #' + (bIdx + 1) + '</span></div><button type="button" onclick="removeGroupBatch(\'' + batchDomId + '\')" class="bg-red-500 hover:bg-red-600 text-white font-bold text-xs px-2.5 py-1 rounded-lg">🗑️ Remove Batch</button></div><div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-3 bg-slate-50 p-3 rounded-xl border border-slate-200"><div><label class="text-[10px] font-bold text-slate-600 uppercase">Batch Name</label><input type="text" class="batch-name w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchName || (subKey + ' (1:4 set)')) + '"></div><div><label class="text-[10px] font-bold text-slate-600 uppercase">Max Students (1 Teacher : N)</label><input type="number" class="batch-max-students w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.maxStudents || 4) + '" min="1"></div><div><label class="text-[10px] font-bold text-slate-600 uppercase">Class Timing</label><input type="text" class="batch-timing w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchTiming || '7:00-8:00 AM') + '"></div><div><label class="text-[10px] font-bold text-slate-600 uppercase">Class Days</label><input type="text" class="batch-days w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchDays || 'Mon/Wed/Fri') + '"></div></div><div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-3"><p class="text-[10px] font-black text-emerald-900 uppercase mb-1.5">🎓 Batch Admission Fee (New Students Only)</p><div class="grid grid-cols-3 gap-2"><div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" class="batch-adm-regular w-full border-2 border-slate-200 rounded-lg p-1.5 font-bold text-xs bg-white" value="' + (adm.regular || 2500) + '"></div><div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" class="batch-adm-discounted w-full border-2 border-slate-200 rounded-lg p-1.5 font-bold text-xs bg-white" value="' + (adm.discounted || 2000) + '"></div><div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" class="batch-adm-special w-full border-2 border-amber-400 rounded-lg p-1.5 font-bold text-xs bg-amber-50" value="' + (adm.special || 1500) + '"></div></div></div><div class="flex justify-between items-center mb-2"><p class="text-[11px] font-black text-slate-700 uppercase">📚 Learning Plans for this Batch</p><button type="button" onclick="addPlanToBatch(\'' + batchDomId + '\')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg">➕ Add Plan Row</button></div><div class="batch-plans-list space-y-2"></div>';
+    
+    if (plans.length === 0) plans = [{ days: 8, perClassDuration: "60 mins/class", mode: "Online via Google Meet or Zoom", regularTotal: 1600, discountedTotal: 1440, specialTotal: 1360 }];
+    
+    batchCard.innerHTML = 
+        '<div class="batch-header-strip"><div class="flex items-center gap-2"><span class="text-xl">🎓</span><span class="font-black text-sm uppercase tracking-wide">Batch Set #' + (bIdx + 1) + '</span></div><button type="button" onclick="removeGroupBatch(\'' + batchDomId + '\')" class="bg-red-500 hover:bg-red-600 text-white font-bold text-xs px-2.5 py-1 rounded-lg">🗑️ Remove Batch</button></div>' +
+        '<div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-3 bg-slate-50 p-3 rounded-xl border border-slate-200">' +
+            '<div><label class="text-[10px] font-bold text-slate-600 uppercase">Batch Name</label><input type="text" class="batch-name w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchName || (subKey + ' (1:4 set)')) + '"></div>' +
+            '<div><label class="text-[10px] font-bold text-slate-600 uppercase">Max Students (1 Teacher : N)</label><input type="number" class="batch-max-students w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.maxStudents || 4) + '" min="1"></div>' +
+            '<div><label class="text-[10px] font-bold text-slate-600 uppercase">Class Timing</label><input type="text" class="batch-timing w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchTiming || '7:00-8:00 AM') + '"></div>' +
+            '<div><label class="text-[10px] font-bold text-slate-600 uppercase">Class Days</label><input type="text" class="batch-days w-full border-2 border-slate-200 rounded-lg p-2 font-bold text-xs bg-white" value="' + (batch.batchDays || 'Mon/Wed/Fri') + '"></div>' +
+        '</div>' +
+        '<div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mb-3">' +
+            '<p class="text-[10px] font-black text-emerald-900 uppercase mb-1.5">🎓 Batch Admission Fee (New Students Only)</p>' +
+            '<div class="grid grid-cols-3 gap-2">' +
+                '<div><label class="text-[9px] font-bold text-slate-600 uppercase">Regular ₹</label><input type="number" class="batch-adm-regular w-full border-2 border-slate-200 rounded-lg p-1.5 font-bold text-xs bg-white" value="' + (adm.regular || 2500) + '"></div>' +
+                '<div><label class="text-[9px] font-bold text-slate-600 uppercase">Discounted ₹</label><input type="number" class="batch-adm-discounted w-full border-2 border-slate-200 rounded-lg p-1.5 font-bold text-xs bg-white" value="' + (adm.discounted || 2000) + '"></div>' +
+                '<div><label class="text-[9px] font-bold text-amber-700 uppercase">Special ₹</label><input type="number" class="batch-adm-special w-full border-2 border-amber-400 rounded-lg p-1.5 font-bold text-xs bg-amber-50" value="' + (adm.special || 1500) + '"></div>' +
+            '</div>' +
+        '</div>' +
+        '<div class="flex justify-between items-center mb-2">' +
+            '<p class="text-[11px] font-black text-slate-700 uppercase">📚 Learning Plans for this Batch</p>' +
+            '<button type="button" onclick="addPlanToBatch(\'' + batchDomId + '\')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg">➕ Add Plan Row</button>' +
+        '</div>' +
+        '<div class="batch-plans-list space-y-2"></div>';
+        
     var plansList = batchCard.querySelector('.batch-plans-list');
     plans.forEach(function(p, pIdx) { plansList.appendChild(buildBatchPlanRow(batchDomId, p, pIdx)); });
     return batchCard;
@@ -970,7 +966,17 @@ function buildBatchPlanRow(batchDomId, plan, pIdx) {
     var rTotal = plan.regularTotal || plan.regularRate || 1600;
     var dTotal = plan.discountedTotal || plan.discountedRate || 1440;
     var sTotal = plan.specialTotal || plan.specialRate || 1360;
-    div.innerHTML = '<div class="grid grid-cols-12 gap-2 items-end"><div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Classes</label><input type="number" class="plan-row-input batch-plan-days" value="' + days + '" min="1" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div><div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Duration</label><input type="text" class="plan-row-input batch-plan-duration" value="' + duration + '"></div><div class="col-span-4 sm:col-span-3"><label class="plan-row-label">Mode / Platform</label><input type="text" class="plan-row-input batch-plan-mode" value="' + mode + '"></div><div class="col-span-4 sm:col-span-1"><label class="plan-row-label">Reg ₹</label><input type="number" class="plan-row-input batch-plan-reg" value="' + rTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div><div class="col-span-4 sm:col-span-1"><label class="plan-row-label">Disc ₹</label><input type="number" class="plan-row-input batch-plan-disc" value="' + dTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div><div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Special ₹</label><input type="number" class="plan-row-input batch-plan-special" value="' + sTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div><div class="col-span-12 sm:col-span-1"><button type="button" onclick="removePlanRow(\'' + rowId + '\')" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-lg text-xs">🗑️</button></div></div><div class="batch-plan-totals mt-1.5 text-center text-[10px] text-slate-500 font-bold bg-white p-1 rounded-md border border-slate-200">Calculating...</div>';
+    div.innerHTML = 
+        '<div class="grid grid-cols-12 gap-2 items-end">' +
+            '<div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Classes</label><input type="number" class="plan-row-input batch-plan-days" value="' + days + '" min="1" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div>' +
+            '<div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Duration</label><input type="text" class="plan-row-input batch-plan-duration" value="' + duration + '"></div>' +
+            '<div class="col-span-4 sm:col-span-3"><label class="plan-row-label">Mode / Platform</label><input type="text" class="plan-row-input batch-plan-mode" value="' + mode + '"></div>' +
+            '<div class="col-span-4 sm:col-span-1"><label class="plan-row-label">Reg ₹</label><input type="number" class="plan-row-input batch-plan-reg" value="' + rTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div>' +
+            '<div class="col-span-4 sm:col-span-1"><label class="plan-row-label">Disc ₹</label><input type="number" class="plan-row-input batch-plan-disc" value="' + dTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div>' +
+            '<div class="col-span-4 sm:col-span-2"><label class="plan-row-label">Special ₹</label><input type="number" class="plan-row-input batch-plan-special" value="' + sTotal + '" min="0" oninput="recalcBatchPlanRow(\'' + rowId + '\')"></div>' +
+            '<div class="col-span-12 sm:col-span-1"><button type="button" onclick="removePlanRow(\'' + rowId + '\')" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-lg text-xs">🗑️</button></div>' +
+        '</div>' +
+        '<div class="batch-plan-totals mt-1.5 text-center text-[10px] text-slate-500 font-bold bg-white p-1 rounded-md border border-slate-200">Calculating...</div>';
     setTimeout(function() { recalcBatchPlanRow(rowId); }, 0);
     return div;
 }
@@ -989,11 +995,12 @@ function recalcBatchPlanRow(rowId) {
     }
 }
 
-function addGroupBatch(subKey) {
-    var safeKey = subKey.replace(/[^a-zA-Z0-9]/g, '_');
+function addGroupBatch(safeKey) {
     var list = document.getElementById('batches_group_' + safeKey);
     if (!list) return;
-    list.appendChild(buildGroupBatchBlock(subKey, DEFAULT_GROUP_BATCH(subKey, list.children.length), list.children.length));
+    var courseBlock = list.closest('.bg-white');
+    var realKey = courseBlock ? courseBlock.dataset.courseKey : safeKey;
+    list.appendChild(buildGroupBatchBlock(realKey, DEFAULT_GROUP_BATCH(realKey, list.children.length), list.children.length));
 }
 function removeGroupBatch(batchDomId) {
     var card = document.getElementById(batchDomId);
@@ -1009,55 +1016,74 @@ function addPlanToBatch(batchDomId) {
 }
 function removePlanRow(rowId) { var row = document.getElementById(rowId); if (row) row.remove(); }
 
+/* ============ COLLECT & SAVE ============ */
 function collectPlansFromForm() {
     var result = { oneOnOne: {}, group: {} };
-    FIXED_SUBCATEGORIES.oneOnOne.forEach(function(sub) {
+    
+    // 1-on-1
+    document.querySelectorAll('#oneOnOneCategories > div').forEach(function(courseBlock) {
+        var key = courseBlock.dataset.courseKey;
+        var displayName = courseBlock.dataset.displayName;
+        var subCategoryId = courseBlock.dataset.subcategoryId;
         var plans = [];
-        sub.fixedPlans.forEach(function(fp) {
-            var m = fp.months;
-            var regular = Number(document.getElementById('cfg1on1_' + m + 'm_regular').value) || 0;
-            var disc = Number(document.getElementById('cfg1on1_' + m + 'm_disc').value) || 0;
-            var special = Number(document.getElementById('cfg1on1_' + m + 'm_special').value) || 0;
-            var classes = Number(document.getElementById('cfg1on1_' + m + 'm_classes').value) || 0;
-            var duration = document.getElementById('cfg1on1_' + m + 'm_duration').value.trim();
-            var platform = document.getElementById('cfg1on1_' + m + 'm_platform').value.trim();
-            var facilities = document.getElementById('cfg1on1_' + m + 'm_facilities').value.split('\n').map(function(x){return x.trim();}).filter(function(x){return x.length>0;});
-            plans.push({ days: fp.days, label: fp.label, months: m, value: fp.value, regularRate: regular, discountedRate: disc, specialRate: special, regularTotal: regular, discountedTotal: disc, specialTotal: special, offerPrice: special, classes: classes, duration: duration, platform: platform, facilities: facilities });
-        });
-        plans.sort(function(a, b) { return a.days - b.days; });
-        result.oneOnOne[sub.key] = { subCategoryId: sub.id, displayName: sub.displayName, plans: plans };
-    });
-    FIXED_SUBCATEGORIES.group.forEach(function(sub) {
-        var safeKey = sub.key.replace(/[^a-zA-Z0-9]/g, '_');
-        var list = document.getElementById('batches_group_' + safeKey);
-        var batches = [];
-        if (list) {
-            list.querySelectorAll('.batch-card').forEach(function(bCard) {
-                var bId = bCard.dataset.batchId || ('batch_' + Date.now() + '_' + Math.floor(Math.random() * 1000));
-                var bName = bCard.querySelector('.batch-name').value.trim();
-                var maxStudents = Number(bCard.querySelector('.batch-max-students').value) || 4;
-                var bTiming = bCard.querySelector('.batch-timing').value.trim();
-                var bDays = bCard.querySelector('.batch-days').value.trim();
-                var admReg = Number(bCard.querySelector('.batch-adm-regular').value) || 0;
-                var admDisc = Number(bCard.querySelector('.batch-adm-discounted').value) || 0;
-                var admSpec = Number(bCard.querySelector('.batch-adm-special').value) || 0;
-                var bPlans = [];
-                bCard.querySelectorAll('.plan-row').forEach(function(row) {
-                    var days = Number(row.querySelector('.batch-plan-days').value) || 0;
-                    var duration = row.querySelector('.batch-plan-duration').value.trim() || '60 mins/class';
-                    var mode = row.querySelector('.batch-plan-mode').value.trim() || 'Online via Google Meet or Zoom';
-                    var rTotal = Number(row.querySelector('.batch-plan-reg').value) || 0;
-                    var dTotal = Number(row.querySelector('.batch-plan-disc').value) || 0;
-                    var sTotal = Number(row.querySelector('.batch-plan-special').value) || 0;
-                    if (days > 0) bPlans.push({ days: days, perClassDuration: duration, mode: mode, regularRate: rTotal, discountedRate: dTotal, specialRate: sTotal, regularTotal: rTotal, discountedTotal: dTotal, specialTotal: sTotal, perClassRate: Math.round(sTotal / days), offerPrice: sTotal });
-                });
-                bPlans.sort(function(a, b) { return a.days - b.days; });
-                batches.push({ batchId: bId, batchName: bName, maxStudents: maxStudents, batchTiming: bTiming, batchDays: bDays, admissionFee: { regular: admReg, discounted: admDisc, special: admSpec }, plans: bPlans });
+        courseBlock.querySelectorAll('.one-on-one-plan-row').forEach(function(row) {
+            var facStr = row.querySelector('.plan-facilities').value;
+            plans.push({
+                days: Number(row.querySelector('.plan-days').value) || 0,
+                months: Number(row.querySelector('.plan-months').value) || 0,
+                label: row.querySelector('.plan-label').value.trim() || 'Custom Plan',
+                classes: Number(row.querySelector('.plan-classes').value) || 0,
+                regularTotal: Number(row.querySelector('.plan-reg').value) || 0,
+                discountedTotal: Number(row.querySelector('.plan-disc').value) || 0,
+                specialTotal: Number(row.querySelector('.plan-spec').value) || 0,
+                regularRate: Number(row.querySelector('.plan-reg').value) || 0, // map for consistency
+                discountedRate: Number(row.querySelector('.plan-disc').value) || 0,
+                specialRate: Number(row.querySelector('.plan-spec').value) || 0,
+                duration: row.querySelector('.plan-duration').value.trim(),
+                platform: row.querySelector('.plan-mode').value.trim(),
+                facilities: facStr.split('\n').map(function(x){return x.trim();}).filter(function(x){return x.length>0;})
             });
-        }
-        var legacyPlans = (batches.length > 0 && batches[0].plans) ? batches[0].plans : [];
-        result.group[sub.key] = { subCategoryId: sub.id, displayName: sub.displayName, batches: batches, plans: legacyPlans };
+        });
+        result.oneOnOne[key] = { subCategoryId, displayName, plans: plans };
     });
+
+    // Group
+    document.querySelectorAll('#groupCategories > div').forEach(function(courseBlock) {
+        var key = courseBlock.dataset.courseKey;
+        var displayName = courseBlock.dataset.displayName;
+        var subCategoryId = courseBlock.dataset.subcategoryId;
+        var batches = [];
+        
+        courseBlock.querySelectorAll('.batch-card').forEach(function(bCard) {
+            var bId = bCard.dataset.batchId;
+            var bName = bCard.querySelector('.batch-name').value.trim();
+            var maxStudents = Number(bCard.querySelector('.batch-max-students').value) || 4;
+            var bTiming = bCard.querySelector('.batch-timing').value.trim();
+            var bDays = bCard.querySelector('.batch-days').value.trim();
+            var admReg = Number(bCard.querySelector('.batch-adm-regular').value) || 0;
+            var admDisc = Number(bCard.querySelector('.batch-adm-discounted').value) || 0;
+            var admSpec = Number(bCard.querySelector('.batch-adm-special').value) || 0;
+            var bPlans = [];
+            
+            bCard.querySelectorAll('.plan-row').forEach(function(row) {
+                var days = Number(row.querySelector('.batch-plan-days').value) || 0;
+                var duration = row.querySelector('.batch-plan-duration').value.trim() || '60 mins/class';
+                var mode = row.querySelector('.batch-plan-mode').value.trim() || 'Online via Google Meet or Zoom';
+                var rTotal = Number(row.querySelector('.batch-plan-reg').value) || 0;
+                var dTotal = Number(row.querySelector('.batch-plan-disc').value) || 0;
+                var sTotal = Number(row.querySelector('.batch-plan-special').value) || 0;
+                if (days > 0) {
+                    bPlans.push({ days: days, perClassDuration: duration, mode: mode, regularRate: rTotal, discountedRate: dTotal, specialRate: sTotal, regularTotal: rTotal, discountedTotal: dTotal, specialTotal: sTotal, perClassRate: Math.round(sTotal / days), offerPrice: sTotal });
+                }
+            });
+            bPlans.sort(function(a, b) { return a.days - b.days; });
+            batches.push({ batchId: bId, batchName: bName, maxStudents: maxStudents, batchTiming: bTiming, batchDays: bDays, admissionFee: { regular: admReg, discounted: admDisc, special: admSpec }, plans: bPlans });
+        });
+        
+        var legacyPlans = (batches.length > 0 && batches[0].plans) ? batches[0].plans : [];
+        result.group[key] = { subCategoryId, displayName, batches, plans: legacyPlans };
+    });
+
     return result;
 }
 
@@ -1096,6 +1122,10 @@ function saveOffer() {
     var endDT = document.getElementById('offerEndDateTime').value;
     if (!endDT) { alert('⚠️ Please select Offer End Date & Time.'); return; }
     var categories = collectPlansFromForm();
+    
+    // Update local object so coupon modals reflect immediately without waiting for Firestore sync
+    currentOffer.categories = categories;
+    
     var data = {
         active: document.getElementById('offerActive').checked,
         endDateTime: endDT,
@@ -1104,13 +1134,7 @@ function saveOffer() {
         oneOnOnePricing: {
             admissionRegular: Number(document.getElementById('cfg1on1AdmissionRegular').value) || 2500,
             admissionDiscounted: Number(document.getElementById('cfg1on1AdmissionDiscounted').value) || 2000,
-            admissionSpecial: Number(document.getElementById('cfg1on1AdmissionSpecial').value) || 1500,
-            courses: {
-                '3m': { regular: Number(document.getElementById('cfg1on1_3m_regular').value) || 15000, discounted: Number(document.getElementById('cfg1on1_3m_disc').value) || 13500, special: Number(document.getElementById('cfg1on1_3m_special').value) || 12000, classes: Number(document.getElementById('cfg1on1_3m_classes').value) || 30, duration: document.getElementById('cfg1on1_3m_duration').value.trim() || '60 mins', platform: document.getElementById('cfg1on1_3m_platform').value.trim() || 'Google Meet', facilities: document.getElementById('cfg1on1_3m_facilities').value },
-                '6m': { regular: Number(document.getElementById('cfg1on1_6m_regular').value) || 28000, discounted: Number(document.getElementById('cfg1on1_6m_disc').value) || 25000, special: Number(document.getElementById('cfg1on1_6m_special').value) || 22000, classes: Number(document.getElementById('cfg1on1_6m_classes').value) || 60, duration: document.getElementById('cfg1on1_6m_duration').value.trim() || '60 mins', platform: document.getElementById('cfg1on1_6m_platform').value.trim() || 'Google Meet', facilities: document.getElementById('cfg1on1_6m_facilities').value },
-                '9m': { regular: Number(document.getElementById('cfg1on1_9m_regular').value) || 40000, discounted: Number(document.getElementById('cfg1on1_9m_disc').value) || 36000, special: Number(document.getElementById('cfg1on1_9m_special').value) || 32000, classes: Number(document.getElementById('cfg1on1_9m_classes').value) || 90, duration: document.getElementById('cfg1on1_9m_duration').value.trim() || '60 mins', platform: document.getElementById('cfg1on1_9m_platform').value.trim() || 'Google Meet', facilities: document.getElementById('cfg1on1_9m_facilities').value },
-                '12m': { regular: Number(document.getElementById('cfg1on1_12m_regular').value) || 52000, discounted: Number(document.getElementById('cfg1on1_12m_disc').value) || 46000, special: Number(document.getElementById('cfg1on1_12m_special').value) || 40000, classes: Number(document.getElementById('cfg1on1_12m_classes').value) || 120, duration: document.getElementById('cfg1on1_12m_duration').value.trim() || '60 mins', platform: document.getElementById('cfg1on1_12m_platform').value.trim() || 'Google Meet', facilities: document.getElementById('cfg1on1_12m_facilities').value }
-            }
+            admissionSpecial: Number(document.getElementById('cfg1on1AdmissionSpecial').value) || 1500
         },
         groupPricing: {
             regularAdmission: Number(document.getElementById('cfgGroupAdmissionRegular').value) || 2500,
@@ -1120,12 +1144,13 @@ function saveOffer() {
         categories: categories,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
+    
     db.collection('config').doc('offer').set(data, { merge: true }).then(function() {
         var msg = document.getElementById('offerSaveMsg');
         msg.textContent = '✅ Saved!';
         msg.classList.remove('hidden');
         setTimeout(function() { msg.classList.add('hidden'); }, 2500);
-        renderCouponPlansCheckboxes();
+        renderCouponPlansCheckboxes(); // refresh just in case
     }).catch(function(err) { alert('Error: ' + err.message); });
 }
 
@@ -1138,54 +1163,73 @@ function initCouponSubCategoryDropdown() {
     var subSel = document.getElementById('newCouponSubCategory');
     if (subSel && subSel.options.length === 0) onCouponCategoryChange();
 }
+
 function onCouponCategoryChange() {
     var cat = document.getElementById('newCouponCategory').value;
     var subSel = document.getElementById('newCouponSubCategory');
     subSel.innerHTML = '';
-    FIXED_SUBCATEGORIES[cat].forEach(function(sub) {
+    
+    var cats = (currentOffer && currentOffer.categories && currentOffer.categories[cat]) ? currentOffer.categories[cat] : {};
+    Object.keys(cats).forEach(function(key) {
+        var sub = cats[key];
         var opt = document.createElement('option');
-        opt.value = sub.id;
-        opt.textContent = sub.displayName;
+        opt.value = sub.subCategoryId || key;
+        opt.textContent = sub.displayName || key;
         subSel.appendChild(opt);
     });
     renderCouponPlansCheckboxes();
 }
+
 function renderCouponPlansCheckboxes() {
     var cat = document.getElementById('newCouponCategory').value;
     var subId = document.getElementById('newCouponSubCategory').value;
     var container = document.getElementById('couponPlansCheckboxes');
     if (!container) return;
-    var found = null;
-    FIXED_SUBCATEGORIES[cat].forEach(function(s) { if (s.id === subId) found = s; });
-    if (!found) { container.innerHTML = ''; return; }
-    var offer = currentOffer || {};
-    var subData = offer.categories && offer.categories[cat] && offer.categories[cat][found.key];
+    
+    var foundKey = null;
+    var foundSubData = null;
+    
+    var cats = (currentOffer && currentOffer.categories && currentOffer.categories[cat]) ? currentOffer.categories[cat] : {};
+    Object.keys(cats).forEach(function(key) {
+        if (cats[key].subCategoryId === subId) {
+            foundKey = key;
+            foundSubData = cats[key];
+        }
+    });
+    
+    if (!foundSubData) { container.innerHTML = '<p class="text-[11px] text-slate-500 italic col-span-4">No plans configured.</p>'; return; }
+    
     var plans = [];
     if (cat === 'oneOnOne') {
-        if (found.fixedPlans) plans = found.fixedPlans.map(function(fp) { return { days: fp.days, months: fp.months, label: fp.label, value: fp.value }; });
+        plans = foundSubData.plans || [];
     } else {
         var uniqueDaysMap = {};
-        if (subData && subData.batches && Array.isArray(subData.batches)) {
-            subData.batches.forEach(function(b) {
+        if (foundSubData.batches && Array.isArray(foundSubData.batches)) {
+            foundSubData.batches.forEach(function(b) {
                 if (b.plans && Array.isArray(b.plans)) {
                     b.plans.forEach(function(p) { if (!uniqueDaysMap[p.days]) { uniqueDaysMap[p.days] = true; plans.push(p); } });
                 }
             });
         }
-        if (plans.length === 0 && subData && subData.plans) plans = subData.plans;
         plans.sort(function(a, b) { return a.days - b.days; });
     }
-    if (plans.length === 0) { container.innerHTML = '<p class="text-[11px] text-slate-500 italic col-span-4">No courses configured.</p>'; return; }
+
+    if (plans.length === 0) {
+        container.innerHTML = '<p class="text-[11px] text-slate-500 italic col-span-4">No plans configured.</p>';
+        return;
+    }
+
     var currentlyChecked = [];
     container.querySelectorAll('.plan-check:checked').forEach(function(c) { currentlyChecked.push(c.value); });
     currentlyChecked = currentlyChecked.map(migrateCouponPlanValue);
+
     container.innerHTML = plans.map(function(p) {
         var value, label, badgeHtml = '';
         if (cat === 'oneOnOne') {
             var months = p.months || Math.round((p.days || 0) / 30);
             value = p.value || (months + 'm');
             label = p.label || (months + ' Months');
-            badgeHtml = ' <span class="month-highlight ' + getMonthBadgeClass(months) + '">' + months + 'M</span>';
+            badgeHtml = months > 0 ? ' <span class="month-highlight ' + getMonthBadgeClass(months) + '">' + months + 'M</span>' : '';
         } else {
             value = p.days + 'd';
             label = p.label || (p.days + ' Days');
@@ -1471,16 +1515,24 @@ function populateCourseSelect() {
     var sel = document.getElementById('usageCourseSelect');
     if (!sel) return;
     sel.innerHTML = '<option value="">-- Select course --</option>';
-    FIXED_SUBCATEGORIES.oneOnOne.forEach(function(sub) {
-        var opt = document.createElement('option');
-        opt.value = sub.displayName; opt.textContent = sub.displayName;
-        sel.appendChild(opt);
-    });
-    FIXED_SUBCATEGORIES.group.forEach(function(sub) {
-        var opt = document.createElement('option');
-        opt.value = sub.displayName; opt.textContent = sub.displayName;
-        sel.appendChild(opt);
-    });
+    if (currentOffer && currentOffer.categories) {
+        if (currentOffer.categories.oneOnOne) {
+            Object.keys(currentOffer.categories.oneOnOne).forEach(function(k) {
+                var opt = document.createElement('option');
+                opt.value = currentOffer.categories.oneOnOne[k].displayName;
+                opt.textContent = currentOffer.categories.oneOnOne[k].displayName;
+                sel.appendChild(opt);
+            });
+        }
+        if (currentOffer.categories.group) {
+            Object.keys(currentOffer.categories.group).forEach(function(k) {
+                var opt = document.createElement('option');
+                opt.value = currentOffer.categories.group[k].displayName;
+                opt.textContent = currentOffer.categories.group[k].displayName;
+                sel.appendChild(opt);
+            });
+        }
+    }
     var otherOpt = document.createElement('option');
     otherOpt.value = 'OTHER'; otherOpt.textContent = '➕ Other / Custom Course';
     sel.appendChild(otherOpt);
@@ -1537,8 +1589,10 @@ function populateUsageDropdowns() {
 function findCourseCategory(courseName) {
     if (!courseName || courseName === 'OTHER') return 'other';
     var found = null;
-    FIXED_SUBCATEGORIES.oneOnOne.forEach(function(sub) { if (sub.displayName === courseName) found = 'oneOnOne'; });
-    FIXED_SUBCATEGORIES.group.forEach(function(sub) { if (sub.displayName === courseName) found = 'group'; });
+    if (currentOffer && currentOffer.categories) {
+        Object.keys(currentOffer.categories.oneOnOne || {}).forEach(function(k) { if (currentOffer.categories.oneOnOne[k].displayName === courseName) found = 'oneOnOne'; });
+        Object.keys(currentOffer.categories.group || {}).forEach(function(k) { if (currentOffer.categories.group[k].displayName === courseName) found = 'group'; });
+    }
     return found || 'unknown';
 }
 
