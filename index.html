@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#087f5b">
-<title>English Spur | Admission Portal</title>
+<title>English Spur | Admission Application</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -203,6 +203,12 @@ input[type=checkbox]{accent-color:#087f5b}
 
 /* Student-entered text is displayed in CAPITAL LETTERS */
 #studentName,#mobile,#address,#school,#guardianName,#guardianMobile,#transactionId{text-transform:uppercase}
+
+/* NEW: Selected Plan Banner for Steps 2, 3, 4 */
+.plan-summary-banner { background: #f0faf4; border: 1.5px solid #b9e5ce; border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 12px #087f5b08; }
+.plan-summary-banner .plan-name { font-size: 14px; font-weight: 900; color: #087f5b; margin: 0; line-height: 1.4; }
+.plan-summary-banner .plan-meta { font-size: 11px; color: #64748b; margin-top: 4px; font-weight: 600; }
+.plan-summary-banner .plan-price-tag { font-size: 18px; font-weight: 900; color: #087f5b; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -217,6 +223,8 @@ input[type=checkbox]{accent-color:#087f5b}
     <div class="wizard-item" data-progress="3"><b>03</b>Payment</div>
     <div class="wizard-item" data-progress="4"><b>04</b>Consent</div>
   </div>
+  
+  <!-- STEP 1 -->
   <section class="card wizard-panel" data-step="1">
     <h2 class="section-title">Step 1 of 4 · Choose Your Course / Plan</h2><p class="sub bn">অ্যাডমিন কর্তৃক প্রকাশিত এবং সক্রিয় Course ও Batch-গুলিই এখানে দেখা যাবে।</p>
     <div id="loadState" class="notice info">Loading current plans…</div>
@@ -232,7 +240,20 @@ input[type=checkbox]{accent-color:#087f5b}
     <div class="wizard-nav"><span></span><button type="button" class="btn" onclick="goStep(2)">Continue to Applicant Details →</button></div>
   </section>
 
+  <!-- STEP 2 -->
   <section class="card wizard-panel hidden" data-step="2">
+    
+    <div class="plan-summary-banner" id="summaryBannerStep2" style="display:none;">
+      <div>
+        <p class="plan-name"><span id="sumName2"></span></p>
+        <p class="plan-meta"><span id="sumMeta2"></span></p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="plan-price-tag" id="sumPrice2"></span>
+        <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
+      </div>
+    </div>
+
     <h2 class="section-title">Step 2 of 4 · Applicant Details</h2><p class="sub bn">সঠিক তথ্য দিন। আবেদন Finalize করার পরে এই Portal থেকে তথ্য পরিবর্তন করা যাবে না।</p>
     <form id="applicationForm">
       <div class="fieldgrid">
@@ -256,7 +277,20 @@ input[type=checkbox]{accent-color:#087f5b}
     <div class="wizard-nav"><button type="button" class="btn light" onclick="goStep(1)">← Back</button><button type="button" class="btn" onclick="goStep(3)">Continue to Payment →</button></div>
   </section>
 
+  <!-- STEP 3 -->
   <section class="card wizard-panel hidden" data-step="3">
+    
+    <div class="plan-summary-banner" id="summaryBannerStep3" style="display:none;">
+      <div>
+        <p class="plan-name"><span id="sumName3"></span></p>
+        <p class="plan-meta"><span id="sumMeta3"></span></p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="plan-price-tag" id="sumPrice3"></span>
+        <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
+      </div>
+    </div>
+
     <h2 class="section-title">Step 3 of 4 · Coupon & Payment Details</h2><p class="sub">Enter your coupon code if you have one. Discount validation happens automatically. <strong>Each coupon can be used only once per student.</strong></p>
     <div class="field"><label>Coupon Code (optional)</label><input id="couponCode" autocomplete="off" placeholder="ENTER COUPON CODE" style="text-transform:uppercase"></div>
     <div id="couponMessage" class="tiny" style="margin-top:7px">No coupon applied.</div>
@@ -295,7 +329,20 @@ input[type=checkbox]{accent-color:#087f5b}
     <div class="wizard-nav"><button type="button" class="btn light" onclick="goStep(2)">← Back</button><button type="button" class="btn" onclick="goStep(4)">Continue to Consent →</button></div>
   </section>
 
+  <!-- STEP 4 -->
   <section class="card wizard-panel hidden" data-step="4">
+    
+    <div class="plan-summary-banner" id="summaryBannerStep4" style="display:none;">
+      <div>
+        <p class="plan-name"><span id="sumName4"></span></p>
+        <p class="plan-meta"><span id="sumMeta4"></span></p>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="plan-price-tag" id="sumPrice4"></span>
+        <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
+      </div>
+    </div>
+
     <h2 class="section-title">Step 4 of 4 · Student Agreement & Consent</h2>
     <p class="sub">Please read all five consent terms carefully. Tick the agreement box and press “I Agree & Continue” to finalize your application.</p>
     <div class="consent-card"><strong>1. 📹 CLASS RECORDING CONSENT</strong><p>I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.</p><p class="bn" lang="bn"><b>১. ক্লাস রেকর্ডিংয়ের সম্মতি:</b> আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি। এই রেকর্ডিং শিক্ষা, প্রশিক্ষণ, নথিভুক্তকরণ, প্রচার এবং প্রতিষ্ঠানের প্রয়োজনীয় কাজে সংরক্ষণ ও ব্যবহার করা যেতে পারে।</p></div>
@@ -416,11 +463,9 @@ async function recordCouponUsage({studentName,couponRecord,plan,appId}){
 function planData(){
  const list=[], cats=categories[activeTab]||{};
  
- // Iterate dynamically over all categories added by Admin
  Object.keys(cats).forEach(key=>{
   const sub=cats[key]||{};
   
-  // Auto-detect Kids vs Adult based on course name
   const isKidsCourse = String(key || '').toLowerCase().indexOf('kid') !== -1;
   if(activeAudience==='kids' && !isKidsCourse) return;
   if(activeAudience==='adult' && isKidsCourse) return;
@@ -514,6 +559,26 @@ function choosePlan(encoded){const id=decodeURIComponent(encoded);selected=planD
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));activeTab=b.dataset.tab;selected=null;renderPlans();}));
 document.querySelectorAll('.audience-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.audience-tab').forEach(x=>x.classList.toggle('active',x===b));activeAudience=b.dataset.audience;selected=null;couponState={valid:false,discount:0,record:null,message:''};$('couponCode').value='';$('couponMessage').textContent='No coupon applied.';renderPlans();}));
 $('dob').addEventListener('change',()=>{const a=ageOf($('dob').value);$('guardianArea').classList.toggle('hidden',a===null||a>=18);$('guardianConsentArea').classList.toggle('hidden',a===null||a>=18);$('guardianName').required=a!==null&&a<18;$('guardianMobile').required=a!==null&&a<18;$('guardianRelation').required=a!==null&&a<18;$('guardianConsent').required=a!==null&&a<18;if(a===null||a>=18){$('guardianConsent').checked=false;}toggleConsentButton();renderPlans();});
+
+function updatePlanSummaryBanners(activeStep) {
+    ['2','3','4'].forEach(num => {
+        const banner = document.getElementById('summaryBannerStep' + num);
+        if (!banner) return;
+        if (selected && String(activeStep) === num) {
+            banner.style.display = 'flex';
+            document.getElementById('sumName' + num).textContent = selected.name;
+            
+            let metaText = selected.label + ' · ' + (selected.classes || selected.days) + ' classes';
+            if (selected.batch) metaText += ' · ' + (selected.batch.batchName || 'Default Batch');
+            document.getElementById('sumMeta' + num).textContent = metaText;
+            
+            document.getElementById('sumPrice' + num).textContent = money(selected.base + selected.admission);
+        } else {
+            banner.style.display = 'none';
+        }
+    });
+}
+
 function goStep(next){
  next=Math.max(1,Math.min(4,Number(next)||1));
  if(next===2&&!selected){alert('Please select a course / plan before continuing.');return;}
@@ -531,6 +596,10 @@ function goStep(next){
  }
  document.querySelectorAll('.wizard-panel').forEach(el=>el.classList.toggle('hidden',Number(el.dataset.step)!==next));
  document.querySelectorAll('.wizard-item').forEach(el=>{const n=Number(el.dataset.progress);el.classList.toggle('active',n===next);el.classList.toggle('done',n<next);});
+ 
+ // Update the top summary banner
+ updatePlanSummaryBanners(next);
+ 
  window.scrollTo({top:document.querySelector('.wizard-progress').getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
 }
 function getPayableBeforeCoupon(){return selected?selected.base+selected.admission:0;}
