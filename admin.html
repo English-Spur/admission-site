@@ -535,7 +535,8 @@ function confirmAddCourse() {
             totalClasses: 24,
             sessionDuration: '60 mins',
             payAtATime: { admission: 1000, course: 15000 },
-            payInstallment: { admission: 1000, amounts: [5000, 5000, 5000] },
+            hasInstallments: false,
+            payInstallment: { admission: 0, amounts: [], total: 0 },
             featureHeadline: '',
             featureSubline: '',
             features: ['Live 1-on-1 class', 'Class recording'],
@@ -705,6 +706,9 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
     const uid = `plan_${cat}_${courseName.replace(/[^a-zA-Z0-9]/g,'_')}_${idx}`;
     const safeName = courseName.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     
+    // Check if installments are enabled
+    const hasInst = plan.hasInstallments === true;
+
     let instAmounts = plan.payInstallment?.amounts || [];
     if(instAmounts.length === 0) instAmounts = [0]; 
 
@@ -720,9 +724,15 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
 
     return `
         <div class="plan-block" id="${uid}">
-            <div class="flex justify-between items-center mb-3 border-b border-slate-100 pb-2">
+            <div class="flex justify-between items-center mb-3 border-b border-slate-100 pb-2 flex-wrap gap-2">
                 <span class="text-[11px] font-black uppercase tracking-wider" style="color:${colors.text}">Plan #${idx + 1}</span>
-                <button onclick="removePlan('${cat}', '${safeName}', ${idx})" class="text-[10px] text-red-500 font-bold hover:underline">Remove Plan</button>
+                <div class="flex items-center gap-3">
+                    <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 px-2 py-1 rounded border border-emerald-200">
+                        <input type="checkbox" class="plan-has-inst w-3.5 h-3.5 accent-emerald-600" onchange="togglePlanInstallments('${uid}', this.checked)" ${hasInst ? 'checked' : ''}>
+                        <span class="text-[10px] font-bold text-emerald-800 uppercase">Enable Installments</span>
+                    </label>
+                    <button onclick="removePlan('${cat}', '${safeName}', ${idx})" class="text-[10px] text-red-500 font-bold hover:underline">Remove Plan</button>
+                </div>
             </div>
             
             <div class="plan-grid plan-grid-4 mb-4">
@@ -744,8 +754,9 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="payment-grid-${uid}">
+                <!-- At a Time -->
+                <div id="at-a-time-${uid}" class="bg-blue-50 border border-blue-200 rounded-lg p-3 ${hasInst ? '' : 'md:col-span-2'}">
                     <h4 class="text-xs font-bold text-blue-800 uppercase mb-3 flex items-center gap-2">💳 At a Time</h4>
                     <div class="space-y-3">
                         <div>
@@ -763,7 +774,8 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
                     </div>
                 </div>
 
-                <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                <!-- Installments -->
+                <div id="installments-${uid}" class="bg-emerald-50 border border-emerald-200 rounded-lg p-3" style="${hasInst ? '' : 'display:none;'}">
                     <h4 class="text-xs font-bold text-emerald-800 uppercase mb-3 flex items-center gap-2">📅 Installments</h4>
                     <div class="mb-3">
                         <label class="plan-row-label">Admission Fee (₹)</label>
@@ -801,6 +813,19 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
             </div>
         </div>
     `;
+}
+
+function togglePlanInstallments(uid, isChecked) {
+    const instDiv = document.getElementById(`installments-${uid}`);
+    const atDiv = document.getElementById(`at-a-time-${uid}`);
+    
+    if (isChecked) {
+        instDiv.style.display = 'block';
+        atDiv.classList.remove('md:col-span-2');
+    } else {
+        instDiv.style.display = 'none';
+        atDiv.classList.add('md:col-span-2');
+    }
 }
 
 function addInstRow(uid) {
@@ -849,7 +874,8 @@ function addPlan(cat, courseName) {
         totalClasses: 48,
         sessionDuration: '60 mins',
         payAtATime: { admission: 1000, course: 25000 },
-        payInstallment: { admission: 1000, amounts: [5000, 5000, 5000] },
+        hasInstallments: false,
+        payInstallment: { admission: 0, amounts: [], total: 0 },
         featureHeadline: '',
         featureSubline: '',
         features: ['Live class'],
@@ -901,14 +927,23 @@ function saveOffer() {
                 total: Number(block.querySelector('.plan-at-total').value) || 0
             };
 
-            let instAmounts = [];
-            block.querySelectorAll('.plan-inst-amt').forEach(inp => instAmounts.push(Number(inp.value) || 0));
+            // Check if installments are enabled
+            const hasInst = block.querySelector('.plan-has-inst').checked;
+            p.hasInstallments = hasInst;
 
-            p.payInstallment = {
-                admission: Number(block.querySelector('.plan-inst-adm').value) || 0,
-                amounts: instAmounts,
-                total: Number(block.querySelector('.plan-inst-total').value) || 0
-            };
+            if (hasInst) {
+                let instAmounts = [];
+                block.querySelectorAll('.plan-inst-amt').forEach(inp => instAmounts.push(Number(inp.value) || 0));
+
+                p.payInstallment = {
+                    admission: Number(block.querySelector('.plan-inst-adm').value) || 0,
+                    amounts: instAmounts,
+                    total: Number(block.querySelector('.plan-inst-total').value) || 0
+                };
+            } else {
+                // Clear installment data if disabled
+                p.payInstallment = { admission: 0, amounts: [], total: 0 };
+            }
 
             p.featureHeadline = block.querySelector('.plan-feature-headline').value.trim();
             p.featureSubline = block.querySelector('.plan-feature-subline').value.trim();
