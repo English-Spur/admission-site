@@ -520,7 +520,8 @@ function confirmAddCourse() {
     if (!currentOffer.categories[type]) currentOffer.categories[type] = {};
     if (currentOffer.categories[type][name]) { alert("Course with this name already exists!"); return; }
 
-    currentOffer.categories[type][name] = {
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    updatedCategories[type][name] = {
         subCategoryId: type + '_' + Date.now(),
         displayName: name,
         description: '', 
@@ -542,43 +543,60 @@ function confirmAddCourse() {
         }]
     };
     
-    document.getElementById('addCourseModal').classList.remove('show');
-    renderCourses();
+    db.collection('config').doc('offer').update({ categories: updatedCategories }).then(() => {
+        document.getElementById('addCourseModal').classList.remove('show');
+        toast('✅ Course Added Successfully');
+    }).catch(err => alert('Error adding course: ' + err.message));
 }
 
-function removeCourse(cat, name) {
-    if (!confirm(`⚠️ Delete entire course: ${name}?`)) return;
-    delete currentOffer.categories[cat][name];
-    renderCourses();
+function removeCourse(cat, courseName) {
+    if (!confirm(`⚠️ Are you sure you want to delete the entire course: ${courseName}?`)) return;
+    
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    
+    if (updatedCategories[cat] && updatedCategories[cat][courseName]) {
+        delete updatedCategories[cat][courseName];
+        
+        db.collection('config').doc('offer').update({
+            categories: updatedCategories,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            toast('🗑️ Course Deleted Successfully');
+        }).catch(err => {
+            alert('❌ Error deleting course: ' + err.message);
+        });
+    }
 }
 
 function editCourseName(cat, oldName) {
-    const courseData = currentOffer.categories[cat][oldName];
-    if (!courseData) return;
-
     const newName = prompt("Enter new course name:", oldName);
-    if (!newName) return; // Cancelled or empty
-
+    if (!newName) return; 
+    
     const cleanName = newName.trim().toUpperCase();
-
-    if (cleanName === oldName) return; // No change
-
+    if (cleanName === oldName) return;
+    
     if (currentOffer.categories[cat][cleanName]) {
         alert("❌ A course with this name already exists!");
         return;
     }
 
-    // Create new entry with updated name
-    currentOffer.categories[cat][cleanName] = {
-        ...courseData,
-        displayName: cleanName
-    };
-
-    // Delete old entry
-    delete currentOffer.categories[cat][oldName];
-
-    renderCourses();
-    toast('✅ Course name updated! Click "Save All" to apply.');
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    let courseData = updatedCategories[cat][oldName];
+    
+    if (!courseData) return;
+    
+    courseData.displayName = cleanName;
+    updatedCategories[cat][cleanName] = courseData;
+    delete updatedCategories[cat][oldName];
+    
+    db.collection('config').doc('offer').update({
+        categories: updatedCategories,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        toast('✅ Course Name Updated');
+    }).catch(err => {
+        alert('❌ Error updating name: ' + err.message);
+    });
 }
 
 function renderCourses() {
@@ -616,11 +634,13 @@ function renderCourses() {
             plansHtml += buildPlanHTML(course.cat, course.name, plan, idx, colors);
         });
 
+        const safeName = course.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+
         wrapper.innerHTML = `
             <div class="course-header">
                 <div class="course-title">
                     <span class="course-name-text">${course.name}</span>
-                    <button onclick="editCourseName('${course.cat}', '${course.name.replace(/'/g, "\\'")}')" class="text-blue-500 hover:text-blue-700 bg-transparent border-none cursor-pointer ml-1 mr-1" title="Edit Course Name" style="font-size: 16px;">✏️</button>
+                    <button onclick="editCourseName('${course.cat}', '${safeName}')" class="text-blue-500 hover:text-blue-700 bg-transparent border-none cursor-pointer ml-1 mr-1" title="Edit Course Name" style="font-size: 16px;">✏️</button>
                     <span class="badge-type" style="background:${colors.accent}">${typeLabel} · ${targetLabel}</span>
                     ${isNew ? '<span class="badge-new">NEW</span>' : ''}
                 </div>
@@ -628,11 +648,11 @@ function renderCourses() {
                     <label class="flex items-center gap-2 cursor-pointer">
                         <span class="text-[10px] font-black text-slate-500 uppercase">Show</span>
                         <div class="switch">
-                            <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleCourseStatus('${course.cat}', '${course.name.replace(/'/g, "\\'")}', this.checked)">
+                            <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleCourseStatus('${course.cat}', '${safeName}', this.checked)">
                             <span class="slider"></span>
                         </div>
                     </label>
-                    <button onclick="removeCourse('${course.cat}', '${course.name.replace(/'/g, "\\'")}')" class="btn-icon danger">🗑️</button>
+                    <button onclick="removeCourse('${course.cat}', '${safeName}')" class="btn-icon danger">🗑️</button>
                 </div>
             </div>
             <div class="p-2">
@@ -644,7 +664,7 @@ function renderCourses() {
                 <div class="flex justify-between items-center px-4 py-2 mt-2">
                     <p class="text-[11px] font-black text-slate-500 uppercase">Learning Plans</p>
                     <label class="flex items-center gap-2 cursor-pointer bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
-                        <input type="checkbox" ${isNew ? 'checked' : ''} onchange="toggleCourseNew('${course.cat}', '${course.name.replace(/'/g, "\\'")}', this.checked)" class="w-4 h-4 accent-blue-600">
+                        <input type="checkbox" ${isNew ? 'checked' : ''} onchange="toggleCourseNew('${course.cat}', '${safeName}', this.checked)" class="w-4 h-4 accent-blue-600">
                         <span class="text-[11px] font-bold text-slate-700">Mark as New Course</span>
                     </label>
                 </div>
@@ -652,7 +672,7 @@ function renderCourses() {
                     ${plansHtml}
                 </div>
                 <div class="px-4 pb-2 pt-1">
-                    <button onclick="addPlan('${course.cat}', '${course.name.replace(/'/g, "\\'")}')" class="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-500 font-bold hover:bg-slate-50 hover:border-slate-400 transition text-sm">➕ Add Another Plan</button>
+                    <button onclick="addPlan('${course.cat}', '${safeName}')" class="w-full py-3 border-2 border-dashed border-slate-300 rounded-xl text-slate-500 font-bold hover:bg-slate-50 hover:border-slate-400 transition text-sm">➕ Add Another Plan</button>
                 </div>
             </div>
         `;
@@ -666,16 +686,24 @@ function renderCourses() {
 }
 
 function toggleCourseStatus(cat, name, isChecked) {
-    currentOffer.categories[cat][name].isActive = isChecked;
-    renderCourses();
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    if(updatedCategories[cat] && updatedCategories[cat][name]){
+        updatedCategories[cat][name].isActive = isChecked;
+        db.collection('config').doc('offer').update({ categories: updatedCategories });
+    }
 }
 
 function toggleCourseNew(cat, name, isChecked) {
-    currentOffer.categories[cat][name].isNew = isChecked;
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    if(updatedCategories[cat] && updatedCategories[cat][name]){
+        updatedCategories[cat][name].isNew = isChecked;
+        db.collection('config').doc('offer').update({ categories: updatedCategories });
+    }
 }
 
 function buildPlanHTML(cat, courseName, plan, idx, colors) {
     const uid = `plan_${cat}_${courseName.replace(/[^a-zA-Z0-9]/g,'_')}_${idx}`;
+    const safeName = courseName.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     
     let instAmounts = plan.payInstallment?.amounts || [];
     if(instAmounts.length === 0) instAmounts = [0]; 
@@ -694,7 +722,7 @@ function buildPlanHTML(cat, courseName, plan, idx, colors) {
         <div class="plan-block" id="${uid}">
             <div class="flex justify-between items-center mb-3 border-b border-slate-100 pb-2">
                 <span class="text-[11px] font-black uppercase tracking-wider" style="color:${colors.text}">Plan #${idx + 1}</span>
-                <button onclick="removePlan('${cat}', '${courseName.replace(/'/g, "\\'")}', ${idx})" class="text-[10px] text-red-500 font-bold hover:underline">Remove Plan</button>
+                <button onclick="removePlan('${cat}', '${safeName}', ${idx})" class="text-[10px] text-red-500 font-bold hover:underline">Remove Plan</button>
             </div>
             
             <div class="plan-grid plan-grid-4 mb-4">
@@ -810,7 +838,10 @@ function calcAdminTotal(uid) {
 }
 
 function addPlan(cat, courseName) {
-    const course = currentOffer.categories[cat][courseName];
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    let course = updatedCategories[cat][courseName];
+    if(!course) return;
+    
     course.plans.push({
         planId: 'p_' + Date.now(),
         ratio: '1:4',
@@ -824,24 +855,35 @@ function addPlan(cat, courseName) {
         features: ['Live class'],
         isActive: true
     });
-    renderCourses();
+    
+    db.collection('config').doc('offer').update({
+        categories: updatedCategories
+    }).then(() => {
+        toast('✅ New Plan Added');
+    }).catch(err => alert('Error adding plan: ' + err.message));
 }
 
 function removePlan(cat, courseName, idx) {
     if (!confirm('Remove this plan?')) return;
-    currentOffer.categories[cat][courseName].plans.splice(idx, 1);
-    renderCourses();
+    let updatedCategories = JSON.parse(JSON.stringify(currentOffer.categories));
+    if(updatedCategories[cat] && updatedCategories[cat][courseName] && updatedCategories[cat][courseName].plans[idx]){
+        updatedCategories[cat][courseName].plans.splice(idx, 1);
+        db.collection('config').doc('offer').update({
+            categories: updatedCategories
+        }).then(() => {
+            toast('🗑️ Plan Removed');
+        }).catch(err => alert('Error removing plan: ' + err.message));
+    }
 }
 
 function saveOffer() {
     document.querySelectorAll('.course-wrapper').forEach(wrapper => {
         const cat = wrapper.querySelector('.plan-container').id.includes('oneOnOne') ? 'oneOnOne' : 'group';
-        const name = wrapper.querySelector('.course-name-text').textContent.trim(); // UPDATED
+        const name = wrapper.querySelector('.course-name-text').textContent.trim(); 
         if(!currentOffer.categories[cat] || !currentOffer.categories[cat][name]) return;
         
         const courseData = currentOffer.categories[cat][name];
         
-        // Save Course Description
         const descInput = wrapper.querySelector('.course-desc');
         if(descInput) courseData.description = descInput.value.trim();
 
@@ -868,7 +910,6 @@ function saveOffer() {
                 total: Number(block.querySelector('.plan-inst-total').value) || 0
             };
 
-            // Save new feature fields
             p.featureHeadline = block.querySelector('.plan-feature-headline').value.trim();
             p.featureSubline = block.querySelector('.plan-feature-subline').value.trim();
             
