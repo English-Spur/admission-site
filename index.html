@@ -75,18 +75,11 @@ img{max-width:100%;height:auto;display:block}
 
 .category-intro{background:linear-gradient(120deg,#f0faf5,#fbfdfc);border:1px solid #d5e9de;border-radius:var(--radius);padding:14px 16px;margin:0 0 18px;font-size:13px;line-height:1.65;color:#315c4b}
 
-/* PLAN CATEGORY SECTIONS */
+/* PLAN CARDS */
 .plan-section{margin-bottom:26px}
-.plan-section:last-child{margin-bottom:0}
 .plan-section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:13px 16px;background:linear-gradient(135deg,#f8fdfb,#f0faf5);border-radius:14px;border:1px solid #d5e9de}
-.plan-section-icon{font-size:22px;flex-shrink:0;line-height:1}
-.plan-section-title-block{flex:1;min-width:0}
-.plan-section-title{font-size:15px;font-weight:800;color:var(--primary-dark);margin:0;line-height:1.3}
-.plan-section-sub{font-size:11.5px;color:var(--muted);margin:2px 0 0;font-weight:500}
-.plan-section-count{font-size:11px;font-weight:800;color:var(--primary);background:#fff;border:1px solid #d5e9de;padding:4px 10px;border-radius:20px;white-space:nowrap}
 .plan-section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
 
-/* PLAN CARDS (Dynamic Colors via CSS Variables) */
 .plan{border:1.5px solid var(--t-border, var(--line));border-radius:var(--radius-lg);background:#fff;overflow:hidden;transition:.22s;position:relative;display:flex;flex-direction:column}
 .plan:hover{border-color:var(--t-accent, #8dcbb0);box-shadow:0 8px 28px var(--t-shadow, rgba(10,123,92,.1));transform:translateY(-2px)}
 .plan.selected{border:2px solid var(--t-accent, var(--primary));box-shadow:0 0 0 4px var(--t-shadow, rgba(10,123,92,.1)),0 8px 28px var(--t-shadow, rgba(10,123,92,.12))}
@@ -95,8 +88,9 @@ img{max-width:100%;height:auto;display:block}
 
 .plan-head{padding:20px 20px 16px;background:var(--t-bg, linear-gradient(135deg,#f8fdfb,#fff));border-bottom:1px solid var(--t-border, var(--line))}
 .plan-kicker{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--t-accent, var(--primary));margin-bottom:8px}
-.plan-head h3{font-size:17px;line-height:1.35;margin:0 0 6px;font-weight:800;color:var(--ink)}
+.plan-head h3{font-size:17px;line-height:1.35;margin:0 0 6px;font-weight:800;color:var(--ink);text-transform:uppercase}
 .plan-head .plan-sub{font-size:12px;color:var(--muted);font-weight:500}
+.plan-desc{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:8px;border-top:1px dashed var(--t-border);padding-top:8px;}
 .batch-chip{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:8px;background:var(--t-light, var(--primary-light));color:var(--t-dark, var(--primary-dark));font-size:10.5px;font-weight:700}
 
 .plan-body{padding:16px 20px 20px;flex:1;display:flex;flex-direction:column}
@@ -104,9 +98,8 @@ img{max-width:100%;height:auto;display:block}
 .price-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .price-main{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .price-amount{font-size:28px;font-weight:900;color:var(--t-accent, var(--primary));letter-spacing:-1px;line-height:1}
-.price-old{font-size:13px;color:#a0aab3;text-decoration:line-through;font-weight:600}
+.installment-note{font-size:11px;color:var(--muted);margin-top:4px;font-weight:600;}
 
-/* Plan stats dynamically adjust based on number of items */
 .plan-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:8px;margin-bottom:16px}
 .stat-pill{background:var(--t-soft, var(--soft));border-radius:10px;padding:10px 8px;text-align:center;border:1px solid var(--t-border, #eef5f1)}
 .stat-pill .stat-num{font-size:15px;font-weight:900;color:var(--t-dark, var(--primary-dark));line-height:1.1}
@@ -123,16 +116,58 @@ img{max-width:100%;height:auto;display:block}
 .plan-details-list .row .lbl{color:var(--muted);font-weight:600}
 .plan-details-list .row .val{font-weight:700;color:var(--ink);text-align:right}
 
-/* Facilities */
-.facilities-block{margin-top:14px;padding-top:14px;border-top:1px dashed var(--t-border, var(--line))}
-.facilities-label{font-size:11px;font-weight:800;color:var(--t-dark, var(--primary-dark));text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
-.facilities-items{list-style:none;padding:0;margin:0;display:grid;gap:6px}
-.facilities-items li{font-size:12.5px;color:#2f5244;padding:8px 12px;background:var(--t-soft, #f0faf5);border-radius:8px;border-left:3px solid var(--t-accent, var(--primary));font-weight:600;line-height:1.4;display:flex;align-items:center;gap:8px}
-.facilities-items li::before{content:"✓";color:var(--t-accent, var(--primary));font-weight:900;flex-shrink:0}
+/* Features List */
+.features-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-top:10px;}
+.features-box .title{font-size:12px;font-weight:800;color:#1e293b;margin-bottom:4px;}
+.features-box .subtitle{font-size:10.5px;color:#64748b;margin-bottom:8px;font-weight:500;}
+.features-list{list-style:none;padding:0;margin:0;display:grid;gap:6px;}
+.features-list li{font-size:11.5px;color:#1e293b;display:flex;align-items:flex-start;gap:6px;line-height:1.55;}
+.features-list li::before{content:"✓";color:var(--t-accent, var(--primary));font-weight:900;font-size:12px;flex-shrink:0;margin-top:1px;}
 
-.plan-select{width:100%;border:none;border-radius:11px;padding:13px;background:var(--t-light, var(--primary-light));color:var(--t-dark, var(--primary-dark));font-weight:900;font-size:13px;margin-top:14px;transition:.15s;letter-spacing:.3px}
-.plan-select:hover{filter:brightness(0.95)}
-.plan.selected .plan-select{background:var(--t-accent, var(--primary));color:#fff}
+/* Updated Select Button */
+.plan-select {
+  width: 100%;
+  border: 1px solid var(--t-border, var(--line));
+  border-radius: 11px;
+  padding: 14px;
+  background: var(--t-light, var(--primary-light));
+  color: var(--t-dark, var(--primary-dark));
+  font-weight: 900;
+  font-size: 13px;
+  margin-top: 14px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+}
+.plan-select:hover {
+  background: var(--t-accent, var(--primary));
+  color: #fff;
+  border-color: var(--t-accent);
+  box-shadow: 0 4px 12px var(--t-shadow, rgba(10,123,92,0.2));
+  transform: translateY(-1px);
+}
+.plan.selected .plan-select {
+  background: var(--t-accent, var(--primary));
+  color: #fff;
+  border-color: var(--t-accent);
+  box-shadow: 0 4px 12px var(--t-shadow, rgba(10,123,92,0.2));
+}
+
+/* PAYMENT OPTIONS DUAL COLUMN */
+.payment-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+@media(max-width:600px){.payment-cols{grid-template-columns:1fr}}
+.pay-card{border:2px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative;background:#fff}
+.pay-card:hover{border-color:#b5d6c8;background:#fbfdfc}
+.pay-card.active{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 3px rgba(10,123,92,.1)}
+.pay-card-header{font-size:14px;font-weight:800;color:var(--primary-dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pay-card-body{font-size:12.5px;line-height:1.7;color:var(--ink)}
+.pay-row{display:flex;justify-content:space-between;padding:4px 0}
+.pay-row.total{border-top:1px dashed var(--line);margin-top:6px;padding-top:8px;font-weight:900;font-size:14px;color:var(--primary)}
+.inst-check-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid var(--line);margin-bottom:6px;transition:.15s}
+.inst-check-item:last-child{margin-bottom:0}
+.inst-check-item.active{border-color:var(--primary);background:#f0faf5}
+.inst-check-item label{display:flex;align-items:center;gap:8px;cursor:pointer;width:100%;margin:0;font-size:12px;font-weight:700;color:var(--ink)}
+.inst-check-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);margin:0}
+.due-text{font-size:11px;color:var(--danger);font-weight:700;margin-top:8px;text-align:right;display:block}
 
 /* FORM */
 .fieldgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
@@ -167,9 +202,8 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
 
 /* SUMMARY BANNER */
 .plan-summary-banner{background:linear-gradient(135deg,#f0faf5,#fbfdfc);border:1.5px solid #b5e5ce;border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 2px 10px rgba(10,123,92,.06)}
-.plan-summary-banner .plan-name{font-size:14.5px;font-weight:800;color:var(--primary-dark);margin:0;line-height:1.4}
+.plan-summary-banner .plan-name{font-size:14.5px;font-weight:800;color:var(--primary-dark);margin:0;line-height:1.4;text-transform:uppercase}
 .plan-summary-banner .plan-meta{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
-.plan-summary-banner .plan-price-tag{font-size:19px;font-weight:900;color:var(--primary);white-space:nowrap}
 
 /* SUMMARY BOX */
 .summary{background:linear-gradient(135deg,#f6faf8,#fbfdfc);border:1px solid var(--line);border-radius:13px;padding:16px}
@@ -203,6 +237,7 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
 .consent-card p+p{margin-top:8px}
 .consent-card .bn{background:rgba(10,123,92,.04);padding:8px 10px;border-radius:8px;font-size:12.5px;margin-top:8px;border-left:2px solid #b5e5ce}
 .consent-agree{background:var(--accent-light);border:2px solid #f0cd7a;border-radius:12px;padding:14px}
+.consent-installment{background:#fff0f0;border:2px solid #ffd1d1;border-radius:12px;padding:14px;margin-top:14px;}
 
 /* SUCCESS */
 .successbox{text-align:center;padding:28px 16px}
@@ -210,11 +245,6 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
 .successbox h2{margin:10px 0 8px;font-size:24px;color:var(--primary-dark)}
 .successbox .sub{margin-bottom:16px}
 #applicationId{font-family:'Courier New',monospace;background:var(--primary-light);color:var(--primary-dark);padding:8px 16px;border-radius:8px;display:inline-block;font-size:13px;font-weight:800;letter-spacing:1px}
-
-.language{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
-.language>div{background:linear-gradient(135deg,#f6faf8,#fbfdfc);border:1px solid var(--line);border-radius:13px;padding:16px;font-size:12.5px;line-height:1.85}
-.language h3{font-size:13px;margin:0 0 10px;color:var(--primary-dark);font-weight:800}
-.language b{color:var(--primary-dark)}
 
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .tiny{font-size:11px;color:var(--muted);line-height:1.6}
@@ -232,19 +262,14 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
   .wizard-progress{padding:8px;gap:6px}
   .wizard-item{padding:9px 4px;font-size:10px}
   .wizard-item b{font-size:13px}
-  .language{grid-template-columns:1fr}
   .wizard-nav{flex-direction:column}
   .wizard-nav .btn{width:100%}
   .btnrow{flex-direction:column}
   .btnrow .btn{width:100%}
   .plan-summary-banner{flex-direction:column;align-items:flex-start}
-  .plan-summary-banner > div:last-child{width:100%;justify-content:space-between;display:flex;align-items:center;gap:12px}
+  .plan-summary-banner > div:last-child{width:100%;justify-content:flex-end;display:flex;align-items:center;}
 }
 @media(max-width:640px){
-  .plan-section-header{padding:10px 12px;gap:10px}
-  .plan-section-title{font-size:14px}
-  .plan-section-sub{font-size:10.5px}
-  .plan-section-count{font-size:10px;padding:3px 8px}
   .plan-section-grid{grid-template-columns:1fr}
 }
 @media(max-width:520px){
@@ -336,7 +361,6 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
         <p class="plan-meta"><span id="sumMeta2"></span></p>
       </div>
       <div>
-        <span class="plan-price-tag" id="sumPrice2"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
@@ -350,9 +374,19 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
         <div class="field"><label>Mobile Number <span class="req">*</span></label><input id="mobile" required inputmode="numeric" maxlength="10" pattern="[6-9][0-9]{9}" placeholder="10-digit mobile number"></div>
         <div class="field"><label>Date of Birth <span class="req">*</span></label><input id="dob" required type="date"></div>
         <div class="field"><label>Gender</label><select id="gender"><option value="">Select</option><option>Female</option><option>Male</option><option>Other</option><option>Prefer not to say</option></select></div>
-        <div class="field full"><label>Full Address <span class="req">*</span></label><textarea id="address" required rows="2" placeholder="Village / Post Office / Police Station / District / PIN"></textarea></div>
+        
+        <div class="field full">
+            <label>Full Address with PIN code <span class="req">*</span></label>
+            <textarea id="address" required rows="3" placeholder="House/Village, Post Office, Police Station, District, State, PIN Code"></textarea>
+            <div class="tiny" style="margin-top:4px;">Please provide complete address with PIN code.</div>
+        </div>
+
         <div class="field"><label>School / Institution (optional)</label><input id="school" placeholder="School / Institution"></div>
         <div class="field"><label>Student's Photo <span class="req">*</span></label><input id="studentPhoto" type="file" accept="image/*" required></div>
+
+        <!-- Aadhaar Card Details -->
+        <div class="field"><label>Aadhaar Card Number <span class="req">*</span></label><input id="aadhaarNumber" required inputmode="numeric" maxlength="12" minlength="12" pattern="[0-9]{12}" placeholder="12-digit Aadhaar Number"></div>
+        <div class="field"><label>Aadhaar Card Photo <span class="req">*</span></label><input id="aadhaarPhoto" type="file" accept="image/*" required></div>
       </div>
 
       <div id="guardianArea" class="notice warn hidden">
@@ -379,27 +413,25 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
         <p class="plan-meta"><span id="sumMeta3"></span></p>
       </div>
       <div>
-        <span class="plan-price-tag" id="sumPrice3"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
 
-    <h2 class="section-title">Step 3 of 4 · Coupon & Payment</h2>
-    <p class="sub">Enter your coupon code if you have one. <strong>Each coupon can be used only once per student.</strong></p>
+    <h2 class="section-title">Step 3 of 4 · Payment Details</h2>
+    <p class="sub">Choose your preferred payment method. <strong>Each coupon can be used only once per student.</strong></p>
 
     <div class="coupon-row">
       <input id="couponCode" autocomplete="off" placeholder="ENTER COUPON CODE" style="text-transform:uppercase">
     </div>
     <div id="couponMessage" class="tiny" style="margin-top:8px">No coupon applied.</div>
 
-    <div class="summary" style="margin-top:18px">
-      <div class="sumrow"><span>Selected plan</span><strong id="sumPlan">Not selected</strong></div>
-      <div class="sumrow"><span>Total Classes</span><strong id="sumClasses">—</strong></div>
-      <div class="sumrow"><span>Course / Batch fee</span><strong id="sumBase">Rs.0.00</strong></div>
-      <div class="sumrow"><span>Admission fee</span><strong id="sumAdmission">Rs.0.00</strong></div>
-      <div class="sumrow"><span>Coupon discount</span><strong id="sumDiscount">−Rs.0.00</strong></div>
-      <div class="sumrow total"><span>Payable amount</span><span id="sumTotal">Rs.0.00</span></div>
+    <!-- Two Column Payment Options -->
+    <div class="payment-cols" id="paymentOptionsContainer">
+      <!-- Injected via JS -->
     </div>
+
+    <!-- Final Summary Box -->
+    <div class="summary" style="margin-top:18px" id="paymentBreakdownBox"></div>
 
     <div class="notice info bn">পেমেন্ট করার আগে নিচের QR Code স্ক্যান করুন অথবা UPI ID কপি করে পেমেন্ট করুন। Portal-এ পেমেন্টের তথ্য জমা দিলেই Admission Confirm হবে না। Bank/Payment verification-এর পরে Admin Admission Confirm করবেন।</div>
 
@@ -417,7 +449,7 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
           <button type="button" class="btn orange" style="padding:9px 14px;flex-shrink:0;font-size:12px" onclick="copyPortalUpi()">Copy</button>
         </div>
       </div>
-      <div class="notice good payable-note"><b>Payable Amount: <span id="paymentPayableAmount">Rs.0.00</span></b><br><span class="tiny">Please pay the exact payable amount shown here.</span></div>
+      <div class="notice good payable-note"><b>Amount to Pay Now: <span id="paymentPayableAmount">Rs.0.00</span></b><br><span class="tiny">Please pay the exact amount shown here.</span></div>
     </div>
 
     <div class="fieldgrid">
@@ -442,25 +474,36 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
         <p class="plan-meta"><span id="sumMeta4"></span></p>
       </div>
       <div>
-        <span class="plan-price-tag" id="sumPrice4"></span>
         <button type="button" class="btn light" style="padding:8px 14px;font-size:12px;" onclick="goStep(1)">Change</button>
       </div>
     </div>
 
     <h2 class="section-title">Step 4 of 4 · Student Agreement & Consent</h2>
-    <p class="sub">Please read all five consent terms carefully. Tick the agreement box and press "I Agree & Continue" to finalize.</p>
+    <p class="sub">Please read all terms carefully. Tick the agreement boxes to finalize.</p>
 
-    <div class="consent-card"><strong>1. 📹 CLASS RECORDING CONSENT</strong><p>I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.</p><p class="bn" lang="bn"><b>১. ক্লাস রেকর্ডিংয়ের সম্মতি:</b> আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি। এই রেকর্ডিং শিক্ষা, প্রশিক্ষণ, নথিভুক্তকরণ, প্রচার এবং প্রতিষ্ঠানের প্রয়োজনীয় কাজে সংরক্ষণ ও ব্যবহার করা যেতে পারে।</p></div>
+    <div class="consent-card"><strong>1. 📹 CLASS RECORDING CONSENT</strong><p>I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions.</p></div>
+    <div class="consent-card"><strong>2. 📱 PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT</strong><p>I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities.</p></div>
+    <div class="consent-card"><strong>3. 🚫 ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT</strong><p>I confirm that I have read and understood Clauses 1 and 2 and have given my consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish the permitted content for the purposes stated above without obtaining separate approval for each individual photograph, video, recording, post or advertisement.</p></div>
+    <div class="consent-card"><strong>4. 📜 RULES, RESPONSIBILITIES & CONTENT USE</strong><p>I agree to follow English Spur's academic guidelines, class discipline, attendance, communication policies and institutional rules.</p></div>
+    <div class="consent-card"><strong>5. 🔒 PRIVACY, ACKNOWLEDGEMENT & DECLARATION</strong><p>I confirm that the information and materials provided by me are accurate to the best of my knowledge. I understand that the application PDF is generated on my device and that I must send it with the payment screenshot to the official English Spur WhatsApp number for verification.</p></div>
+    
+    <div class="consent-card" style="border-left-color:#c0392b; background:#fff0f0;"><strong>6. 💰 NO REFUND POLICY</strong><p>I understand and agree that under any circumstances, English Spur English Training Academy will <b>NOT</b> refund any money once paid for admission or course fees.</p></div>
 
-    <div class="consent-card"><strong>2. 📱 PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT</strong><p>I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities. This includes English Spur's website, Facebook, YouTube, Instagram, WhatsApp, digital advertisements and other communication or publicity channels.</p><p class="bn" lang="bn"><b>২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি:</b> আমি English Spur-কে আমার ছবি, ভিডিও, কণ্ঠস্বরের রেকর্ডিং, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন, বিজ্ঞাপন ও প্রচারমূলক কাজে ব্যবহার, সম্পাদনা, প্রকাশ, প্রদর্শন, বিতরণ এবং শেয়ার করার স্পষ্ট অনুমতি দিচ্ছি। এর মধ্যে English Spur-এর ওয়েবসাইট, Facebook, YouTube, Instagram, WhatsApp, ডিজিটাল বিজ্ঞাপন এবং অন্যান্য প্রচারমাধ্যম অন্তর্ভুক্ত।</p></div>
+    <!-- Installment Consent Box (Hidden by default) -->
+    <div id="installmentConsentBox" class="consent-installment hidden">
+      <label class="checkline" style="margin:0;">
+        <input type="checkbox" id="consentInstallment" onchange="toggleConsentButton()">
+        <span>
+          <strong style="color:#c0392b;display:block;margin-bottom:4px;">7. INSTALLMENT PAYMENT AGREEMENT (MANDATORY)</strong>
+          I agree to pay my monthly installment within the <b>6th date of every month</b>. I understand that failure to pay on time will result in a <b>20% penalty</b> on the installment amount. Furthermore, I must inform the Management in writing (via WhatsApp/Email) about any delay, and I can only pay late if my request is explicitly granted. I also understand that no refunds will be provided.
+          <div class="bn" style="margin-top:6px; font-size:12px; color:#721c24;">
+            আমি সম্মত হচ্ছি যে প্রতি মাসের ৬ তারিখের মধ্যে কিস্তির টাকা পরিশোধ করতে হবে। নির্ধারিত সময়ের মধ্যে টাকা পরিশোধ করতে না পারলে ২০% জরিমানা গুনতে হবে। দেরি হলে ম্যানেজমেন্টকে লিখিতভাবে জানাতে হবে এবং অনুমতি নিতে হবে। কোনো অবস্থাতেই টাকা ফেরত দেওয়া হবে না।
+          </div>
+        </span>
+      </label>
+    </div>
 
-    <div class="consent-card"><strong>3. 🚫 ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT</strong><p>I confirm that I have read and understood Clauses 1 and 2 and have given my consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish the permitted content for the purposes stated above without obtaining separate approval for each individual photograph, video, recording, post or advertisement, provided the use remains within the scope of this consent. I will not object solely because English Spur has used the content in accordance with the permissions granted here.</p><p class="bn" lang="bn"><b>৩. সম্মতির স্বীকৃতি ও প্রতিবার আলাদা অনুমতির প্রয়োজন নেই:</b> আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি, বুঝেছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির নির্ধারিত উদ্দেশ্য ও সীমার মধ্যে English Spur প্রতিটি ছবি, ভিডিও, রেকর্ডিং, পোস্ট বা বিজ্ঞাপনের জন্য আলাদা অনুমতি না নিয়েই অনুমোদিত কনটেন্ট নির্বাচন, সম্পাদনা, সংকলন, পুনরুৎপাদন, প্রকাশ এবং পুনরায় প্রকাশ করতে পারবে। এখানে দেওয়া অনুমতির আওতায় কনটেন্ট ব্যবহার করা হয়েছে—শুধুমাত্র এই কারণে আমি আপত্তি করব না।</p></div>
-
-    <div class="consent-card"><strong>4. 📜 RULES, RESPONSIBILITIES & CONTENT USE</strong><p>I agree to follow English Spur's academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not knowingly misuse, reproduce, distribute or commercially exploit English Spur's recordings, teaching materials, photographs, videos, logo or other institutional content without prior written permission.</p><p class="bn" lang="bn"><b>৪. নিয়মাবলি, দায়িত্ব ও কনটেন্ট ব্যবহার:</b> আমি English Spur-এর শিক্ষাগত নির্দেশিকা, ক্লাসের শৃঙ্খলা, উপস্থিতি, যোগাযোগনীতি এবং প্রতিষ্ঠানের নিয়ম মেনে চলতে সম্মত। English Spur-এর পূর্ব লিখিত অনুমতি ছাড়া প্রতিষ্ঠানের রেকর্ডিং, শিক্ষাসামগ্রী, ছবি, ভিডিও, লোগো বা অন্যান্য কনটেন্ট জেনে-শুনে অপব্যবহার, পুনরুৎপাদন, বিতরণ বা বাণিজ্যিক কাজে ব্যবহার করব না।</p></div>
-
-    <div class="consent-card"><strong>5. 🔒 PRIVACY, ACKNOWLEDGEMENT & DECLARATION</strong><p>I confirm that the information and materials provided by me are accurate to the best of my knowledge. I understand that English Spur will handle personal information and content for the purposes explained in this consent and its applicable privacy practices. I understand that the application PDF is generated on my device and that I must send it with the payment screenshot to the official English Spur WhatsApp number for verification.</p><p class="bn" lang="bn"><b>৫. গোপনীয়তা, স্বীকৃতি ও ঘোষণা:</b> আমার দেওয়া তথ্য ও উপকরণ আমার জ্ঞান অনুযায়ী সঠিক বলে নিশ্চিত করছি। এই সম্মতিতে উল্লেখিত উদ্দেশ্য এবং প্রযোজ্য গোপনীয়তা নীতি অনুযায়ী English Spur আমার ব্যক্তিগত তথ্য ও কনটেন্ট ব্যবহার করবে—এটি আমি বুঝেছি। আবেদনপত্রের PDF আমার নিজের ডিভাইসে তৈরি হবে এবং যাচাইয়ের জন্য PDF ও পেমেন্টের স্ক্রিনশট English Spur-এর নির্ধারিত WhatsApp নম্বরে পাঠাতে হবে—এটিও আমি বুঝেছি।</p></div>
-
-    <label class="checkline consent-agree"><input type="checkbox" id="consentCheckbox" onchange="toggleConsentButton()"><span><strong>I have read and agree to all five terms above. I give my full consent.</strong></span></label>
+    <label class="checkline consent-agree" style="margin-top:16px;"><input type="checkbox" id="consentCheckbox" onchange="toggleConsentButton()"><span><strong>I have read and agree to all the terms above. I give my full consent.</strong></span></label>
     <label class="checkline"><input type="checkbox" id="consentAccuracy" required><span>I declare that the information and documents provided in this application are true and correct.</span></label>
     <label class="checkline"><input type="checkbox" id="consentPayment" required><span>I understand that submitting payment details does not guarantee admission. Admission is confirmed only after English Spur verifies the actual payment received.</span></label>
     <label class="checkline"><input type="checkbox" id="consentRules" required><span>I agree to follow the course schedule, learning guidelines, communication rules and other instructions issued by English Spur.</span></label>
@@ -468,8 +511,6 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
       <label class="checkline consent-agree"><input type="checkbox" id="guardianConsent" onchange="toggleConsentButton()"><span class="bn"><strong>অভিভাবকের বাধ্যতামূলক সম্মতি (শুধুমাত্র ১৮ বছরের কম বয়সীদের জন্য):</strong> আমি শিক্ষার্থীর পিতা/মাতা/আইনগত অভিভাবক হিসেবে এই আবেদন, নির্বাচিত কোর্স এবং English Spur-এর নিয়মাবলিতে সম্মতি প্রদান করছি।</span></label>
     </div>
     <label class="checkline"><input type="checkbox" id="consentData" required><span>I understand that I must send the downloaded Application PDF and payment screenshot to the official English Spur WhatsApp number for verification.</span></label>
-
-    <div class="notice warn bn">গুরুত্বপূর্ণ: Guardian consent একটি ঘোষণামূলক সম্মতি। অনলাইনে checkbox tick করলেই অভিভাবকের পরিচয় স্বাধীনভাবে যাচাই হয় না।</div>
 
     <div class="wizard-nav">
       <button type="button" class="btn light" onclick="goStep(3)">← Back</button>
@@ -486,27 +527,10 @@ input[type=checkbox]{width:auto;accent-color:var(--primary)}
       <p><strong id="applicationId"></strong></p>
     </div>
     <div class="notice good bn">আপনার Application PDF তৈরি হয়েছে। এখন নিচের সবুজ বাটনে ক্লিক করে সরাসরি English Spur Admin (9875340842)-এর WhatsApp-এ PDF-টি পাঠান।</div>
-    <div class="language">
-      <div class="bn"><h3>বাংলায় করণীয়</h3>
-        ১. নিচের সবুজ <b>Send PDF to Admin on WhatsApp</b> বাটনে ক্লিক করুন।<br>
-        ২. Share sheet / WhatsApp নির্বাচন করুন।<br>
-        ৩. English Spur Admin (9875340842) চ্যাট নির্বাচন করে PDF Send করুন।<br>
-        ৪. Payment Screenshot-টিও আলাদাভাবে Attach করে পাঠান।<br>
-        ৫. Payment যাচাই না হওয়া পর্যন্ত Admission Pending থাকবে।
-      </div>
-      <div><h3>What to do next</h3>
-        1. Click the green <b>Send PDF to Admin on WhatsApp</b> button below.<br>
-        2. Choose WhatsApp from the share sheet.<br>
-        3. Select the English Spur Admin chat (9875340842) and send the PDF.<br>
-        4. Attach and send your payment screenshot separately.<br>
-        5. Admission remains pending until payment verification.
-      </div>
-    </div>
     <div class="btnrow">
       <button class="btn green" style="background:var(--success)" onclick="sendPdfToAdmin()">📤 Send PDF to Admin on WhatsApp (9875340842)</button>
       <button class="btn light" onclick="downloadAgain()">Download PDF</button>
     </div>
-    <p class="tiny" style="margin-top:14px">If your device does not support direct file sharing, the PDF will be downloaded and the WhatsApp chat will open — please attach the downloaded PDF there.</p>
   </section>
 
   <footer class="footer">© 2026 English Spur Online English Training Academy · Kanaipur, Bagnan, Howrah<br>WhatsApp / Call: 9875340842 · Only Call: 8158874131</footer>
@@ -522,7 +546,7 @@ const firebaseConfig = {
   appId: "1:113483091618:web:1bb7cfb608ba85382011fb"
 };
 let db=null, offer={}, categories={oneOnOne:{},group:{}}, coupons=[];
-let activeTab='group', activeAudience='adult', selected=null;
+let activeTab='group', activeAudience='adult', selected=null, selectedPaymentMode='at_a_time', selectedInstIds=[];
 let couponState={valid:false,discount:0,record:null,message:''};
 let finalPdfBlob=null, finalPdfName='', finalAppId='', finalPdfFile=null;
 const COUPON_USAGE_COLLECTION='couponUsage';
@@ -530,49 +554,20 @@ const $=id=>document.getElementById(id);
 const money=n=>'Rs.'+Number(n||0).toFixed(2);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const ENGLISH_KEYWORDS = ['english','speak','grammar','ielts','toefl','vocabulary','pronunciation','fluency'];
-
-function offerActive(){if(offer.active===false)return false;if(!offer.endDateTime)return false;const d=new Date(offer.endDateTime);return !isNaN(d)&&d.getTime()>Date.now();}
 function ageOf(v){if(!v)return null;const b=new Date(v+'T00:00:00');if(isNaN(b))return null;const n=new Date();let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a;}
-function formatPlanDuration(plan){
- const days=Number(plan?.days)||0;
- if(plan?.cat==='oneOnOne'){
-  const explicitMonths=Number(plan.months)||0;
-  const exactMonths=({90:3,180:6,270:9,360:12})[days]||0;
-  const months=explicitMonths||exactMonths;
-  if(months) return months+' month'+(months===1?'':'s');
- }
- return days?days+' days':'—';
+
+function getCourseColor(name) {
+    let hash = 0;
+    const str = name || 'default';
+    for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    const hue = Math.abs(hash) % 360;
+    return {
+        bg: `hsl(${hue}, 70%, 96%)`, border: `hsl(${hue}, 60%, 80%)`, text: `hsl(${hue}, 80%, 30%)`,
+        accent: `hsl(${hue}, 70%, 45%)`, light: `hsl(${hue}, 70%, 92%)`,
+        shadow: `hsla(${hue}, 70%, 45%, 0.15)`, bgGradient: `linear-gradient(135deg, hsl(${hue}, 70%, 96%), #fff)`
+    };
 }
 
-/* ============================================================
-   DYNAMIC COURSE CARD COLOURS
-   ============================================================ */
-function getThemeStyle(courseName) {
- const str = courseName || 'default';
- let hash = 0;
- for (let i = 0; i < str.length; i++) {
-  hash = str.charCodeAt(i) + ((hash << 5) - hash);
- }
- const hue = Math.abs(hash) % 360;
- return `--t-accent: hsl(${hue}, 65%, 35%); --t-dark: hsl(${hue}, 65%, 20%); --t-light: hsl(${hue}, 65%, 92%); --t-soft: hsl(${hue}, 65%, 97%); --t-border: hsl(${hue}, 40%, 88%); --t-shadow: hsla(${hue}, 65%, 35%, 0.15); --t-bg: linear-gradient(135deg, hsl(${hue}, 65%, 96%), #fff);`;
-}
-
-function categorizePlan(plan){
- const sub = plan.sub || {};
- const planObj = plan.plan || {};
- if (sub.isNew === true || planObj.isNew === true) return 'new';
- if (sub.courseGroup === 'english') return 'english';
- if (sub.courseGroup === 'other') return 'other';
- if (sub.courseGroup === 'new') return 'new';
- const nameLower = (plan.name || '').toLowerCase();
- if (ENGLISH_KEYWORDS.some(k => nameLower.includes(k))) return 'english';
- return 'other';
-}
-
-/* ============================================================
-   COUPON USAGE TRACKING
-   ============================================================ */
 async function checkCouponUsedByStudent(studentName, couponCode){
  if(!db||!studentName||!couponCode) return null;
  const nameUp=String(studentName).trim().toUpperCase();
@@ -587,10 +582,10 @@ async function checkCouponUsedByStudent(studentName, couponCode){
   return match;
  }catch(e){console.warn('Coupon usage check failed:',e);return null;}
 }
+
 async function recordCouponUsage({studentName,couponRecord,plan,appId}){
  if(!db||!studentName||!couponRecord) return null;
  try{
-  const planDetail=formatPlanDuration(plan);
   const docRef=await db.collection(COUPON_USAGE_COLLECTION).add({
    studentName:String(studentName).trim().toUpperCase(),
    couponId:couponRecord._id||couponRecord.id||'',
@@ -599,7 +594,7 @@ async function recordCouponUsage({studentName,couponRecord,plan,appId}){
    couponValue:Number(couponRecord.value)||0,
    courseName:plan?.name||'',
    courseCategory:plan?.cat||'',
-   planDetail:planDetail,
+   planDetail:plan?.months + ' Months' || '',
    usedAt:new Date().toISOString(),
    recordedAt:firebase.firestore.FieldValue.serverTimestamp(),
    appId:appId||'',
@@ -609,124 +604,120 @@ async function recordCouponUsage({studentName,couponRecord,plan,appId}){
  }catch(e){console.warn('Could not record coupon usage:',e);return null;}
 }
 
-/* ============================================================
-   DYNAMIC PLAN DATA
-   ============================================================ */
 function planData(){
  const list=[], cats=categories[activeTab]||{};
- Object.keys(cats).forEach(key=>{
-  const sub=cats[key]||{};
-  const isKidsCourse = String(key || '').toLowerCase().indexOf('kid') !== -1;
-  if(activeAudience==='kids' && !isKidsCourse) return;
-  if(activeAudience==='adult' && isKidsCourse) return;
-  const batches=Array.isArray(sub.batches)?sub.batches:[];
-  if(activeTab==='group'){
-   batches.forEach((b)=>{
-    if(b.active===false||b.published===false||b.isActive===false)return;
-    (b.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,b,pi)));
-   });
-  }else{
-   (sub.plans||[]).forEach((p,pi)=>list.push(makePlan(activeTab,key,sub,p,null,pi)));
-  }
+ Object.keys(cats).forEach(courseName => {
+  const course = cats[courseName];
+  if (course.isActive === false) return;
+  if (activeAudience === 'kids' && course.targetAudience !== 'kids') return;
+  if (activeAudience === 'adult' && course.targetAudience !== 'adult') return;
+
+  (course.plans || []).forEach((plan, idx) => {
+    if (plan.isActive === false) return;
+    list.push(makePlan(activeTab, courseName, course, plan, idx));
+  });
  });
  return list;
 }
 
-function makePlan(cat,key,sub,p,batch,idx){
- const days=Number(p.days ?? p.planDays ?? p.durationDays ?? 0)||0;
- const months=cat==='oneOnOne'?(Number(p.months)||({90:3,180:6,270:9,360:12})[days]||0):0;
- let base=0,admission=0,regular=0,classes=Number(p.classes)||0;
- let duration=p.perClassDuration||p.duration||'', mode=p.mode||p.platform||'Online Classes', facilities=[];
- if(cat==='oneOnOne'){
-  regular=Number(p.regularTotal)||0;
-  const discounted=Number(p.discountedTotal)||regular;
-  base=offerActive()?(Number(p.specialTotal)||discounted):discounted;
-  admission=offerActive()?(Number(offer.oneOnOnePricing?.admissionSpecial)||0):(Number(offer.oneOnOnePricing?.admissionDiscounted)||Number(offer.oneOnOnePricing?.admissionRegular)||0);
-  classes=Number(p.classes)||classes;
-  duration=p.duration||duration||'60 mins/class';
-  mode=p.platform||mode;
-  facilities=Array.isArray(p.facilities)?p.facilities:[];
- }else{
-  regular=Number(p.regularTotal??p.regularRate)||0;
-  const discounted=Number(p.discountedTotal??p.discountedRate)||regular;
-  base=offerActive()?(Number(p.specialTotal??p.specialRate)||discounted):discounted;
-  const af=batch?.admissionFee||{};
-  admission=offerActive()?(Number(af.special)||0):(Number(af.discounted)||Number(af.regular)||0);
-  classes=Number(p.classes)||days;
-  duration=p.perClassDuration||'60 mins/class';
-  mode=p.mode||'Online via Google Meet or Zoom';
- }
+function makePlan(cat, name, course, plan, idx){
+ const payAtATime = plan.payAtATime || { admission: plan.admissionFee || 0, course: plan.tuitionFee || 0 };
+ let payInstallment = plan.payInstallment || { admission: plan.admissionFee || 0, amounts: [] };
+ if(!payInstallment.amounts) payInstallment.amounts = [];
+
  return {
-  id:[cat,sub.subCategoryId||key,batch?.batchId||'no-batch',idx].join('|'),
-  cat, key, sub, name:sub.displayName||key,
-  label:cat==='oneOnOne'?'One-to-One':'Group Class',
-  days, base, admission, regular, classes, duration, mode, facilities, batch, kid:activeAudience==='kids', plan:p, months
+  id: [cat, course.subCategoryId, plan.planId || idx].join('|'),
+  cat, name, sub: course, plan: plan,
+  desc: course.description || '',
+  label: cat === 'oneOnOne' ? 'One-to-One' : 'Group Class',
+  kid: course.targetAudience === 'kids',
+  isNew: course.isNew === true,
+  ratio: plan.ratio || '1:4',
+  months: plan.durationMonths || 3,
+  classes: plan.totalClasses || 24,
+  sessionDuration: plan.sessionDuration || '60 mins',
+  payAtATime: payAtATime,
+  payInstallment: payInstallment,
+  featureHeadline: plan.featureHeadline || '',
+  featureSubline: plan.featureSubline || '',
+  features: plan.features || [],
+  colors: getCourseColor(name)
  };
 }
 
-/* ============================================================
-   RENDER A SINGLE PLAN CARD
-   ============================================================ */
-function renderPlanCard(p, selectedNow){
- const total=p.base+p.admission, old=p.regular+p.admission;
- const savings=old>total?old-total:0;
- const ratio=p.cat==='oneOnOne'?'1:1':(p.batch?.maxStudents?`1:${p.batch.maxStudents}`:'Group');
- const ratioLabel=p.cat==='oneOnOne'?'1-on-1':'Up to '+(p.batch?.maxStudents||'4');
- const adult = activeAudience === 'adult';
- const themeStyle = getThemeStyle(p.name);
+// Helper to bold the text before the colon in features
+function formatFeatureText(text) {
+    if (!text) return '';
+    const colonIndex = text.indexOf(':');
+    if (colonIndex !== -1) {
+        const head = text.substring(0, colonIndex).trim();
+        const rest = text.substring(colonIndex + 1).trim();
+        return `<strong style="font-weight:800; color:var(--ink);">${esc(head)}:</strong> ${esc(rest)}`;
+    }
+    return esc(text);
+}
 
- return `<article class="plan ${selectedNow?'selected':''}" style="${themeStyle}">
-  ${savings>0?`<div class="plan-badge">Save ${money(savings)}</div>`:''}
+function renderPlanCard(p, selectedNow){
+ const adult = activeAudience === 'adult';
+ const displayAmount = p.payAtATime.admission + p.payAtATime.course;
+ const totalInstAmt = p.payInstallment.admission + p.payInstallment.amounts.reduce((a,b)=>a+b, 0);
+ 
+ let featuresHtml = '';
+ if(p.features && p.features.length > 0) {
+    featuresHtml = `
+    <div class="features-box">
+      ${p.featureHeadline ? `<div class="title">${esc(p.featureHeadline)}</div>` : ''}
+      ${p.featureSubline ? `<div class="subtitle">${esc(p.featureSubline)}</div>` : ''}
+      <ul class="features-list">
+        ${p.features.map(f => `<li><span>${formatFeatureText(f)}</span></li>`).join('')}
+      </ul>
+    </div>`;
+ }
+
+ return `<article class="plan ${selectedNow?'selected':''}" style="
+    --t-accent: ${p.colors.accent}; --t-dark: ${p.colors.text}; --t-light: ${p.colors.light}; 
+    --t-soft: ${p.colors.bg}; --t-border: ${p.colors.border}; --t-shadow: ${p.colors.shadow}; --t-bg: ${p.colors.bgGradient};
+ ">
+  ${p.isNew?`<div class="plan-badge" style="background:#f59e0b;color:#fff;">NEW</div>`:''}
   <div class="plan-head">
    <div class="plan-kicker">${adult?'ADULT':'KIDS'} · ${p.label.toUpperCase()}</div>
    <h3>${esc(p.name)}</h3>
    <div class="plan-sub">${p.cat==='group'?'Group Course':'Personal One-to-One'}</div>
-   ${p.batch?`<div class="batch-chip">📅 ${esc(p.batch.batchName||'Available Batch')}</div>`:''}
+   ${p.desc ? `<div class="plan-desc">${esc(p.desc)}</div>` : ''}
+   <div class="batch-chip">📅 ${p.months} Months Plan</div>
   </div>
   <div class="plan-body">
    <div class="plan-price-hero">
-    <div class="price-label">Total Programme Fee</div>
+    <div class="price-label">Total Program Fee <span style="text-transform:none; font-weight:600;">(One Time Price)</span></div>
     <div class="price-main">
-     <span class="price-amount">${money(total)}</span>
-     ${old>total?`<span class="price-old">${money(old)}</span>`:''}
+     <span class="price-amount">${money(displayAmount)}</span>
     </div>
+    ${p.payInstallment.amounts.length > 0 ? `<div class="installment-note">In easy installments: ${money(totalInstAmt)}</div>` : ''}
    </div>
 
    <div class="plan-stats">
     <div class="stat-pill">
-     <div class="stat-num">${p.classes||p.days||'—'}</div>
+     <div class="stat-num">${p.classes}</div>
      <div class="stat-lbl">Classes</div>
     </div>
-    ${p.cat === 'oneOnOne' ? `
     <div class="stat-pill">
-     <div class="stat-num">${formatPlanDuration(p)}</div>
+     <div class="stat-num">${p.months} mo</div>
      <div class="stat-lbl">Duration</div>
-    </div>` : ''}
+    </div>
     <div class="stat-pill">
-     <div class="stat-num">${ratioLabel}</div>
-     <div class="stat-lbl">Batch Size</div>
+     <div class="stat-num">${p.ratio}</div>
+     <div class="stat-lbl">Ratio</div>
     </div>
    </div>
 
    <button type="button" class="plan-details-toggle" onclick="togglePlanDetails(this)">
-    <span class="toggle-label">View full details${p.facilities?.length ? ' · ' + p.facilities.length + ' facilities' : ''}</span>
+    <span class="toggle-label">View full details</span>
    </button>
    <div class="plan-details-list">
-    <div class="row"><span class="lbl">Class Type</span><span class="val">${p.label}</span></div>
-    ${p.batch?`<div class="row"><span class="lbl">Batch</span><span class="val">${esc(p.batch.batchName||'—')}</span></div>`:''}
-    <div class="row"><span class="lbl">Student Ratio</span><span class="val">${ratio}</span></div>
-    <div class="row"><span class="lbl">Class Duration</span><span class="val">${esc(p.duration||'—')}</span></div>
-    <div class="row"><span class="lbl">Learning Mode</span><span class="val">${esc(p.mode||'Online')}</span></div>
-    <div class="row"><span class="lbl">Course Fee</span><span class="val">${money(p.base)}</span></div>
-    <div class="row"><span class="lbl">Admission Fee</span><span class="val">${money(p.admission)}</span></div>
-    ${p.facilities?.length ? `
-     <div class="facilities-block">
-      <div class="facilities-label">✨ What's Included</div>
-      <ul class="facilities-items">
-       ${p.facilities.map(f => `<li>${esc(f)}</li>`).join('')}
-      </ul>
-     </div>
-    ` : ''}
+    <div class="row"><span class="lbl">Teacher : Student Ratio</span><span class="val">${p.ratio}</span></div>
+    <div class="row"><span class="lbl">Session Duration</span><span class="val">${p.sessionDuration}</span></div>
+    <div class="row"><span class="lbl">Total Classes</span><span class="val">${p.classes} sessions</span></div>
+    ${featuresHtml}
    </div>
 
    <button class="plan-select" onclick="choosePlan('${encodeURIComponent(p.id)}')">
@@ -736,9 +727,6 @@ function renderPlanCard(p, selectedNow){
  </article>`;
 }
 
-/* ============================================================
-   RENDER PLANS
-   ============================================================ */
 function renderPlans(){
  const all = planData();
  const adult = activeAudience === 'adult';
@@ -749,73 +737,53 @@ function renderPlans(){
 
  if (!all.length) {
   $('plans').innerHTML = `<div class="notice warn">No ${adult?'Adult':'Kids'} plan is currently available in this class type. Please contact English Spur.</div>`;
-  updateSummary();
   return;
  }
-
- const groups = { english: [], other: [], new: [] };
- all.forEach(p => groups[categorizePlan(p)].push(p));
 
  const sortFn = (a, b) => {
   const nameCmp = (a.name || '').toLowerCase().localeCompare((b.name || '').toLowerCase());
   if (nameCmp !== 0) return nameCmp;
-  return (a.batch?.batchName || '').toLowerCase().localeCompare((b.batch?.batchName || '').toLowerCase());
+  return (a.months || 0) - (b.months || 0);
  };
- Object.keys(groups).forEach(k => groups[k].sort(sortFn));
+ all.sort(sortFn);
 
- const meta = {
-  english: { icon: '📘', title: 'English Courses', sub: 'Master English with expert-led programmes' },
-  other:   { icon: '🎯', title: 'Other Skill Trainings', sub: 'Broaden your skills with specialised courses' },
-  new:     { icon: '✨', title: 'New Courses', sub: 'Freshly launched programmes just for you' }
- };
-
- let html = '';
- ['english', 'other', 'new'].forEach(key => {
-  const plans = groups[key];
-  if (!plans.length) return;
-  const m = meta[key];
-  html += `<section class="plan-section" data-group="${key}">
+ let html = `<section class="plan-section">
    <div class="plan-section-header">
-    <span class="plan-section-icon">${m.icon}</span>
+    <span class="plan-section-icon">${adult ? '📘' : '🧒'}</span>
     <div class="plan-section-title-block">
-     <h3 class="plan-section-title">${m.title}</h3>
-     <p class="plan-section-sub">${m.sub}</p>
+     <h3 class="plan-section-title">${adult ? 'Adult Programmes' : 'Kids Programmes'}</h3>
+     <p class="plan-section-sub">Available courses and batches</p>
     </div>
-    <span class="plan-section-count">${plans.length} ${plans.length===1?'course':'courses'}</span>
+    <span class="plan-section-count">${all.length} plans</span>
    </div>
    <div class="plan-section-grid">
-    ${plans.map(p => renderPlanCard(p, selected?.id === p.id)).join('')}
+    ${all.map(p => renderPlanCard(p, selected?.id === p.id)).join('')}
    </div>
   </section>`;
- });
 
  $('plans').innerHTML = html;
- updateSummary();
 }
 
-/* ============================================================
-   TOGGLE DETAILS
-   ============================================================ */
 function togglePlanDetails(btn){
  btn.classList.toggle('open');
  const list = btn.nextElementSibling;
  list.classList.toggle('open');
  const label = btn.querySelector('.toggle-label');
- if (!label) return;
- if (!btn.dataset.baseLabel) btn.dataset.baseLabel = label.textContent;
- label.textContent = btn.classList.contains('open') ? 'Hide details' : btn.dataset.baseLabel;
+ if (label) label.textContent = btn.classList.contains('open') ? 'Hide details' : 'View full details';
 }
 
-/* ============================================================
-   INTERACTIONS
-   ============================================================ */
 function choosePlan(encoded){
  const id=decodeURIComponent(encoded);
  selected=planData().find(p=>p.id===id)||null;
  couponState={valid:false,discount:0,record:null,message:''};
  $('couponCode').value='';
  $('couponMessage').textContent='No coupon applied.';
+ 
+ selectedPaymentMode = 'at_a_time';
+ selectedInstIds = [0]; // Default to 1st installment
+ 
  renderPlans();
+ renderPaymentOptions(); 
 }
 
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
@@ -850,10 +818,8 @@ function updatePlanSummaryBanners(activeStep) {
   if (selected && String(activeStep) === num) {
    banner.style.display = 'flex';
    document.getElementById('sumName' + num).textContent = selected.name;
-   let metaText = selected.label + ' · ' + (selected.classes || selected.days) + ' classes';
-   if (selected.batch) metaText += ' · ' + (selected.batch.batchName || 'Default Batch');
+   let metaText = selected.label + ' · ' + selected.classes + ' classes · ' + selected.months + ' Months';
    document.getElementById('sumMeta' + num).textContent = metaText;
-   document.getElementById('sumPrice' + num).textContent = money(selected.base + selected.admission);
   } else {
    banner.style.display = 'none';
   }
@@ -870,6 +836,7 @@ function goStep(next){
   if(age===null||age<0){alert('Please enter a valid date of birth.');return;}
   if((activeAudience==='kids'&&age>=18)||(activeAudience==='adult'&&age<18)){alert('Please select the correct course category based on the student age.');return;}
   if(age<18&&(!$('guardianName').value.trim()||!/^([6-9][0-9]{9})$/.test($('guardianMobile').value.trim())||!$('guardianRelation').value)){$('guardianArea').classList.remove('hidden');alert('Please complete the required guardian details.');return;}
+  if(!/^[0-9]{12}$/.test($('aadhaarNumber').value.trim())){alert('Enter a valid 12-digit Aadhaar number.');return;}
  }
  if(next===4){
   for(const id of ['paymentMethod','transactionId','paymentDate','amountPaid','paymentShot']){
@@ -883,22 +850,180 @@ function goStep(next){
  window.scrollTo({top:document.querySelector('.wizard-progress').getBoundingClientRect().top+window.scrollY-16,behavior:'smooth'});
 }
 
-function getPayableBeforeCoupon(){return selected?selected.base+selected.admission:0;}
+/* ============ PAYMENT UI LOGIC ============ */
+
+function renderPaymentOptions() {
+    if(!selected) return;
+    const container = $('paymentOptionsContainer');
+    
+    // At a Time Details
+    const atTotal = selected.payAtATime.admission + selected.payAtATime.course;
+    
+    // Installments Details
+    const instArray = selected.payInstallment.amounts || [];
+    const instTotal = selected.payInstallment.admission + instArray.reduce((a,b)=>a+b, 0);
+
+    let html = `
+        <div class="pay-card ${selectedPaymentMode==='at_a_time'?'active':''}" onclick="setPaymentMode('at_a_time')">
+            <div class="pay-card-header">
+                <input type="radio" name="payMode" ${selectedPaymentMode==='at_a_time'?'checked':''} style="accent-color:var(--primary);">
+                At a Time (Full)
+            </div>
+            <div class="pay-card-body">
+                <div class="pay-row"><span>Admission Fee</span><span>${money(selected.payAtATime.admission)}</span></div>
+                <div class="pay-row"><span>Course Fee</span><span>${money(selected.payAtATime.course)}</span></div>
+                <div class="pay-row total"><span>Total Payable</span><span>${money(atTotal)}</span></div>
+                <div style="text-align:center;margin-top:10px;font-size:11px;font-weight:800;color:var(--primary);">${selectedPaymentMode==='at_a_time'?'✓ Selected':'Click to Choose'}</div>
+            </div>
+        </div>
+
+        <div class="pay-card ${selectedPaymentMode==='installments'?'active':''}" onclick="setPaymentMode('installments')" style="${instArray.length===0?'display:none;':''}">
+            <div class="pay-card-header">
+                <input type="radio" name="payMode" ${selectedPaymentMode==='installments'?'checked':''} style="accent-color:var(--primary);">
+                Pay in Installments
+            </div>
+            <div class="pay-card-body">
+                <div class="pay-row" style="font-weight:700;"><span>Admission Fee (Fixed) ✅</span><span>${money(selected.payInstallment.admission)}</span></div>
+                <div style="margin-top:8px;margin-bottom:8px;">
+    `;
+
+    instArray.forEach((amt, i) => {
+        const isChecked = selectedInstIds.includes(i);
+        const isDisabled = (i === 0); // 1st installment forced
+        html += `
+            <label class="inst-check-item ${isChecked?'active':''}" onclick="event.stopPropagation(); ${isDisabled ? '' : `toggleInst(${i})`}">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <input type="checkbox" ${isChecked?'checked':''} ${isDisabled?'disabled':''}>
+                    <span>${i+1}${i===0?'st':(i===1?'nd':(i===2?'rd':'th'))} Installment</span>
+                </div>
+                <span style="font-weight:800;">${money(amt)}</span>
+            </label>
+        `;
+    });
+
+    html += `
+                </div>
+                <div class="pay-row total" style="margin-top:10px;"><span>Pay Now (Adm + Checked)</span><span id="instTotalDisplay"></span></div>
+                <div class="due-text" id="instDueDisplay"></div>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+    updatePaymentBreakdown();
+}
+
+function setPaymentMode(mode) {
+    if(mode==='installments' && (!selected.payInstallment.amounts || selected.payInstallment.amounts.length===0)) return;
+    selectedPaymentMode = mode;
+    
+    if(mode === 'installments' && selectedInstIds.length === 0) {
+        selectedInstIds = [0]; 
+    }
+
+    renderPaymentOptions();
+    $('installmentConsentBox').classList.toggle('hidden', mode !== 'installments');
+    if(mode !== 'installments') $('consentInstallment').checked = false;
+    
+    toggleConsentButton();
+}
+
+function toggleInst(index) {
+    if(selectedPaymentMode !== 'installments') return;
+    if(index === 0) return; // 1st installment cannot be unchecked
+
+    if(selectedInstIds.includes(index)) {
+        // Unchecking: remove this and all subsequent
+        selectedInstIds = selectedInstIds.filter(i => i < index);
+    } else {
+        // Checking: ensure all previous are checked
+        for(let i = 0; i <= index; i++) {
+            if(!selectedInstIds.includes(i)) selectedInstIds.push(i);
+        }
+        selectedInstIds.sort((a,b)=>a-b);
+    }
+    
+    renderPaymentOptions();
+}
+
+function updatePaymentBreakdown() {
+    if(!selected) return;
+    
+    let amountToPayNow = 0;
+    let totalCourseValue = 0;
+    let html = '';
+
+    if (selectedPaymentMode === 'at_a_time') {
+        amountToPayNow = selected.payAtATime.admission + selected.payAtATime.course;
+        totalCourseValue = amountToPayNow;
+        html = `
+            <div class="sumrow"><span>Selected plan</span><strong>${selected.name} (${selected.months} Months)</strong></div>
+            <div class="sumrow"><span>Payment Mode</span><strong>At a Time</strong></div>
+            <div class="sumrow"><span>Admission Fee</span><strong>${money(selected.payAtATime.admission)}</strong></div>
+            <div class="sumrow"><span>Course Fee</span><strong>${money(selected.payAtATime.course)}</strong></div>
+            <div class="sumrow"><span>Coupon discount</span><strong id="sumDiscount">−Rs.0.00</strong></div>
+            <div class="sumrow total"><span>Total Amount to Pay</span><span id="sumTotal">${money(amountToPayNow)}</span></div>
+        `;
+    } else {
+        const instArray = selected.payInstallment.amounts || [];
+        let checkedSum = 0;
+        selectedInstIds.forEach(i => {
+            if(instArray[i]) checkedSum += instArray[i];
+        });
+        
+        const totalInstSum = instArray.reduce((a,b)=>a+b, 0);
+        const dueAmount = totalInstSum - checkedSum;
+        amountToPayNow = selected.payInstallment.admission + checkedSum;
+        totalCourseValue = selected.payInstallment.admission + totalInstSum;
+
+        html = `
+            <div class="sumrow"><span>Selected plan</span><strong>${selected.name} (${selected.months} Months)</strong></div>
+            <div class="sumrow"><span>Payment Mode</span><strong>Installments</strong></div>
+            <div class="sumrow"><span>Admission Fee (Paid Now)</span><strong>${money(selected.payInstallment.admission)}</strong></div>
+            <div class="sumrow"><span>Selected Installments (${selectedInstIds.length})</span><strong>${money(checkedSum)}</strong></div>
+            <div class="sumrow"><span>Coupon discount</span><strong id="sumDiscount">−Rs.0.00</strong></div>
+            <div class="sumrow total"><span>Pay Now</span><span id="sumTotal">${money(amountToPayNow)}</span></div>
+        `;
+        
+        const instTotalDisp = $('instTotalDisplay');
+        if(instTotalDisp) instTotalDisp.textContent = money(amountToPayNow);
+        
+        const instDueDisp = $('instDueDisplay');
+        if(instDueDisp && dueAmount > 0) {
+            instDueDisp.textContent = `Remaining Due: ${money(dueAmount)} (To be paid later)`;
+        } else if(instDueDisp) {
+            instDueDisp.textContent = '';
+        }
+    }
+    
+    $('paymentBreakdownBox').innerHTML = html;
+    
+    // Attach coupon discount logic
+    const disc = couponState.valid ? couponState.discount : 0;
+    const finalPayable = Math.max(0, amountToPayNow - disc);
+    
+    const discEl = $('sumDiscount');
+    if(discEl) discEl.textContent = '−' + money(disc);
+    
+    const totalEl = $('sumTotal');
+    if(totalEl) totalEl.textContent = money(finalPayable);
+    
+    $('paymentPayableAmount').textContent = money(finalPayable);
+}
 
 async function validateCoupon(){
  const code=$('couponCode').value.trim().toUpperCase();
  $('couponCode').value=$('couponCode').value.toUpperCase();
  couponState={valid:false,discount:0,record:null,message:''};
- if(!code){$('couponMessage').textContent='No coupon applied.';$('couponMessage').style.color='';updateSummary();return;}
- if(!selected){$('couponMessage').textContent='Please select a plan first.';updateSummary();return;}
+ if(!code){$('couponMessage').textContent='No coupon applied.';$('couponMessage').style.color='';updatePaymentBreakdown();return;}
+ if(!selected){$('couponMessage').textContent='Please select a plan first.';updatePaymentBreakdown();return;}
  const c=coupons.find(x=>(x.code||'').toUpperCase()===code);
  const now=Date.now();
  if(!c||c.active===false){couponState.message='Invalid or inactive coupon code.';}
  else if(c.validFrom&&new Date(c.validFrom).getTime()>now){couponState.message='This coupon is not active yet.';}
  else if(c.validUntil&&new Date(c.validUntil).getTime()<now){couponState.message='This coupon has expired.';}
  else if(c.category&&c.category!==selected.cat){couponState.message='This coupon is not valid for the selected class type.';}
- else if(c.subCategory&&c.subCategory!==selected.sub.subCategoryId&&c.subCategory!==selected.key){couponState.message='This coupon is not valid for this course.';}
- else if(Array.isArray(c.allowedPlans)&&c.allowedPlans.length&&!c.allowedPlans.some(x=>String(x)===String(selected.plan.days)||String(x)===String(selected.id)||String(x)===String(selected.plan.planId))){couponState.message='This coupon is not valid for the selected plan.';}
+ else if(c.subCategory&&c.subCategory!==selected.sub.subCategoryId){couponState.message='This coupon is not valid for this course.';}
+ else if(Array.isArray(c.allowedPlans)&&c.allowedPlans.length&&!c.allowedPlans.includes(selected.plan.planId)){couponState.message='This coupon is not valid for the selected plan.';}
  else{
   const studentName=($('studentName')?.value||'').trim().toUpperCase();
   let dupRecord=null;
@@ -911,7 +1036,16 @@ async function validateCoupon(){
    const dupDate=dupRecord.usedAt?new Date(dupRecord.usedAt).toLocaleString('en-IN'):'—';
    couponState.message='❌ You have already used this coupon on '+dupDate+' for "'+(dupRecord.courseName||'—')+'". A coupon can be used only ONCE per student.';
   }else{
-   const base=getPayableBeforeCoupon();
+   let base = 0;
+   if(selectedPaymentMode === 'at_a_time') {
+       base = selected.payAtATime.admission + selected.payAtATime.course;
+   } else {
+       const instArray = selected.payInstallment.amounts || [];
+       let checkedSum = 0;
+       selectedInstIds.forEach(i => { if(instArray[i]) checkedSum += instArray[i]; });
+       base = selected.payInstallment.admission + checkedSum;
+   }
+   
    let d=c.type==='percent'?base*Number(c.value||0)/100:Number(c.value||0);
    d=Math.min(base,Math.max(0,d));
    couponState={valid:true,discount:d,record:c,message:'✓ Coupon applied successfully.'};
@@ -919,7 +1053,7 @@ async function validateCoupon(){
  }
  $('couponMessage').textContent=couponState.message;
  $('couponMessage').style.color=couponState.valid?'#0a7b5c':'#c0392b';
- updateSummary();
+ updatePaymentBreakdown();
 }
 $('couponCode').addEventListener('input',()=>{clearTimeout(window.couponTimer);window.couponTimer=setTimeout(()=>{validateCoupon().catch(e=>console.warn(e));},400);});
 $('studentName').addEventListener('change',()=>{if($('couponCode').value.trim())validateCoupon().catch(e=>console.warn(e));});
@@ -934,18 +1068,6 @@ function fallbackCopyPortalUpi(upi){
  document.body.appendChild(t);t.select();
  try{document.execCommand('copy');alert('UPI ID copied: '+upi);}catch(e){alert('Please copy manually: '+upi);}
  t.remove();
-}
-
-function updateSummary(){
- const base=selected?.base||0,adm=selected?.admission||0,disc=couponState.valid?couponState.discount:0;
- $('sumPlan').textContent=selected?selected.name:'Not selected';
- $('sumClasses').textContent=selected?(Number(selected.classes)||'—')+' classes':'—';
- $('sumBase').textContent=money(base);
- $('sumAdmission').textContent=money(adm);
- $('sumDiscount').textContent='−'+money(disc);
- $('sumTotal').textContent=money(Math.max(0,base+adm-disc));
- const payAmount=$('paymentPayableAmount');
- if(payAmount)payAmount.textContent=money(Math.max(0,base+adm-disc));
 }
 
 function loadFirebase(){
@@ -1045,11 +1167,25 @@ async function makePdf(data){
  }
 
  heading('APPLICANT & COURSE DETAILS');
+ 
+ let admFee = data.paymentMode === 'at_a_time' ? data.plan.payAtATime.admission : data.plan.payInstallment.admission;
+ let crsFee = data.paymentMode === 'at_a_time' ? data.plan.payAtATime.course : 0;
+ let instDetails = '';
+ 
+ if (data.paymentMode === 'installments') {
+     instDetails = data.paidInstallments.map(i => `${i.label}: ${money(i.amount)}`).join('\n');
+     crsFee = data.totalInstallmentSum;
+ }
+
  const rows=[
-  ['Student Name',data.name],['Mobile Number',data.mobile],['Date of Birth',data.dob],['Age',data.age+' years'],['Gender',data.gender||'Not provided'],['Address',data.address],['School / Institution',data.school||'Not provided'],
-  ['Programme Category',data.plan.kid?'Kids':'Adult'],['Course',data.plan.name],['Class Type',data.plan.label],['Batch',data.plan.batch?.batchName||'Not applicable'],['Class Duration',data.plan.duration||'—'],['Learning Mode',data.plan.mode||'—'],['Total Classes',data.plan.classes||'—'],
-  ['Course Fee',money(data.plan.base)],['Admission Fee',money(data.plan.admission)],['Coupon Code',data.coupon||'Not used'],['Coupon Discount',money(data.discount)],['Payable Amount',money(data.total)],
-  ['Payment Method',data.method],['Transaction / UTR ID',data.utr],['Payment Date',data.payDate],['Amount Paid',money(data.paid)]
+  ['Student Name',data.name],['Mobile Number',data.mobile],['Date of Birth',data.dob],['Age',data.age+' years'],['Gender',data.gender||'Not provided'],['Aadhaar Number',data.aadhaarNumber],['Address',data.address],['School / Institution',data.school||'Not provided'],
+  ['Programme Category',data.plan.kid?'Kids':'Adult'],['Course',data.plan.name],['Class Type',data.plan.label],['Plan Duration',data.plan.months + ' Months'],['Total Classes',data.plan.classes],['Session Duration',data.plan.sessionDuration],['Teacher : Student Ratio',data.plan.ratio],
+  ['Payment Mode', data.paymentMode === 'at_a_time' ? 'At a Time' : 'Installments'],
+  ['Admission Fee', money(admFee)],
+  ['Course Fee / Installments', instDetails || money(crsFee)],
+  ['Amount Payable Now', money(data.baseTotal)],
+  ['Coupon Code',data.coupon||'Not used'],['Coupon Discount',money(data.discount)],['Amount Paid',money(data.paid)],
+  ['Payment Method',data.method],['Transaction / UTR ID',data.utr],['Payment Date',data.payDate]
  ];
  rows.forEach(([k,v])=>field(k,v));
 
@@ -1060,20 +1196,44 @@ async function makePdf(data){
   field('Relationship',data.guardianRelation);
  }
 
+ // Installment Due Schedule Section
+ if (data.paymentMode === 'installments' && data.dueInstallments.length > 0) {
+     heading('INSTALLMENT DUE SCHEDULE (IMPORTANT)');
+     paragraph('The following installments are DUE. You must pay them within the mentioned dates.', {fontSize:10, bold:true, lineGap:5});
+     
+     data.dueInstallments.forEach(d => {
+         doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(192, 57, 43); // Red
+         doc.text(`${d.label}: ${money(d.amount)}`, LEFT, y);
+         doc.setFont('helvetica','normal'); doc.setTextColor(50,50,50);
+         doc.text(`Due Date: ${d.dueDate}`, LEFT + 80, y);
+         y += 7;
+     });
+     y += 5;
+ }
+
+ // Images Page (Aadhaar and Payment screenshot)
+ if(data.aadhaarPhoto) addImagePage(doc, data.aadhaarPhoto, 'AADHAAR CARD PHOTOCOPY');
+ if(data.paymentImage) addImagePage(doc, data.paymentImage, 'PAYMENT SCREENSHOT');
+
  doc.addPage();y=20;
  doc.setFillColor(10,123,92);doc.rect(0,0,PAGE_W,27,'F');
  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text('DECLARATIONS & CONSENT',LEFT,17);
  y=39;
  paragraph('Application ID: '+data.id+'    |    Applicant: '+data.name,{fontSize:9,bold:true,lineGap:5});
- paragraph('The applicant (and, where under 18, the parent or legal guardian) confirms the following terms were read and accepted electronically before finalizing.',{fontSize:9,lineGap:4.8});
+ paragraph('The applicant confirms the following terms were read and accepted electronically before finalizing.',{fontSize:9,lineGap:4.8});
 
  const clauses=[
-  ['1. CLASS RECORDING CONSENT','I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions. These recordings may be retained for educational, academic, training, documentation, promotional and institutional purposes.','১. ক্লাস রেকর্ডিংয়ের সম্মতি: আমি স্বেচ্ছায় English Spur-কে আমার অনলাইন ও অফলাইন ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ, শ্রেণিকক্ষের কার্যকলাপ, উপস্থাপনা, পারফরম্যান্স এবং শিক্ষাসংক্রান্ত অন্যান্য কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি।'],
-  ['2. PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT','I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities.','২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি: আমি English Spur-কে আমার ছবি, ভিডিও, কণ্ঠস্বরের রেকর্ডিং, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন, বিজ্ঞাপন ও প্রচারমূলক কাজে ব্যবহার করার স্পষ্ট অনুমতি দিচ্ছি।'],
-  ['3. ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT','I confirm that I have read Clauses 1 and 2 and have given consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish permitted content without separate approval for each individual item, provided use remains within this consent.','৩. সম্মতির স্বীকৃতি ও প্রতিবার আলাদা অনুমতির প্রয়োজন নেই: আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি, বুঝেছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির সীমার মধ্যে English Spur প্রতিটি কনটেন্টের জন্য আলাদা অনুমতি না নিয়েই প্রকাশ করতে পারবে।'],
-  ['4. RULES, RESPONSIBILITIES & CONTENT USE','I agree to follow English Spur academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not knowingly misuse, reproduce, distribute or commercially exploit English Spur recordings, teaching materials, photographs, videos, logo or other institutional content without prior written permission.','৪. নিয়মাবলি, দায়িত্ব ও কনটেন্ট ব্যবহার: আমি English Spur-এর শিক্ষাগত নির্দেশিকা, ক্লাসের শৃঙ্খলা, উপস্থিতি, যোগাযোগনীতি এবং প্রতিষ্ঠানের নিয়ম মেনে চলতে সম্মত।'],
-  ['5. PRIVACY, ACKNOWLEDGEMENT & DECLARATION','I confirm the information provided is accurate. I understand English Spur will handle personal information and content as explained in this consent. I understand the PDF is generated on my device and must be sent with payment screenshot to the official WhatsApp number.','৫. গোপনীয়তা, স্বীকৃতি ও ঘোষণা: আমার দেওয়া তথ্য সঠিক বলে নিশ্চিত করছি। এই সম্মতিতে উল্লেখিত উদ্দেশ্য অনুযায়ী English Spur আমার তথ্য ব্যবহার করবে—এটি আমি বুঝেছি।']
+  ['1. CLASS RECORDING CONSENT','I voluntarily consent to English Spur recording my online and offline classes, including my voice, video, image, participation, classroom activities, presentations, performances and other learning-related interactions.','১. ক্লাস রেকর্ডিংয়ের সম্মতি: আমি স্বেচ্ছায় English Spur-কে আমার ক্লাসের অডিও, ভিডিও, ছবি, কণ্ঠস্বর, অংশগ্রহণ এবং শিক্ষাসংক্রান্ত কার্যক্রম রেকর্ড করার অনুমতি দিচ্ছি।'],
+  ['2. PHOTO, VIDEO & SOCIAL MEDIA PUBLICATION CONSENT','I expressly authorise English Spur to use, reproduce, edit, publish, display, distribute and share my photographs, videos, voice recordings, class recordings, testimonials, achievements and learning activities for institutional publicity, branding, marketing, advertising and promotional activities.','২. ছবি, ভিডিও ও সোশ্যাল মিডিয়ায় প্রকাশের সম্মতি: আমি English Spur-কে আমার ছবি, ভিডিও, ক্লাস রেকর্ডিং, মতামত, সাফল্য এবং শিক্ষামূলক কার্যকলাপ প্রতিষ্ঠানের প্রচার, ব্র্যান্ডিং, বিপণন ও বিজ্ঞাপন কাজে ব্যবহার করার অনুমতি দিচ্ছি।'],
+  ['3. ACKNOWLEDGEMENT & NO SEPARATE PERMISSION REQUIREMENT','I confirm that I have read Clauses 1 and 2 and have given consent voluntarily. English Spur may select, edit, compile, reproduce, publish and republish permitted content without separate approval for each individual item.','৩. সম্মতির স্বীকৃতি: আমি নিশ্চিত করছি যে ১ ও ২ নম্বর ধারা পড়েছি এবং স্বেচ্ছায় সম্মতি দিয়েছি। এই সম্মতির সীমার মধ্যে English Spur আলাদা অনুমতি না নিয়েই কনটেন্ট প্রকাশ করতে পারবে।'],
+  ['4. RULES & CONTENT USE','I agree to follow English Spur academic guidelines, class discipline, attendance, communication policies and institutional rules. I will not misuse or commercially exploit English Spur recordings, materials, logo or other content without prior written permission.','৪. নিয়মাবলি ও কনটেন্ট ব্যবহার: আমি English Spur-এর নির্দেশিকা, ক্লাসের শৃঙ্খলা ও নিয়মাবলি মেনে চলতে সম্মত। পূর্বানুমতি ছাড়া কোনো কনটেন্ট বাণিজ্যিক কাজে ব্যবহার করব না।'],
+  ['5. PRIVACY & DECLARATION','I confirm the information provided is accurate. I understand the application PDF is generated on my device and must be sent with payment screenshot to the official WhatsApp number for verification.','৫. গোপনীয়তা ও ঘোষণা: আমার দেওয়া তথ্য সঠিক। PDF আমার ডিভাইসে তৈরি হবে এবং যাচাইয়ের জন্য WhatsApp-এ পাঠাতে হবে।'],
+  ['6. NO REFUND POLICY','I understand and agree that under any circumstances, English Spur English Training Academy will NOT refund any money once paid.','৬. রিফান্ড পলিসি: আমি বুঝেছি এবং সম্মত যে কোনো অবস্থাতেই English Spur টাকা ফেরত দেবে না।']
  ];
+
+ if(data.paymentMode === 'installments') {
+   clauses.push(['7. INSTALLMENT PAYMENT AGREEMENT','I agree to pay the monthly installment within the 6th date of every month. Failure to pay on time will result in a 20% penalty. I must inform Management in writing about any delay and can only pay late if explicitly granted.','৭. কিস্তি সংক্রান্ত চুক্তি: প্রতি মাসের ৬ তারিখের মধ্যে কিস্তির টাকা দিতে হবে। দেরি হলে ২০% জরিমানা দিতে হবে এবং ম্যানেজমেন্টকে লিখিতভাবে জানাতে হবে।']);
+ }
 
  clauses.forEach(([title,body,bn])=>{
   addPageIfNeeded(18);
@@ -1099,22 +1259,6 @@ async function makePdf(data){
   doc.setDrawColor(215,221,232);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=5;
  });
 
- heading('ADDITIONAL APPLICATION DECLARATIONS');
- paragraph('I declare that the information and documents provided in this application are true and correct.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
- paragraph('I understand that submitting payment details does not guarantee admission. Admission is confirmed only after English Spur verifies the actual payment received.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
- paragraph('I understand that I must send the downloaded Application PDF and payment screenshot to English Spur by WhatsApp for verification.',{fontSize:9,lineGap:4.8,bullet:'[ACCEPTED]'});
-
- if(data.guardianName){
-  heading('PARENT / LEGAL GUARDIAN CONSENT - MINOR APPLICANT');
-  paragraph('I, '+data.guardianName+', as the parent / legal guardian of '+data.name+', confirm that I have read and agree to the five consent clauses and the application declarations above.',{fontSize:9,lineGap:4.8,bullet:'[GUARDIAN CONSENT RECORDED]'});
-  field('Guardian Name',data.guardianName);
-  field('Guardian Mobile',data.guardianMobile);
-  field('Relationship',data.guardianRelation);
- }else{
-  heading('APPLICANT CONSENT RECORD');
-  paragraph('The applicant confirmed agreement to all five consent clauses and the required application declarations by selecting the consent checkboxes and pressing "I Agree & Continue".',{fontSize:9,lineGap:4.8,bullet:'[APPLICANT CONSENT RECORDED]'});
- }
-
  addPageIfNeeded(25);y+=2;
  doc.setDrawColor(130,140,160);doc.line(LEFT,y,PAGE_W-RIGHT,y);y+=7;
  paragraph('Consent recorded electronically on: '+data.generated,{fontSize:9,bold:true,lineGap:5});
@@ -1129,8 +1273,7 @@ async function makePdf(data){
   doc.text('Page '+i+' of '+pageCount,PAGE_W-RIGHT,289,{align:'right'});
  }
 
- addImagePage(doc,data.paymentImage,'PAYMENT SCREENSHOT');
- doc.setProperties({title:'English Spur Admission '+data.id,subject:'Admission Application and Consent Record'});
+ doc.setProperties({title:'English Spur Admission '+data.id});
  return doc.output('blob');
 }
 
@@ -1145,8 +1288,12 @@ function toggleConsentButton(){
  const age=ageOf($('dob')?.value);
  const guardianRequired=age!==null&&age<18;
  const guardianAccepted=!guardianRequired||$('guardianConsent')?.checked===true;
+ 
+ const needsInstConsent = selectedPaymentMode === 'installments';
+ const instAccepted = !needsInstConsent || $('consentInstallment')?.checked === true;
+
  const btn=$('agreeConsentBtn');
- if(btn)btn.disabled=!(accepted&&guardianAccepted);
+ if(btn)btn.disabled=!(accepted&&guardianAccepted&&instAccepted);
 }
 
 async function finalizeApplication(){
@@ -1157,6 +1304,7 @@ async function finalizeApplication(){
  if(!selected){err.textContent='Please select a course / plan first.';err.classList.remove('hidden');return;}
  const age=ageOf($('dob').value);
  if(age===null||age<0){err.textContent='Please enter a valid date of birth.';err.classList.remove('hidden');return;}
+ 
  if(age<18){
   $('guardianConsent').required=true;
   if(!$('guardianName').value.trim()||!$('guardianMobile').value.match(/^[6-9][0-9]{9}$/)||!$('guardianRelation').value){
@@ -1173,13 +1321,56 @@ async function finalizeApplication(){
    return;
   }
  }
- if(!$('consentCheckbox').checked){err.textContent='Please read and agree to all five consent terms.';err.classList.remove('hidden');return;}
+
+ if(!$('consentCheckbox').checked){err.textContent='Please read and agree to all consent terms.';err.classList.remove('hidden');return;}
+ 
+ if(selectedPaymentMode === 'installments' && !$('consentInstallment').checked){
+   err.textContent='You must agree to the Installment Payment Agreement (6th date, 20% penalty) to proceed.';
+   err.classList.remove('hidden');
+   $('consentInstallment').focus();
+   return;
+ }
+
  if(!$('consentAccuracy').checked||!$('consentPayment').checked||!$('consentRules').checked||!$('consentData').checked){err.textContent='Please accept all required application declarations.';err.classList.remove('hidden');return;}
  if(!/^[6-9][0-9]{9}$/.test($('mobile').value.trim())){err.textContent='Enter a valid 10-digit mobile number.';err.classList.remove('hidden');return;}
- const total=Math.max(0,getPayableBeforeCoupon()-(couponState.valid?couponState.discount:0));
+ if(!/^[0-9]{12}$/.test($('aadhaarNumber').value.trim())){err.textContent='Enter a valid 12-digit Aadhaar number.';err.classList.remove('hidden');return;}
+ 
+ let baseToPay = 0;
+ let paidInstallments = [];
+ let dueInstallments = [];
+ let totalInstSum = 0;
+
+ const paidDate = new Date($('paymentDate').value);
+ const nextDueDateBase = new Date(paidDate);
+
+ if (selectedPaymentMode === 'at_a_time') {
+     baseToPay = selected.payAtATime.admission + selected.payAtATime.course;
+ } else {
+     const instArray = selected.payInstallment.amounts || [];
+     let checkedSum = 0;
+     
+     instArray.forEach((amt, i) => {
+         totalInstSum += amt;
+         if (selectedInstIds.includes(i)) {
+             checkedSum += amt;
+             paidInstallments.push({ label: `Installment ${i+1}`, amount: amt });
+         } else {
+             let daysToAdd = 15 * (dueInstallments.length + 1);
+             let dueDate = new Date(nextDueDateBase);
+             dueDate.setDate(dueDate.getDate() + daysToAdd);
+             
+             let dateStr = dueDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+             dueInstallments.push({ label: `Installment ${i+1}`, amount: amt, dueDate: dateStr });
+         }
+     });
+     baseToPay = selected.payInstallment.admission + checkedSum;
+ }
+
+ const totalDiscounted = Math.max(0, baseToPay - (couponState.valid?couponState.discount:0));
+ 
  const paid=Number($('amountPaid').value);
  if(!paid||paid<=0){err.textContent='Enter the amount actually paid.';err.classList.remove('hidden');return;}
- if(paid+0.01<total){err.textContent='The amount paid is less than the payable amount.';err.classList.remove('hidden');return;}
+ if(paid+0.01<totalDiscounted){err.textContent='The amount paid is less than the required initial payment.';err.classList.remove('hidden');return;}
  if(!/^[0-9]{12}$/.test($('transactionId').value.trim())){err.textContent='Enter a valid 12-digit transaction / UTR ID.';err.classList.remove('hidden');return;}
 
  const studentNameUpper=$('studentName').value.trim().toUpperCase();
@@ -1199,22 +1390,35 @@ async function finalizeApplication(){
  if(btn){btn.disabled=true;btn.textContent='Preparing your PDF…';}
 
  try{
-  const [photo,paymentImage]=await Promise.all([readFile($('studentPhoto').files[0]),readFile($('paymentShot').files[0])]);
+  const [photo, paymentImage, aadhaarPhoto] = await Promise.all([
+      readFile($('studentPhoto').files[0]),
+      readFile($('paymentShot').files[0]),
+      readFile($('aadhaarPhoto').files[0])
+  ]);
+  
   const id='ES-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+  
   const data={
    id,generated:new Date().toLocaleString('en-IN'),
    name:studentNameUpper,mobile:$('mobile').value.trim(),dob:$('dob').value,age,
-   gender:$('gender').value,address:$('address').value.trim().toUpperCase(),
+   gender:$('gender').value, aadhaarNumber: $('aadhaarNumber').value.trim(), address:$('address').value.trim().toUpperCase(),
    school:$('school').value.trim().toUpperCase(),
-   photo,paymentImage,plan:selected,
+   photo, paymentImage, aadhaarPhoto, plan:selected,
+   baseTotal: baseToPay,
+   paidInstallments: paidInstallments,
+   dueInstallments: dueInstallments,
+   totalInstallmentSum: totalInstSum,
    coupon:couponState.valid?couponState.record.code:'',
    discount:couponState.valid?couponState.discount:0,
-   total,method:$('paymentMethod').value,utr:$('transactionId').value.trim(),
+   total:totalDiscounted,
+   method:$('paymentMethod').value,utr:$('transactionId').value.trim(),
    payDate:$('paymentDate').value,paid:Number($('amountPaid').value),
    guardianName:$('guardianName').value.trim().toUpperCase(),
    guardianMobile:$('guardianMobile').value.trim(),
-   guardianRelation:$('guardianRelation').value
+   guardianRelation:$('guardianRelation').value,
+   paymentMode: selectedPaymentMode
   };
+  
   const blob=await makePdf(data);
   finalPdfBlob=blob;
   finalPdfName='EnglishSpur_Application_'+id+'.pdf';
@@ -1232,7 +1436,7 @@ async function finalizeApplication(){
   $('afterDownload').scrollIntoView({behavior:'smooth'});
   if(btn){btn.textContent='PDF Ready';btn.disabled=true;}
   form.querySelectorAll('input,textarea,select').forEach(x=>x.disabled=true);
-  document.querySelectorAll('#couponCode,#paymentMethod,#transactionId,#paymentDate,#amountPaid,#paymentShot,#consentAccuracy,#consentPayment,#consentRules,#consentData,#consentCheckbox,#guardianConsent').forEach(x=>x.disabled=true);
+  document.querySelectorAll('#couponCode,#paymentMethod,#transactionId,#paymentDate,#amountPaid,#paymentShot,#consentAccuracy,#consentPayment,#consentRules,#consentData,#consentCheckbox,#guardianConsent,#consentInstallment').forEach(x=>x.disabled=true);
  }catch(e){
   err.textContent='Could not generate/download PDF: '+e.message+'. Please try again.';
   err.classList.remove('hidden');
